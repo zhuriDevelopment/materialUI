@@ -6,32 +6,6 @@ const Layout = r => require.ensure([], () => r(require('../page/layout')), 'layo
 
 // 快速入门
 const Quick = r => require.ensure([], () => r(require('../page/quick/quick')), 'quick');
-// 基础服务 -- 三级菜单 -- 文章管理
-const Article = r => require.ensure([], () => r(require('../page/base/thrmenu/article')), 'article');
-// 基础服务 -- 三级菜单 -- 评论管理
-const Comment = r => require.ensure([], () => r(require('../page/base/thrmenu/comment')), 'comment');
-// 基础服务 -- 三级菜单 -- 用户留存
-const Left = r => require.ensure([], () => r(require('../page/base/thrmenu/left')), 'left');
-// 基础服务 -- 三级菜单 -- 流失用户
-const Lost = r => require.ensure([], () => r(require('../page/base/thrmenu/lost')), 'lost');
-
-// 用户中心 -- 用户管理
-// const User = r => require.ensure([], () => r(require('../page/user/user')), 'user');
-
-// 基础服务 -- 三级菜单
-const thrmenuNavbar = [{
-  title: '文章管理',
-  index: '/thrmenu/article'
-}, {
-  title: '评论管理',
-  index: '/thrmenu/comment'
-}, {
-  title: '用户留存',
-  index: '/thrmenu/left'
-}, {
-  title: '流失用户',
-  index: '/thrmenu/lost'
-}];
 
 // -------------------------------------------- 为用户新增代码 --------------------------------------------
 const MaterialInfoList = r => require.ensure([], () => r(require('../page/material/MaterialInfoList')), 'MaterialInfoList');

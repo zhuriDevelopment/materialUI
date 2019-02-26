@@ -99,7 +99,6 @@
 <script>
 // import { Form, FormItem, Input, Button } from 'element-ui';
 import THREE from '../../libs/three/three';
-import UserApi from '../../api/user';
 export default {
   components: {
     // ElForm: Form,
@@ -154,7 +153,7 @@ export default {
         username: formLogin.username,
         password: formLogin.password
       }
-      const res = await UserApi.goLogin(params);
+      const res = [1];
       if (res.length > 0) {
         let $sto = that.$sto;
         let $conf = that.$conf;
