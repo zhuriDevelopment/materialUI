@@ -21,8 +21,6 @@
     import MaterialInfoSearchDisplayCard from '@/components/MaterialInfoListComponents/MaterialInfoSearchDisplayCard';
     import MaterialInfoSearchBottomCard from '@/components/MaterialInfoListComponents/MaterialInfoSearchBottomCard';
     
-    import KeyReplace from '@/api/keyReplace';
-
     export default{
         name:"MaterialInfoList",
         components:{
