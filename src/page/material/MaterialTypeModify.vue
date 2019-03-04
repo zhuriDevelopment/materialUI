@@ -55,6 +55,7 @@
                     align-items: center;
                     width: 100%;
                     height: 10%;
+                    overflow: hidden;
                     background: #c2c1c1;
                     .navi-ope-button{
                         width: 35%;
