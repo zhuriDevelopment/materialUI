@@ -1,7 +1,7 @@
 <template>
 <!-- SKU定义表格 -->
     <!--SKU定义的展示编辑表格-->
-    <el-card >
+    <el-card class="box-card">
         <el-table
         border="true"
         ref="singleTable"
@@ -141,6 +141,13 @@
         </el-table>
     </el-card>
 </template>
+
+<style lang="less" scoped>
+    .box-card{
+        min-width: 900px;
+    }
+</style>
+
 
 <script>
 export default {

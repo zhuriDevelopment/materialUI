@@ -176,7 +176,7 @@
                 naviMtrCtgValue:'',
                 mtrNameInput:'',
                 mtrSKUCodeInput:'',
-                advSrchItmShw: true
+                advSrchItmShw: false
             }
         },
 

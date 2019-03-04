@@ -218,7 +218,7 @@
                             <el-table-column
                             property="name"
                             label="排序号"
-                            width="120">
+                            width="150">
                                 <template slot-scope="scope" style="display:flex;">
                                     <el-button type="primary" icon="el-icon-sort-up"></el-button>
                                     <el-button type="primary" icon="el-icon-sort-down"></el-button>
@@ -242,49 +242,52 @@
 </template>
 
 <style lang="less" scoped>
-    .input-combine{
-        display: flex;
+    .box-card{
+        min-width: 950px;
+        .input-combine{
+            display: flex;
 
-        .content-font{
+            .content-font{
+                font-family:"PingFang SC";
+                text-align: left;
+                font-size: 18px;
+                margin: 5px;
+                min-width: 130px;
+                overflow: hidden;
+            }
+
+            .combine-selector{
+                width: 100%;
+            }
+        }
+        .single-button{
             font-family:"PingFang SC";
-            text-align: left;
-            font-size: 18px;
+            text-align: center;
+            font-size: 20px;
             margin: 5px;
-            min-width: 130px;
-            overflow: hidden;
+            min-width: 100px;
+        }
+        .el-row {
+            margin-bottom: 20px;
+            &:last-child {
+            margin-bottom: 0;
+            }
         }
 
-        .combine-selector{
-            width: 100%;
+        .el-col {
+            border-radius: 4px;
         }
-    }
-    .single-button{
-        font-family:"PingFang SC";
-        text-align: center;
-        font-size: 20px;
-        margin: 5px;
-        min-width: 100px;
-    }
-    .el-row {
-        margin-bottom: 20px;
-        &:last-child {
-        margin-bottom: 0;
+
+        .grid-content {
+            border-radius: 4px;
+            min-height: 36px;
         }
-    }
 
-    .el-col {
-        border-radius: 4px;
-    }
-
-    .grid-content {
-        border-radius: 4px;
-        min-height: 36px;
-    }
-
-    .switch-button{
-        font-size: large;
-        align-content: center;
-        margin: 5px;
+        .switch-button{
+            font-size: large;
+            align-content: center;
+            margin: 5px;
+        }
     }
   
  </style>

@@ -1,6 +1,6 @@
 <template>
 <!-- 物料销售类属性卡片 -->
-    <el-card>
+    <el-card class="box-card">
         <!-- 第一行 -->
         <el-row :gutter="100">
             <!--销售计划价格-->
@@ -155,46 +155,52 @@
 </template>
 
 <style lang="less" scoped>
-    .input-combine{
-        display: flex;
+    .box-card{
+        min-width: 900px;
 
-        .content-font{
+        .input-combine{
+            display: flex;
+
+            .content-font{
+                font-family:"PingFang SC";
+                text-align: left;
+                font-size: 18px;
+                margin: 5px;
+                min-width: 130px;
+                overflow: hidden;
+            }
+
+            .combine-selector{
+                width: 100%;
+            }
+        }
+        .single-button{
             font-family:"PingFang SC";
-            text-align: left;
-            font-size: 18px;
+            text-align: center;
+            font-size: 20px;
             margin: 5px;
-            min-width: 130px;
-            overflow: hidden;
+            min-width: 100px;
         }
 
-        .combine-selector{
-            width: 100%;
+        .el-row {
+            margin-bottom: 20px;
+            &:last-child {
+            margin-bottom: 0;
+            }
         }
-    }
-    .single-button{
-        font-family:"PingFang SC";
-        text-align: center;
-        font-size: 20px;
-        margin: 5px;
-        min-width: 100px;
-    }
 
-    .el-row {
-        margin-bottom: 20px;
-        &:last-child {
-        margin-bottom: 0;
+        .el-col {
+            border-radius: 4px;
         }
-    }
 
-    .el-col {
-        border-radius: 4px;
-    }
-
-    .grid-content {
-        border-radius: 4px;
-        min-height: 36px;
-    }
+        .grid-content {
+            border-radius: 4px;
+            min-height: 36px;
+        }
   
+    }
+
+
  </style>
 
 <script>

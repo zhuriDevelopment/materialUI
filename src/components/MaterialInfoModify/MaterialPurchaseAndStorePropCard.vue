@@ -1,6 +1,6 @@
 <template>
 <!-- 物料采购信息卡 -->
-    <el-card>
+    <el-card class="box-card">
         <!-- 第一行 -->
         <el-row :gutter="100">
             <!--物料置购类型-->
@@ -210,6 +210,12 @@
         </el-row>
     </el-card>
 </template>
+
+<style>
+    .box-card{
+        min-width: 900px;
+    }
+</style>
 
 <style lang="less" scoped>
     .input-combine{
