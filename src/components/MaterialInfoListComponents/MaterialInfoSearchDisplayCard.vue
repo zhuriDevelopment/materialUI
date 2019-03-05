@@ -19,67 +19,69 @@
       <!-- 各列 -->
       <el-table-column
         type="selection"
-        width="55">
+        width="55"
+        fixed>
       </el-table-column>
 
       <el-table-column
         prop="name"
         label="SPU编码"
-        width="120">
+        min-width="120">
       </el-table-column>
 
       <el-table-column
         prop="name"
         label="SPU名称"
-        width="120">
+        min-width="120">
       </el-table-column>
 
       <el-table-column
         prop="name"
         label="物料分类"
-        width="120">
+        min-width="120">
       </el-table-column>
 
       <el-table-column
         prop="name"
         label="设计图号"
-        width="120">
+        min-width="120">
       </el-table-column>
 
       <el-table-column
         prop="name"
         label="设计版本"
-        width="120">
+        min-width="120">
       </el-table-column>
 
       <el-table-column
         prop="name"
         label="来源"
-        width="120">
+        min-width="120">
       </el-table-column>
 
       <el-table-column
         prop="name"
         label="默认计量单位"
-        width="60">
+        min-width="120">
       </el-table-column>
 
       <el-table-column
         prop="name"
         label="描述"
-        width="240">
+        min-width="240">
       </el-table-column>
 
       <el-table-column
         prop="name"
         label="备注"
-        width="240">
+        min-width="240">
       </el-table-column>
 
       <el-table-column
         label="操作"
         min-width="150"
-        show-overflow-tooltip>
+        show-overflow-tooltip
+        fixed="right">
         <template slot-scope="scope">
           <el-button type="text" size="small">查看</el-button>
           <el-button type="text" size="small">编辑</el-button>

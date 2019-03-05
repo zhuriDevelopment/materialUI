@@ -146,17 +146,17 @@
       flex-direction: row;
       flex-wrap: nowrap;
       align-items: center;
-      min-width: 50%;
+      // min-width: 50%;
 
       .title {
-        font-size: 18px;
+        font-size: 14px;
         min-width: 90px;
         text-align: center;
         margin: 5px;
       }
 
-      .searchNaviSelector{
-        min-width: 60%;
+      .barSelector{
+        width: 100%;
       }
     }
   } 
