@@ -5,11 +5,11 @@
     <el-row :gutter="20" type="flex">
       <!-- 物料分类输入框 -->
       <el-col :span="6">
-        <div class="bar">
+        <div class="searchBar">
           <div class="title">
             物料分类:
           </div>
-          <el-select class="barSelector" v-model="searchParams.materialCategorys" placeholder="请选择">
+          <el-select class="searchBarSelector" v-model="searchParams.materialCategory" placeholder="请选择">
             <el-option
             v-for="item in materialCategInfo"
             :key="item.value"
@@ -22,7 +22,7 @@
 
       <!-- 物料名称输入框 -->
       <el-col :span="6">
-        <div class="bar">
+        <div class="searchBar">
           <div class="title">
           物料名称:
           </div>
@@ -32,7 +32,7 @@
 
       <!-- SKU编码输入框 -->
       <el-col :span="6">
-        <div class="bar">
+        <div class="searchBar">
           <div class="title">
             SKU编码:
           </div>
@@ -52,7 +52,7 @@
         </el-button>
 
         <!-- 新建物料按钮 -->
-        <el-button type="primary" icon="el-icon-plus">
+        <el-button type="primary" icon="el-icon-plus" @click="createMaterailClick">
           新建物料
         </el-button>
       </el-col>
@@ -62,52 +62,63 @@
     <el-row :gutter="20" type="flex" v-show="advSearchShow">
       <!-- 时间输入框 -->
       <el-col :span="6">
-        <div class="bar" v-show="advSearchShow">
+        <div class="searchBar" v-show="advSearchShow">
           <div class="title">
-            时间:
+            起始时间:
           </div>
-          <el-select class="barSelector" v-model="searchParams.timeRange" placeholder="请选择">
-            <el-option
-            v-for="item in materialCategInfo"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-            </el-option>
-          </el-select>
+            <el-date-picker
+              v-model="timeRange1"
+              type="date"
+              placeholder="选择日期">
+            </el-date-picker>
+        </div>
+      </el-col>
+
+      <!-- 时间输入框 -->
+      <el-col :span="6">
+        <div class="searchBar" v-show="advSearchShow">
+          <div class="title">
+            终止时间:
+          </div>
+            <el-date-picker
+              v-model="timeRange2"
+              type="date"
+              placeholder="选择日期">
+            </el-date-picker>
         </div>
       </el-col>
 
       <!-- SPU编码输入框 -->
       <el-col :span="6">
-        <div class="bar">
+        <div class="searchBar">
           <div class="title">
-          SPU编码:
+            SPU编码:
           </div>
           <el-input v-model="searchParams.spuCode" placeholder="请输入内容"></el-input>
         </div>
       </el-col>
+    </el-row>
 
+    <el-row :gutter="20" type="flex" v-show="advSearchShow">
       <!-- 设计图号输入框 -->
       <el-col :span="6">
-        <div class="bar">
+        <div class="searchBar">
           <div class="title">
             设计图号:
           </div>
           <el-input v-model="searchParams.designCode" placeholder="请输入内容"></el-input>
         </div>
       </el-col>
-    </el-row>
 
-    <el-row :gutter="20" type="flex" v-show="advSearchShow">
       <!-- 设计版本输入框 -->
       <el-col :span="6">
-        <div class="bar">
+        <div class="searchBar">
           <div class="title">
             设计版本:
           </div>
-          <el-select class="barSelector" v-model="searchParams.designVersion" placeholder="请选择">
+          <el-select class="searchBarSelector" v-model="searchParams.designVersion" placeholder="请选择">
             <el-option
-            v-for="item in materialCategInfo"
+            v-for="item in materialDesignVersionInfo"
             :key="item.value"
             :label="item.label"
             :value="item.value">
@@ -118,7 +129,7 @@
 
       <!-- 来源输入框 -->
       <el-col :span="6">
-        <div class="bar">
+        <div class="searchBar">
           <div class="title">
             来源:
           </div>
@@ -142,7 +153,7 @@
       }
     }
 
-    .bar{
+    .searchBar{
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
@@ -156,7 +167,7 @@
         margin: 5px;
       }
 
-      .barSelector{
+      .searchBarSelector{
         width: 100%;
       }
     }
@@ -171,10 +182,20 @@
 
     data() {
       return {
+        /* 物料分类 选择器显示信息 */
         materialCategInfo : MaterialInfoSearchNaviCardAPIs.getMaterialCategInfo(),
+        materialDesignVersionInfo : MaterialInfoSearchNaviCardAPIs.getDesignVersionInfo(),
+
+        /* 高级搜索相关组件是否显示 */
         advSearchShow: false,
+
+        /* 时间 */
+        timeRange1: '',
+        timeRange2: '',
+
+        /* 搜索输入 */
         searchParams: {
-          materialCategorys: '',
+          materialCategory: '',
           materialName: '',
           skuCode: '',
           timeRange: '',
@@ -187,12 +208,45 @@
     },
 
     methods:{
+      /* 高级搜索按钮点击响应函数 */
       advancedSearchButtonClick() {
         this.advSearchShow = !this.advSearchShow;
-        console.log("activeNames");
       },
+
+      /* 搜索按钮点击响应函数 */
       searchClick () {
-        console.log(this.$store.state.infolist);
+        for(var key in this.searchParams){
+          /* print to conslole */
+          console.log(key + this.searchParams[key]);
+        }
+
+        this.searchParams.timeRange = this.timeRange2 - this.timeRange1;
+
+        this.searchInputs = this.searchParams;
+      },
+
+      createMaterailClick(){
+          /* this.$axios
+            .get(`http://202.120.1.66:8080/materialmanagement/getAllBaseInfo`)
+            .then(response => {
+              
+            })
+            .catch(error => {
+              console.log("ERROR");
+            }); */
+      }
+    },
+
+    computed:{
+      /* 搜索的输入变量 */
+      searchInputs : {
+        get(){
+          return this.$store.getters['infolist/searchInputs'];
+        },
+        set(value){
+          this.$store.commit('infolist/searchInputs-update',value);
+          console.log("called");
+        }
       }
     }
   }

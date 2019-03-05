@@ -12,7 +12,7 @@
     <el-table
       border
       ref="multipleTable"
-      :data="baseInfoData"
+      :data="displayMaterialInfo"
       tooltip-effect="dark"
       style="width: 100%"
       @selection-change="handleSelectionChange">
@@ -104,25 +104,12 @@
 </style>
 
 <script>
+  
   export default {
     name:"MaterialInfoSearchDisplayCard",
     data(){
       return {
-        /* 测试数据 */
-        baseInfoData: [
-          {
-            "spuCode": "1001",
-            "spuName": "1001",
-            "materialCatId": "1001",
-            "designCode": "1001",
-            "designVersion": "1001",
-            "source": "1001",
-            "defaultUnitId": 1,
-            "description": "1001",
-            "note": "1001",
-          },
-        ],
-        currentRow: null
+        currentRow: null,
       }
     },
 
@@ -138,6 +125,13 @@
         }
       },
       handleSelectionChange (selection) {},
+    },
+
+    computed:{
+      /* 表格展示信息变量 */
+      displayMaterialInfo(){
+        return this.$store.getters['infolist/displayMaterialInfo'];
+      }
     }
   }
 </script>
