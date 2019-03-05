@@ -117,11 +117,11 @@
     </el-row>
 
     <el-row :gutter="20">
-      <!-- 规格描述输入 -->
+      <!-- 描述输入 -->
       <el-col :span="14">
         <div class="grid-content bg-purple">
           <div class="input-combine">
-            <div class="content-font" >规格描述：</div>
+            <div class="content-font" >描述：</div>
             <el-input v-model="input" placeholder="请输入内容" ></el-input>
           </div>
         </div>
