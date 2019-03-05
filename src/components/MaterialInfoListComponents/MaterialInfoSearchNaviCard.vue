@@ -5,11 +5,11 @@
     <el-row :gutter="20" type="flex">
       <!-- 物料分类输入框 -->
       <el-col :span="6">
-        <div class="bar">
+        <div class="searchNavi">
           <div class="title">
             物料分类:
           </div>
-          <el-select class="barSelector" v-model="naviMtrCtgValue" placeholder="请选择">
+          <el-select class="searchNaviSelector" v-model="searchMaterialCategory" placeholder="请选择">
             <el-option
             v-for="item in materialCategInfo"
             :key="item.value"
@@ -22,21 +22,21 @@
 
       <!-- 物料名称输入框 -->
       <el-col :span="6">
-        <div class="bar">
+        <div class="searchNavi">
           <div class="title">
           物料名称:
           </div>
-          <el-input v-model="mtrNameInput" placeholder="请输入内容"></el-input>
+          <el-input v-model="searchMaterialName" placeholder="请输入内容"></el-input>
         </div>
       </el-col>
 
       <!-- SKU编码输入框 -->
       <el-col :span="6">
-        <div class="bar">
+        <div class="searchNavi">
           <div class="title">
             SKU编码:
           </div>
-          <el-input v-model="mtrSKUCodeInput" placeholder="请输入内容"></el-input>
+          <el-input v-model="searchMaterialSKUCode" placeholder="请输入内容"></el-input>
         </div>
       </el-col>
 
@@ -63,38 +63,36 @@
     <el-row :gutter="20" type="flex" v-show="advSrchItmShw">
       <!-- 时间输入框 -->
       <el-col :span="6">
-        <div class="bar" v-show="advSrchItmShw">
+        <div class="searchNavi" v-show="advSrchItmShw">
           <div class="title">
             时间:
           </div>
-          <el-select class="barSelector" v-model="naviMtrCtgValue" placeholder="请选择">
-            <el-option
-            v-for="item in materialCategInfo"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-            </el-option>
-          </el-select>
+  
+          <el-date-picker
+          v-model="searchDate"
+          type="date"
+          placeholder="选择日期">
+          </el-date-picker>
         </div>
       </el-col>
 
       <!-- SPU编码输入框 -->
       <el-col :span="6">
-        <div class="bar">
+        <div class="searchNavi">
           <div class="title">
           SPU编码:
           </div>
-          <el-input v-model="mtrCodeInput" placeholder="请输入内容"></el-input>
+          <el-input v-model="searchSPUCode" placeholder="请输入内容"></el-input>
         </div>
       </el-col>
 
       <!-- 设计图号输入框 -->
       <el-col :span="6">
-        <div class="bar">
+        <div class="searchNavi">
           <div class="title">
             设计图号:
           </div>
-          <el-input v-model="mtrHelperCodeInput" placeholder="请输入内容"></el-input>
+          <el-input v-model="searchDesignNumber" placeholder="请输入内容"></el-input>
         </div>
       </el-col>
     </el-row>
@@ -102,13 +100,13 @@
     <el-row :gutter="20" type="flex" v-show="advSrchItmShw">
       <!-- 设计版本输入框 -->
       <el-col :span="6">
-        <div class="bar">
+        <div class="searchNavi">
           <div class="title">
             设计版本:
           </div>
-          <el-select class="barSelector" v-model="naviMtrCtgValue" placeholder="请选择">
+          <el-select class="searchNaviSelector" v-model="searchDesignVersion" placeholder="请选择">
             <el-option
-            v-for="item in materialCategInfo"
+            v-for="item in materialDesignVersionInfo"
             :key="item.value"
             :label="item.label"
             :value="item.value">
@@ -119,11 +117,11 @@
 
       <!-- 来源输入框 -->
       <el-col :span="6">
-        <div class="bar">
+        <div class="searchNavi">
           <div class="title">
             来源:
           </div>
-          <el-input v-model="mtrCodeInput" placeholder="请输入内容"></el-input>
+          <el-input v-model="searchSource" placeholder="请输入内容"></el-input>
         </div>
       </el-col>
     </el-row> 
@@ -143,7 +141,7 @@
       }
     }
 
-    .bar{
+    .searchNavi{
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
@@ -157,7 +155,7 @@
         margin: 5px;
       }
 
-      .barSelector{
+      .searchNaviSelector{
         min-width: 60%;
       }
     }
@@ -172,11 +170,22 @@
 
     data() {
       return {
+        /* 高级搜索相关部件是否显示的变量 */
+        advSrchItmShw: false,
+
+        /* 搜索栏选择框显示的选择信息 */
         materialCategInfo : MaterialInfoSearchNaviCardAPIs.getMaterialCategInfo(),
-        naviMtrCtgValue:'',
-        mtrNameInput:'',
-        mtrSKUCodeInput:'',
-        advSrchItmShw: false
+        materialDesignVersionInfo : '',
+
+        /* 搜索栏各输入框的值保存变量 */
+        searchMaterialCategory : '',
+        searchMaterialName : '',
+        searchMaterialSKUCode : '',
+        searchDate : '',
+        searchSPUCode : '',
+        searchDesignNumber : '',
+        searchDesignVersion : '',
+        searchSource : ''
       }
     },
 
