@@ -9,7 +9,7 @@
           <div class="title">
             物料分类:
           </div>
-          <el-select class="barSelector" v-model="naviMtrCtgValue" placeholder="请选择">
+          <el-select class="barSelector" v-model="searchParams.materialCategorys" placeholder="请选择">
             <el-option
             v-for="item in materialCategInfo"
             :key="item.value"
@@ -26,7 +26,7 @@
           <div class="title">
           物料名称:
           </div>
-          <el-input v-model="mtrNameInput" placeholder="请输入内容"></el-input>
+          <el-input v-model="searchParams.materialName" placeholder="请输入内容"></el-input>
         </div>
       </el-col>
 
@@ -36,11 +36,10 @@
           <div class="title">
             SKU编码:
           </div>
-          <el-input v-model="mtrSKUCodeInput" placeholder="请输入内容"></el-input>
+          <el-input v-model="searchParams.skuCode" placeholder="请输入内容"></el-input>
         </div>
       </el-col>
 
-       
       <el-col :span="6" class="buttonCol">
         <!-- 高级搜索按钮 -->
         <el-button  plain @click="advancedSearchButtonClick">
@@ -48,7 +47,7 @@
         </el-button>
         
         <!-- 搜索按钮 -->
-        <el-button type="primary"  icon="el-icon-search" @click="searchClick()">
+        <el-button type="primary"  icon="el-icon-search" @click="searchClick">
           搜索
         </el-button>
 
@@ -60,14 +59,14 @@
     </el-row>
     
     <!-- 高级搜索信息项 -->
-    <el-row :gutter="20" type="flex" v-show="advSrchItmShw">
+    <el-row :gutter="20" type="flex" v-show="advSearchShow">
       <!-- 时间输入框 -->
       <el-col :span="6">
-        <div class="bar" v-show="advSrchItmShw">
+        <div class="bar" v-show="advSearchShow">
           <div class="title">
             时间:
           </div>
-          <el-select class="barSelector" v-model="naviMtrCtgValue" placeholder="请选择">
+          <el-select class="barSelector" v-model="searchParams.timeRange" placeholder="请选择">
             <el-option
             v-for="item in materialCategInfo"
             :key="item.value"
@@ -84,7 +83,7 @@
           <div class="title">
           SPU编码:
           </div>
-          <el-input v-model="mtrCodeInput" placeholder="请输入内容"></el-input>
+          <el-input v-model="searchParams.spuCode" placeholder="请输入内容"></el-input>
         </div>
       </el-col>
 
@@ -94,19 +93,19 @@
           <div class="title">
             设计图号:
           </div>
-          <el-input v-model="mtrHelperCodeInput" placeholder="请输入内容"></el-input>
+          <el-input v-model="searchParams.designCode" placeholder="请输入内容"></el-input>
         </div>
       </el-col>
     </el-row>
 
-    <el-row :gutter="20" type="flex" v-show="advSrchItmShw">
+    <el-row :gutter="20" type="flex" v-show="advSearchShow">
       <!-- 设计版本输入框 -->
       <el-col :span="6">
         <div class="bar">
           <div class="title">
             设计版本:
           </div>
-          <el-select class="barSelector" v-model="naviMtrCtgValue" placeholder="请选择">
+          <el-select class="barSelector" v-model="searchParams.designVersion" placeholder="请选择">
             <el-option
             v-for="item in materialCategInfo"
             :key="item.value"
@@ -123,7 +122,7 @@
           <div class="title">
             来源:
           </div>
-          <el-input v-model="mtrCodeInput" placeholder="请输入内容"></el-input>
+          <el-input v-model="searchParams.source" placeholder="请输入内容"></el-input>
         </div>
       </el-col>
     </el-row> 
@@ -153,7 +152,7 @@
       .title {
         font-size: 14px;
         min-width: 90px;
-        text-align: center;
+        text-align: left;
         margin: 5px;
       }
 
@@ -173,17 +172,27 @@
     data() {
       return {
         materialCategInfo : MaterialInfoSearchNaviCardAPIs.getMaterialCategInfo(),
-        naviMtrCtgValue:'',
-        mtrNameInput:'',
-        mtrSKUCodeInput:'',
-        advSrchItmShw: false
+        advSearchShow: false,
+        searchParams: {
+          materialCategorys: '',
+          materialName: '',
+          skuCode: '',
+          timeRange: '',
+          spuCode: '',
+          designCode: '',
+          designVersion: '',
+          source: '',
+        },
       }
     },
 
     methods:{
       advancedSearchButtonClick() {
-        this.advSrchItmShw = !this.advSrchItmShw;
+        this.advSearchShow = !this.advSearchShow;
         console.log("activeNames");
+      },
+      searchClick () {
+        console.log(this.$store.state.infolist);
       }
     }
   }
