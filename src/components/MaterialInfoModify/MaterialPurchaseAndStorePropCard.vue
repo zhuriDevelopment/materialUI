@@ -7,7 +7,7 @@
       <el-col :span="7">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >物料置购类型:</div>
+            <div class="content-font" >物料置购类型：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -23,7 +23,7 @@
       <el-col :span="7">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >ABC分类:</div>
+            <div class="content-font" >ABC分类：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -39,7 +39,7 @@
       <el-col :span="7">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >循环盘点编码:</div>
+            <div class="content-font" >循环盘点编码：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -59,7 +59,7 @@
       <el-col :span="7">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >是否批次管理:</div>
+            <div class="content-font" >是否批次管理：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -75,7 +75,7 @@
       <el-col :span="7">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >是否单件管理:</div>
+            <div class="content-font" >是否单件管理：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -91,7 +91,7 @@
       <el-col :span="7">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >是否进价控制:</div>
+            <div class="content-font" >是否进价控制：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -111,7 +111,7 @@
       <el-col :span="7">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >默认供应商:</div>
+            <div class="content-font" >默认供应商：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -127,7 +127,7 @@
       <el-col :span="7">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >默认采购部门:</div>
+            <div class="content-font" >默认采购部门：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -143,7 +143,7 @@
       <el-col :span="7">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >默认仓库:</div>
+            <div class="content-font" >默认仓库：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -163,7 +163,7 @@
       <el-col :span="7">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >默认采购单位:</div>
+            <div class="content-font" >默认采购单位：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -179,7 +179,7 @@
       <el-col :span="7">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >默认库存单位:</div>
+            <div class="content-font" >默认库存单位：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -195,7 +195,7 @@
       <el-col :span="7">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >默认库位:</div>
+            <div class="content-font" >默认库位：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -223,7 +223,7 @@
         text-align: left;
         font-size: 18px;
         margin: 5px;
-        min-width: 90px;
+        min-width: 140px;
         overflow: hidden;
       }
 

@@ -8,7 +8,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font" >
-              是否独立需求:
+              是否独立需求：
             </div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
@@ -26,7 +26,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font" >
-              订货提前期(天):
+              订货提前期(天)：
             </div>
             <el-input v-model="input" placeholder="请输入内容" >
             </el-input>
@@ -38,7 +38,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font" >
-              补货政策:
+              补货政策：
             </div>
             <el-select class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
@@ -56,7 +56,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font" >
-              补货周期(天):
+              补货周期(天)：
             </div>
             <el-input v-model="input" placeholder="请输入内容" ></el-input>
           </div>
@@ -71,7 +71,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font" >
-              最大库存量:
+              最大库存量：
             </div>
             <el-input v-model="input" placeholder="请输入内容" >
             </el-input>
@@ -91,7 +91,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font" >
-              安全库存量:
+              安全库存量：
               </div>
             <el-input v-model="input" placeholder="请输入内容" >
 
@@ -104,7 +104,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font" >
-              订货批量:
+              订货批量：
             </div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
@@ -122,7 +122,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font" >
-              批量政策:
+              批量政策：
             </div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
@@ -144,7 +144,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font" >
-              批量周期(天):
+              批量周期(天)：
             </div>
             <el-input v-model="input" placeholder="请输入内容" >
 
@@ -157,7 +157,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font" >
-              默认计划单位:
+              默认计划单位：
             </div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
@@ -183,7 +183,7 @@
       text-align: left;
       font-size: 18px;
       margin: 5px;
-      min-width: 90px;
+      min-width: 140px;
       overflow: hidden;
     }
 

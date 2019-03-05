@@ -7,7 +7,7 @@
       <el-col :span="7">
         <div class="grid-content bg-purple">
           <div class="input-combine">
-            <div class="content-font" >SPU编号:</div>
+            <div class="content-font" >SPU编号：</div>
             <el-input v-model="input" placeholder="请输入内容" ></el-input>
           </div>
         </div>
@@ -16,7 +16,7 @@
       <el-col :span="7">
         <div class="grid-content bg-purple">
           <div class="input-combine">
-            <div class="content-font" >SPU名称:</div>
+            <div class="content-font" >SPU名称：</div>
             <el-input v-model="input" placeholder="请输入内容" ></el-input>
           </div>
         </div>
@@ -25,7 +25,7 @@
       <el-col :span="7">
         <div class="grid-content bg-purple">
           <div class="input-combine">
-            <div class="content-font" >物料类型:</div>
+            <div class="content-font" >物料类型：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -45,7 +45,7 @@
       <el-col :span="7">
         <div class="grid-content bg-purple">
           <div class="input-combine">
-            <div class="content-font" >物料分类:</div>
+            <div class="content-font" >物料分类：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -62,7 +62,7 @@
       <el-col :span="7">
         <div class="grid-content bg-purple">
           <div class="input-combine">
-            <div class="content-font" >来源:</div>
+            <div class="content-font" >来源：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -78,7 +78,7 @@
       <el-col :span="7">
         <div class="grid-content bg-purple">
           <div class="input-combine">
-            <div class="content-font" >用途:</div>
+            <div class="content-font" >用途：</div>
             <el-input v-model="input" placeholder="请输入内容" ></el-input>
           </div>
         </div>
@@ -91,7 +91,7 @@
       <el-col :span="7">
         <div class="grid-content bg-purple">
           <div class="input-combine">
-            <div class="content-font" >设计图号:</div>
+            <div class="content-font" >设计图号：</div>
             <el-input v-model="input" placeholder="请输入内容" ></el-input>
           </div>
         </div>
@@ -100,7 +100,7 @@
       <el-col :span="7">
         <div class="grid-content bg-purple">
           <div class="input-combine">
-            <div class="content-font" >设计版次:</div>
+            <div class="content-font" >设计版次：</div>
             <el-input v-model="input" placeholder="请输入内容" ></el-input>
           </div>
         </div>
@@ -109,7 +109,7 @@
       <el-col :span="7">
         <div class="grid-content bg-purple">
           <div class="input-combine">
-            <div class="content-font" >助记码:</div>
+            <div class="content-font" >助记码：</div>
             <el-input v-model="input" placeholder="请输入内容" ></el-input>
           </div>
         </div>
@@ -121,7 +121,7 @@
       <el-col :span="14">
         <div class="grid-content bg-purple">
           <div class="input-combine">
-            <div class="content-font" >规格描述:</div>
+            <div class="content-font" >规格描述：</div>
             <el-input v-model="input" placeholder="请输入内容" ></el-input>
           </div>
         </div>
@@ -144,7 +144,7 @@
       <el-col :span="14">
         <div class="grid-content bg-purple">
           <div class="input-combine">
-            <div class="content-font" >备注:</div>
+            <div class="content-font" >备注：</div>
             <el-input
               type="textarea"
               :rows="2"
@@ -164,7 +164,7 @@
       <el-col :span="7">
         <div class="grid-content bg-purple">
           <div class="input-combine">
-            <div class="content-font" >默认计量单位:</div>
+            <div class="content-font" >默认计量单位：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -184,7 +184,7 @@
         <div class="grid-content bg-purple">
           <div class="input-combine">
             <div class="content-font" >
-              辅助计量单位:
+              辅助计量单位：
             </div>
           </div>
         </div>
@@ -255,7 +255,7 @@
 				text-align: left;
 				font-size: 18px;
 				margin: 5px;
-				min-width: 90px;
+				min-width: 140px;
 				overflow: hidden;
 			}
 

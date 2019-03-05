@@ -7,7 +7,7 @@
       <el-col :span="24">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >检验方式:</div>
+            <div class="content-font" >检验方式：</div>
             <el-radio class="single-radio" v-model="radio" label="1">不检验</el-radio>
             <el-radio class="single-radio" v-model="radio" label="2">抽样检验</el-radio>
             <el-radio class="single-radio" v-model="radio" label="3">全样检验</el-radio>
@@ -22,7 +22,7 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >检验水准:</div>
+            <div class="content-font" >检验水准：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -38,7 +38,7 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >检验程度:</div>
+            <div class="content-font" >检验程度：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -54,7 +54,7 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >默认检验部门:</div>
+            <div class="content-font" >默认检验部门：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -74,7 +74,7 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >检验工时(时):</div>
+            <div class="content-font" >检验工时(时)：</div>
             <el-input v-model="input" placeholder="请输入内容" ></el-input>
           </div>
         </div>
@@ -83,7 +83,7 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >存储期限(天):</div>
+            <div class="content-font" >存储期限(天)：</div>
             <el-input v-model="input" placeholder="请输入内容" ></el-input>
           </div>
         </div>
@@ -92,7 +92,7 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >默认检验员:</div>
+            <div class="content-font" >默认检验员：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -112,7 +112,7 @@
       <el-col :span="10">
         <div class="grid-content upload-grid">
           <div class="input-combine">
-            <div class="content-font" >检验标准文件:</div>
+            <div class="content-font" >检验标准文件：</div>
             <!-- <el-input v-model="input" placeholder="请输入内容" ></el-input> -->
             <el-upload
             class="upload-element"
@@ -149,7 +149,7 @@
         text-align: left;
         font-size: 18px;
         margin: 5px;
-        min-width: 90px;
+        min-width: 140px;
         overflow: hidden;
       }
 

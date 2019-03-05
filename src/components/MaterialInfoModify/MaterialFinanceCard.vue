@@ -7,7 +7,7 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >财务类别:</div>
+            <div class="content-font" >财务类别：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -27,7 +27,7 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >记账本位币:</div>
+            <div class="content-font" >记账本位币：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -46,7 +46,7 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >会计科目:</div>
+            <div class="content-font" >会计科目：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -65,7 +65,7 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >增值税代码:</div>
+            <div class="content-font" >增值税代码：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -84,7 +84,7 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >存货计价方法:</div>
+            <div class="content-font" >存货计价方法：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -103,7 +103,7 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >成本计算方法:</div>
+            <div class="content-font" >成本计算方法：</div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
               v-for="item in options"
@@ -123,7 +123,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font" >
-              开票类型:
+              开票类型：
             </div>
             <el-select  class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
@@ -150,7 +150,7 @@
         text-align: left;
         font-size: 18px;
         margin: 5px;
-        min-width: 90px;
+        min-width: 140px;
         overflow: hidden;
       }
 
