@@ -1,5 +1,5 @@
 <template>
-<!-- 物料财务信息卡 -->
+  <!-- 物料财务信息卡 -->
   <el-card class="box-card">
     <!-- 第一行 -->
     <el-row :gutter="100">
@@ -7,14 +7,14 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >财务类别：</div>
-            <el-select  class="combine-selector" v-model="value" placeholder="请选择">
+            <div class="content-font">财务类别：</div>
+            <el-select class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-              </el-option>
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
             </el-select>
           </div>
         </div>
@@ -27,14 +27,14 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >记账本位币：</div>
-            <el-select  class="combine-selector" v-model="value" placeholder="请选择">
+            <div class="content-font">记账本位币：</div>
+            <el-select class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-              </el-option>
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
             </el-select>
           </div>
         </div>
@@ -46,14 +46,14 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >会计科目：</div>
-            <el-select  class="combine-selector" v-model="value" placeholder="请选择">
+            <div class="content-font">会计科目：</div>
+            <el-select class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-              </el-option>
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
             </el-select>
           </div>
         </div>
@@ -65,14 +65,14 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >增值税代码：</div>
-            <el-select  class="combine-selector" v-model="value" placeholder="请选择">
+            <div class="content-font">增值税代码：</div>
+            <el-select class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-              </el-option>
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
             </el-select>
           </div>
         </div>
@@ -84,14 +84,14 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >存货计价方法：</div>
-            <el-select  class="combine-selector" v-model="value" placeholder="请选择">
+            <div class="content-font">存货计价方法：</div>
+            <el-select class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-              </el-option>
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
             </el-select>
           </div>
         </div>
@@ -103,14 +103,14 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >成本计算方法：</div>
-            <el-select  class="combine-selector" v-model="value" placeholder="请选择">
+            <div class="content-font">成本计算方法：</div>
+            <el-select class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-              </el-option>
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
             </el-select>
           </div>
         </div>
@@ -122,16 +122,14 @@
       <el-col :span="6">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font" >
-              开票类型：
-            </div>
-            <el-select  class="combine-selector" v-model="value" placeholder="请选择">
+            <div class="content-font">开票类型：</div>
+            <el-select class="combine-selector" v-model="value" placeholder="请选择">
               <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-              </el-option>
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
             </el-select>
           </div>
         </div>
@@ -141,44 +139,44 @@
 </template>
 
 <style lang="less" scoped>
-  .box-card{
-    .input-combine{
-      display: flex;
+.box-card {
+  .input-combine {
+    display: flex;
+    align-items: center;
 
-      .content-font{
-        font-family:"PingFang SC";
-        text-align: left;
-        font-size: 18px;
-        margin: 5px;
-        min-width: 140px;
-        overflow: hidden;
-      }
-
-      .combine-selector{
-        width: 100%;
-      }
+    .content-font {
+      font-family: "PingFang SC";
+      text-align: left;
+      font-size: 14px;
+      margin: 5px;
+      min-width: 100px;
+      overflow: hidden;
     }
 
-    .el-row {
-      margin-bottom: 20px;
-      &:last-child {
+    .combine-selector {
+      width: 100%;
+    }
+  }
+
+  .el-row {
+    margin-bottom: 20px;
+    &:last-child {
       margin-bottom: 0;
-      }
-    }
-
-    .el-col {
-      border-radius: 4px;
-    }
-
-    .grid-content {
-      border-radius: 4px;
-      min-height: 36px;
     }
   }
-  
- </style>
+
+  .el-col {
+    border-radius: 4px;
+  }
+
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
+}
+</style>
 <script>
-  export default {
-    name:"MaterialFinanceCard",
-  }
+export default {
+  name: "MaterialFinanceCard"
+};
 </script>

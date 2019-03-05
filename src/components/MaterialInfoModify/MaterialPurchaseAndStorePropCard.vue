@@ -217,13 +217,14 @@
 
     .input-combine{
       display: flex;
+      align-items: center;
 
       .content-font{
         font-family:"PingFang SC";
         text-align: left;
-        font-size: 18px;
+        font-size: 14px;
         margin: 5px;
-        min-width: 140px;
+        min-width: 100px;
         overflow: hidden;
       }
 

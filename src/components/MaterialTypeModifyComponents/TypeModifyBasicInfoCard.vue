@@ -71,7 +71,7 @@
 <style lang="less" scoped>
   .box-card { 
     .title1{
-      font-size: 18px;
+      font-size: 14px;
       min-width: 90px;
       overflow: hidden;
       text-align: left;
@@ -81,10 +81,10 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      min-width: 50%;
+      // min-width: 50%;
 
       .title {
-        font-size: 18px;
+        font-size: 14px;
         min-width: 90px;
         overflow: hidden;
         text-align: center;
@@ -92,7 +92,7 @@
       }
 
       .barSelector{
-        min-width: 60%;
+        width: 100%;
       }
     }
   } 
