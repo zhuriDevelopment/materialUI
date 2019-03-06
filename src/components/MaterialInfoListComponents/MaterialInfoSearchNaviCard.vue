@@ -9,14 +9,21 @@
           <div class="title">
             物料分类:
           </div>
-          <el-select class="searchBarSelector" v-model="searchParams.materialCategory" placeholder="请选择">
+          <el-cascader
+            expand-trigger="hover"
+            :options="materialCategInfo"
+            v-model="searchParams.materialCategory"
+            >
+          </el-cascader>
+
+          <!-- <el-select class="searchBarSelector" v-model="searchParams.materialCategory" placeholder="请选择">
             <el-option
             v-for="item in materialCategInfo"
             :key="item.value"
             :label="item.label"
             :value="item.value">
             </el-option>
-          </el-select>
+          </el-select> -->
         </div>
       </el-col>
 
@@ -215,39 +222,71 @@
 
       /* 搜索按钮点击响应函数 */
       searchClick () {
+        /* print to conslole */
         for(var key in this.searchParams){
-          /* print to conslole */
           console.log(key + this.searchParams[key]);
         }
-
         this.searchParams.timeRange = this.timeRange2 - this.timeRange1;
+        /* this.searchInputs = this.searchParams; */
 
-        this.searchInputs = this.searchParams;
+        var retArr = [];
+        /* 搜索API--getBaseInfo */
+        this.$axios
+          .post(`http://202.120.1.66:8080/materialmanagement/getBaseInfo`, this.searchParams)
+          .then(response => {
+            console.log("getBaseInfo received.");
+            let basedata = response.data['result']['baseResult'];
+            let catdata = response.data['result']['catResult'];
+            let unitdata = response.data['result']['unitResult'];
+          
+            for (let i = 0; i < basedata.length; ++i) {
+              let tmpvalue = {};
+              tmpvalue["spuCode"] = basedata[i]["spuCode"];
+              tmpvalue["spuName"] = basedata[i]["spuName"];
+              tmpvalue["materialCatId"] = catdata[i]["name"];
+              tmpvalue["description"] = basedata[i]["description"];
+              tmpvalue["designCode"] = basedata[i]["designCode"];
+              tmpvalue["designVersion"] = basedata[i]["designVersion"];
+              tmpvalue["source"] = basedata[i]["source"];
+              tmpvalue["defaultUnitId"] = unitdata[i]["name"];
+              tmpvalue["note"] = basedata[i]["note"];
+              retArr.push(tmpvalue);
+              console.log(tmpvalue);
+            }
+
+            /* 将搜索结果写入到store中的 displayMaterialInfo中*/
+            this.displayMaterialInfo = retArr;
+          })
+          .catch(error => {
+            // console.log(`searchWithParams error: `, error);
+          });
       },
 
       createMaterailClick(){
-          /* this.$axios
-            .get(`http://202.120.1.66:8080/materialmanagement/getAllBaseInfo`)
-            .then(response => {
-              
-            })
-            .catch(error => {
-              console.log("ERROR");
-            }); */
+          //
       }
     },
 
     computed:{
       /* 搜索的输入变量 */
-      searchInputs : {
+      /* searchInputs : {
         get(){
           return this.$store.getters['infolist/searchInputs'];
         },
         set(value){
           this.$store.commit('infolist/searchInputs-update',value);
-          console.log("called");
         }
-      }
+      }, */
+
+      /* 表格展示信息变量 */
+      displayMaterialInfo: {
+        get(){
+          return this.$store.getters['infolist/displayMaterialInfo'];
+        },
+        set(newValue){
+          this.$store.commit('infolist/displayMaterialInfo-update',value);
+        }
+      },
     }
   }
 </script>

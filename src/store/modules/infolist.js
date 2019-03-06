@@ -5,7 +5,8 @@ const state = {
     searchInputs: [],
 
     /* 信息展示表格的展示信息 */
-    displayMaterialInfo: [
+    displayMaterialInfo: [],
+    /* [
         {
           "spuCode": "1001",
           "spuName": "1001",
@@ -17,8 +18,7 @@ const state = {
           "description": "1001",
           "note": "1001",
         },
-      ],
-    
+      ], */
 };
 
 const getters = {
