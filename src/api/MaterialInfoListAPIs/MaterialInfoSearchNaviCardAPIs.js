@@ -1,44 +1,40 @@
+import axios from 'axios';
+
 class materialInfoSearchNaviCardAPIs{
-
-    /* 回传物料分类选择器 显示信息的函数 */
+    /* 物料分类选择器显示信息 */
     getMaterialCategInfo = function(){
+      var retDict = [];
+      /* get请求 */
+      axios.get(`http://202.120.1.66:8080/materialmanagement/getMaterialCategory`)
+          .then((response) => {
+            console.log("getMaterialCategory received.");
+            retDict.push(response.data);            
+          })
+          .catch(error => {
+            // console.log(`error in initing tree`, error);
+          });
+          return retDict;          
+    }
+ 
+    /* 设计版本选择器显示信息 */
+    getDesignVersionInfo = function(){
       return  [{
-          value: 'A',
-          label: '类型A'
+          value: '版本1',
+          label: '版本1'
         }, {
-          value: 'B',
-          label: '类型B'
+          value: '版本2',
+          label: '版本2'
         }, {
-          value: 'C',
-          label: '类型C'
+          value: '版本3',
+          label: '版本3'
         }, {
-          vvalue: 'D',
-          label: '类型D'
+          value: '版本4',
+          label: '版本4'
         }, {
-          value: 'E',
-          label: '类型E'
+          value: '版本5',
+          label: '版本5'
         }];
-    }
-
-    /* 回传物料设计版本选择器 显示信息的函数 */
-    getMaterialDesignVersionInfo = function(){
-      return [{
-          value: 'DV-A',
-          label: '版本A'
-        }, {
-          value: 'DV-B',
-          label: '版本b'
-        }, {
-          value: 'DV-c',
-          label: '版本C'
-        }, {
-          value: 'DV-A',
-          label: '版本A'
-        }, {
-          value: 'DV-A',
-          label: '版本A'
-      }];
-    }
+  }
 }
 
 export default new materialInfoSearchNaviCardAPIs();
