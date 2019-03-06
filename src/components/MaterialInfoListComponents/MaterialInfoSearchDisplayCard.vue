@@ -129,8 +129,10 @@
 
     computed:{
       /* 表格展示信息变量 */
-      displayMaterialInfo(){
-        return this.$store.getters['infolist/displayMaterialInfo'];
+      displayMaterialInfo: {
+        get(){
+          return this.$store.getters['infolist/displayMaterialInfo'];
+        }
       }
     }
   }
