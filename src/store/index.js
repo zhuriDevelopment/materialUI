@@ -5,6 +5,7 @@ import * as getters from './getters';
 import * as mutations from './mutations';
 import createLogger from 'vuex/dist/logger';
 import infolist from './modules/infolist';
+import categorymodify from './modules/categorymodify';
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
   getters,
   modules: {
     infolist,
+    categorymodify,
   },
   strict: debug,
   plugins: [createLogger()]

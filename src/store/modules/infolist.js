@@ -1,24 +1,25 @@
 import * as types from '../mutation-types'
 
 const state = {
-    baseInfoData: [],
+  baseInfoData: [],
 };
 
 const getters = {
-    baseInfoData: state => state.baseInfoData,
+  baseInfoData: state => state.baseInfoData,
 };
 
 const actions = {};
 
 const mutations = {
-    [types.MODIFY_INFOLISTTABLE] (state, { baseInfoData }) {
-        state.baseInfoData = baseInfoData;
-    },
+  [types.MODIFY_INFOLISTTABLE](state, { baseInfoData }) {
+    state.baseInfoData = baseInfoData;
+  },
 }
 
 export default {
-    state,
-    getters,
-    actions,
-    mutations
+  namespaced: true,
+  state,
+  getters,
+  actions,
+  mutations
 }

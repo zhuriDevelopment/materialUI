@@ -10,7 +10,7 @@ const Quick = r => require.ensure([], () => r(require('../page/quick/quick')), '
 // -------------------------------------------- 为用户新增代码 --------------------------------------------
 const MaterialInfoList = r => require.ensure([], () => r(require('../page/material/MaterialInfoList')), 'MaterialInfoList');
 const MaterialInfoModify = r => require.ensure([], () => r(require('../page/material/MaterialInfoModify')), 'MaterialInfoModify');
-const MaterialTypeModify = r => require.ensure([], () => r(require('../page/material/MaterialTypeModify')), 'MaterialTypeModify');
+const MaterialCategoryModify = r => require.ensure([], () => r(require('../page/material/MaterialCategoryModify')), 'MaterialCategoryModify');
 
 // -------------------------------------------- 路由配置部分 --------------------------------------------
 export default [{
@@ -48,9 +48,9 @@ export default [{
         }
       },
       { // 物料 -- 物料分类管理
-        path: '/material/typemodify',
-        name: 'MaterialTypeModify',
-        component: MaterialTypeModify,
+        path: '/material/categorymodify',
+        name: 'MaterialCategoryModify',
+        component: MaterialCategoryModify,
         meta: {
           bcrumd: ['物料', '物料分类管理'],
         }

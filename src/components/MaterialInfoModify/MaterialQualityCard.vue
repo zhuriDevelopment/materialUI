@@ -8,24 +8,23 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">检验方式：</div>
-            <el-radio class="single-radio" v-model="radio" label="1">不检验</el-radio>
-            <el-radio class="single-radio" v-model="radio" label="2">抽样检验</el-radio>
-            <el-radio class="single-radio" v-model="radio" label="3">全样检验</el-radio>
+            <el-radio class="single-radio" v-model="params.testMethod" label="0">不检验</el-radio>
+            <el-radio class="single-radio" v-model="params.testMethod" label="1">抽样检验</el-radio>
+            <el-radio class="single-radio" v-model="params.testMethod" label="2">全样检验</el-radio>
           </div>
         </div>
       </el-col>
     </el-row>
-
     <!-- 第二行 -->
-    <el-row :gutter="100">
+    <el-row :gutter="20">
       <!--检验水准-->
-      <el-col :span="6">
+      <el-col :span="12">
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">检验水准：</div>
-            <el-select class="combine-selector" v-model="value" placeholder="请选择">
+            <el-select class="combine-selector" v-model="params.testLevel" placeholder="请选择">
               <el-option
-                v-for="item in options"
+                v-for="item in options.testLevelOptions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -35,29 +34,13 @@
         </div>
       </el-col>
       <!--检验程度-->
-      <el-col :span="6">
+      <el-col :span="12">
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">检验程度：</div>
-            <el-select class="combine-selector" v-model="value" placeholder="请选择">
+            <el-select class="combine-selector" v-model="params.testDegree" placeholder="请选择">
               <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-          </div>
-        </div>
-      </el-col>
-      <!--默认检验部门-->
-      <el-col :span="6">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">默认检验部门：</div>
-            <el-select class="combine-selector" v-model="value" placeholder="请选择">
-              <el-option
-                v-for="item in options"
+                v-for="item in options.testDegreeOptions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -67,53 +50,62 @@
         </div>
       </el-col>
     </el-row>
-
     <!-- 第三行 -->
-    <el-row :gutter="100">
-      <!--检验工时(时)-->
-      <el-col :span="6">
+    <el-row :gutter="20">
+      <!--默认检验部门-->
+      <el-col :span="12">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font">检验工时(时)：</div>
-            <el-input v-model="input" placeholder="请输入内容"></el-input>
+            <div class="content-font">默认检验部门：</div>
+            <el-select class="combine-selector" v-model="params.defaultTestDep" placeholder="请选择">
+              <el-option
+                v-for="item in options.defaultTestDepOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
           </div>
         </div>
       </el-col>
-      <!--存储期限(天)-->
-      <el-col :span="6">
+      <!--检验工时(时)-->
+      <el-col :span="12">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font">存储期限(天)：</div>
-            <el-input v-model="input" placeholder="请输入内容"></el-input>
+            <div class="content-font">检验工时（时）：</div>
+            <el-input class="combine-selector" v-model="params.testHour" placeholder="请输入内容"></el-input>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
+    <!-- 第四行 -->
+    <el-row :gutter="20">
+      <!--存储期限(天)-->
+      <el-col :span="12">
+        <div class="grid-content">
+          <div class="input-combine">
+            <div class="content-font">存储期限（天）：</div>
+            <el-input class="combine-selector" v-model="params.testHour" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
       <!--默认检验员-->
-      <el-col :span="6">
+      <el-col :span="12">
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">默认检验员：</div>
-            <el-select class="combine-selector" v-model="value" placeholder="请选择">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
+            <el-input class="combine-selector" v-model="params.defaultTester" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
     </el-row>
-
-    <!-- 第四行 -->
-    <el-row :gutter="100">
+    <!-- 第五行 -->
+    <el-row :gutter="20">
       <!--检验工时(时)-->
-      <el-col :span="10">
+      <el-col :span="24">
         <div class="grid-content upload-grid">
           <div class="input-combine">
             <div class="content-font">检验标准文件：</div>
-            <!-- <el-input v-model="input" placeholder="请输入内容" ></el-input> -->
             <el-upload
               class="upload-element"
               ref="upload"
@@ -152,7 +144,7 @@
       text-align: left;
       font-size: 14px;
       margin: 5px;
-      min-width: 100px;
+      min-width: 115px;
       overflow: hidden;
     }
 
@@ -220,7 +212,68 @@ export default {
           url:
             "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"
         }
-      ]
+      ],
+      // 质量属性数据
+      params: {
+        // 检验方法
+        testMethod: '1',
+        // 检验水准
+        testLevel: '0',
+        // 检验程度
+        testDegree: '0',
+        // 默认检验部门
+        defaultTestDep: '0',
+        // 检验工时
+        testHour: '10',
+        // 存储期限
+        storageLimit: '10',
+        // 默认检验员
+        defaultTester: '李小四'
+      },
+      // 部分质量属性需要的选项
+      options: {
+        // 检验水准选项
+        testLevelOptions: [
+          {
+            label: '一般检验水准',
+            value: '0',
+          },
+          {
+            label: '特殊检验水准',
+            value: '1',
+          },
+        ],
+        // 检验程度选项
+        testDegreeOptions: [
+          {
+            label: '减量',
+            value: '0',
+          },
+          {
+            label: '正常',
+            value: '1',
+          },
+          {
+            label: '严格',
+            value: '2',
+          },
+        ],
+        // 默认检验部门选项
+        defaultTestDepOptions: [
+          {
+            label: '生产部',
+            value: '0',
+          },
+          {
+            label: '采购部',
+            value: '1',
+          },
+          {
+            label: '销售部',
+            value: '2',
+          },
+        ]
+      },
     };
   },
   methods: {

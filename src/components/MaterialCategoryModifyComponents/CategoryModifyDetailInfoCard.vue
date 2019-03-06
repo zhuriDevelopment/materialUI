@@ -5,8 +5,8 @@
       <!-- 物料属性选择按钮 -->
       <el-tab-pane class="radio-group-member" label="物料属性定义" name="propertyDefination">
         <div class="detailInfoEmbededCard" >
-          <TypeModifyPropertyDefinationCard>
-          </TypeModifyPropertyDefinationCard>
+          <CategoryModifyPropertyDefinationCard>
+          </CategoryModifyPropertyDefinationCard>
         </div></el-tab-pane>
       <!-- 采购和库存属性选择按钮 -->
       <el-tab-pane class="radio-group-member" label="采购和库存属性" name="pruchaseAndStore">
@@ -43,7 +43,7 @@
           </MaterialFinanceCard>
         </div>
       </el-tab-pane>
-    </el-tabs>     
+    </el-tabs>
   </div>
 </template>
 
@@ -64,7 +64,7 @@
 
 <script>
   /* 物料属性定义tag */
-  import TypeModifyPropertyDefinationCard from '@/components/MaterialTypeModifyComponents/TypeModifyPropertyDefinationCard';
+  import CategoryModifyPropertyDefinationCard from '@/components/MaterialCategoryModifyComponents/CategoryModifyPropertyDefinationCard';
   /* 采购和库存属性tag */
   import MaterialPurchaseAndStorePropCard from '@/components/MaterialInfoModify/MaterialPurchaseAndStorePropCard';
   /* 计划类属性tag */
@@ -78,18 +78,18 @@
 
   export default {
     /* 名字 */
-    name:"TypeModifyDetailInfoCard",
+    name:"CategoryModifyDetailInfoCard",
 
     /* 引入的组件 */
     components:{
-      TypeModifyPropertyDefinationCard,
+      CategoryModifyPropertyDefinationCard,
       MaterialPurchaseAndStorePropCard,
       MaterialPlanPropCard,
       MaterialSalePropCard,
       MaterialQualityCard,
       MaterialFinanceCard
     },
-    
+
     /* data */
     data(){
       return {

@@ -100,7 +100,7 @@
         </template>
         <el-menu-item index="/material/infolist"><i class="el-icon-document"></i>物料信息列表</el-menu-item>
         <el-menu-item index="/material/infomodify"><i class="el-icon-document"></i>物料信息修改</el-menu-item>
-        <el-menu-item index="/material/typemodify"><i class="el-icon-document"></i>物料分类信息修改</el-menu-item>
+        <el-menu-item index="/material/categorymodify"><i class="el-icon-document"></i>物料分类信息修改</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
