@@ -77,14 +77,14 @@ const state = {
     },
   ],
   // 采购和库存属性的数据
-  purchaseAndStore: [],
+  purchaseAndStoreInfos: [],
 };
 
 const getters = {
   categoryTree: state => state.categoryTree,
   catInfo: state => state.catInfo,
   basePropList: state => state.basePropList,
-  purchaseAndStore: state => state.purchaseAndStore,
+  purchaseAndStoreInfos: state => state.purchaseAndStoreInfos,
 };
 
 const actions = {
@@ -122,6 +122,9 @@ const mutations = {
   [types.CAT_BASE_PROP] (state, basePropList) {
     state.basePropList = basePropList;
   },
+  [types.CAT_PURCHASE_PROP] (state, purchaseAndStoreInfos) {
+    state.purchaseAndStoreInfos = purchaseAndStoreInfos;
+  }
 };
 
 export default {

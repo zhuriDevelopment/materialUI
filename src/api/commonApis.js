@@ -1,6 +1,7 @@
 import qs from 'qs';
 
 class commonApis {
+  // 通用的处理axios错误的函数
   handleError = function (error, main, message) {
     if (error && error.response) {
       console.log("error.response.data", error.response.data);
@@ -16,6 +17,32 @@ class commonApis {
   };
   paramsSerializer = params => {
     return qs.stringify(params, { indices: false })
+  };
+  // 从给定字典的key转化成value
+  keyToValue = (dict, keys) => {
+    var result = [];
+    for (var keyIndex in keys) {
+      for (var key in dict) {
+        if (key === keys[keyIndex]) {
+          result.append(dict[key]);
+          break;
+        }
+      }
+    }
+    return result;
+  };
+  // 从给定字典的value转化成key
+  valueToKey = (dict, values) => {
+    var result = [];
+    for (var valueIndex in values) {
+      for (var key in dict) {
+        if (dict[key] === values[valueIndex]) {
+          result.append(key);
+          break;
+        }
+      }
+    }
+    return result;
   };
 }
 

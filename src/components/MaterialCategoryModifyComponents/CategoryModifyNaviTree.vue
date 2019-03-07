@@ -50,10 +50,7 @@ export default {
         .then(response => {
           console.log(`getMaterialInfos response`, response);
           var responseData = response.data;
-          var basePropList = Object.assign([], responseData.basePropList);
-          basePropList = CategoryModifyFuncs.handleBaseInfos(basePropList);
-          console.log(`basePropList`, basePropList);
-          that.$store.commit('categorymodify/cat-base-prop', basePropList);
+          CategoryModifyFuncs.handleAllInfos(responseData, that.$store);
         })
         .catch(error => {
           CommonApi.handleError(error, that, "在获取所有物料信息的过程中发生错误，错误为：");
