@@ -24,7 +24,7 @@ class commonApis {
     for (var keyIndex in keys) {
       for (var key in dict) {
         if (key === keys[keyIndex]) {
-          result.append(dict[key]);
+          result.push(dict[key]);
           break;
         }
       }
@@ -37,9 +37,21 @@ class commonApis {
     for (var valueIndex in values) {
       for (var key in dict) {
         if (dict[key] === values[valueIndex]) {
-          result.append(key);
+          result.push(key);
           break;
         }
+      }
+    }
+    return result;
+  };
+  // 从给定字典中提取出key或者value数组，type=0为key数组，type=1为value数组
+  getArrOfKeyOrValue = (dict, type) => {
+    var result = [];
+    for (var key in dict) {
+      if (type == 0) {
+        result.push(key);
+      } else {
+        result.push(dict[key]);
       }
     }
     return result;

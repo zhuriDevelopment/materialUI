@@ -8,7 +8,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">财务类别：</div>
-            <el-select class="combine-selector" v-model="params.typeId" placeholder="请选择">
+            <el-select class="combine-selector" v-model="typeId" placeholder="请选择">
               <el-option
                 v-for="item in options.typeOptions"
                 :key="item.value"
@@ -24,7 +24,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">记账本位币：</div>
-            <el-input class="combine-selector" v-model="params.recordCurrency" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="recordCurrency" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -36,7 +36,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">会计科目：</div>
-            <el-input class="combine-selector" v-model="params.accountName" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="accountName" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -45,7 +45,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">增值税代码：</div>
-            <el-input class="combine-selector" v-model="params.vatCode" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="vatCode" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -57,7 +57,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">存货计价方法：</div>
-            <el-select class="combine-selector" v-model="params.invCostMethod" placeholder="请选择">
+            <el-select class="combine-selector" v-model="invCostMethod" placeholder="请选择">
               <el-option
                 v-for="item in options.invCostMethodOptions"
                 :key="item.value"
@@ -73,7 +73,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">成本计算方法：</div>
-            <el-select class="combine-selector" v-model="params.costingMethod" placeholder="请选择">
+            <el-select class="combine-selector" v-model="costingMethod" placeholder="请选择">
               <el-option
                 v-for="item in options.costingMethodOptions"
                 :key="item.value"
@@ -92,7 +92,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">开票类型：</div>
-            <el-select class="combine-selector" v-model="params.billingType" placeholder="请选择">
+            <el-select class="combine-selector" v-model="billingType" placeholder="请选择">
               <el-option
                 v-for="item in options.billingTypeOptions"
                 :key="item.value"
@@ -149,95 +149,143 @@ export default {
   name: "MaterialFinanceCard",
   data() {
     return {
-      // 财务属性数据
-      params: {
-        // 财务类别
-        typeId: 0,
-        // 记账本位币
-        recordCurrency: '人民币',
-        // 会计科目
-        accountName: '资产类',
-        // 增值税代码
-        vatCode: '1001',
-        // 存货计价方法
-        invCostMethod: 0,
-        // 成本计算方法
-        costingMethod: 0,
-        // 开票类型
-        billingType: 0,
-      },
       // 部分财务属性需要的选项
       options: {
         // 财务类别选项
         typeOptions: [
           {
             label: '私有类别',
-            value: 0,
+            value: '0',
           },
           {
             label: '共有类别',
-            value: 1,
+            value: '1',
           }
         ],
         // 存货计价方法选项
         invCostMethodOptions: [
           {
             label: '先进先出法',
-            value: 0,
+            value: '0',
           },
           {
             label: '月末一次加权平均法',
-            value: 1,
+            value: '1',
           },
           {
             label: '个别计价法',
-            value: 2,
+            value: '2',
           },
           {
             label: '移动加权平均法',
-            value: 3,
+            value: '3',
           },
         ],
         // 成本计算方法选项
         costingMethodOptions: [
           {
             label: '分步法',
-            value: 0,
+            value: '0',
           },
           {
             label: '分类法',
-            value: 1,
+            value: '1',
           },
           {
             label: '分批法',
-            value: 2,
+            value: '2',
           },
           {
             label: '品种法',
-            value: 3,
+            value: '3',
           },
           {
             label: '​ABC成本法',
-            value: 4,
+            value: '4',
           },
         ],
         // 开票类型选项
         billingTypeOptions: [
           {
             label: '增值税专用发票',
-            value: 0,
+            value: '0',
           },
           {
             label: '普通发票',
-            value: 1,
+            value: '1',
           },
           {
             label: '专业发票',
-            value: 2,
+            value: '2',
           },
         ]
       },
     }
   },
+  computed: {
+    // 财务类别
+    typeId: {
+      get() {
+        return this.$store.getters['financeprop/typeId'];
+      },
+      set(value) {
+        this.$store.commit('financeprop/type-id', value);
+      }
+    },
+    // 记账本位币
+    recordCurrency: {
+      get() {
+        return this.$store.getters['financeprop/recordCurrency'];
+      },
+      set(value) {
+        this.$store.commit('financeprop/record-cur', value);
+      }
+    },
+    // 会计科目
+    accountName: {
+      get() {
+        return this.$store.getters['financeprop/accountName'];
+      },
+      set(value) {
+        this.$store.commit('financeprop/account-name', value);
+      }
+    },
+    // 增值税代码
+    vatCode: {
+      get() {
+        return this.$store.getters['financeprop/vatCode'];
+      },
+      set(value) {
+        this.$store.commit('financeprop/vat-code', value);
+      }
+    },
+    // 存货计价方法
+    invCostMethod: {
+      get() {
+        return this.$store.getters['financeprop/invCostMethod'];
+      },
+      set(value) {
+        this.$store.commit('financeprop/inv-cost-method', value);
+      }
+    },
+    // 成本计算方法
+    costingMethod: {
+      get() {
+        return this.$store.getters['financeprop/costingMethod'];
+      },
+      set(value) {
+        this.$store.commit('financeprop/costing-method', value);
+      }
+    },
+    // 开票类型
+    billingType: {
+      get() {
+        return this.$store.getters['financeprop/billingType'];
+      },
+      set(value) {
+        this.$store.commit('financeprop/billing-type', value);
+      }
+    },
+  }
 };
 </script>

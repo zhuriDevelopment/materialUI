@@ -6,6 +6,11 @@ import * as mutations from './mutations';
 import createLogger from 'vuex/dist/logger';
 import infolist from './modules/infolist';
 import categorymodify from './modules/categorymodify';
+import purandstoreprop from './modules/purandstoreprop';
+import planprop from './modules/planprop';
+import salesprop from './modules/salesprop';
+import qualityprop from './modules/qualityprop';
+import financeprop from './modules/financeprop';
 
 Vue.use(Vuex)
 
@@ -18,6 +23,11 @@ export default new Vuex.Store({
   modules: {
     infolist,
     categorymodify,
+    purandstoreprop,
+    planprop,
+    salesprop,
+    qualityprop,
+    financeprop,
   },
   strict: debug,
   plugins: [createLogger()]

@@ -8,9 +8,9 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">检验方式：</div>
-            <el-radio class="single-radio" v-model="params.testMethod" label="0">不检验</el-radio>
-            <el-radio class="single-radio" v-model="params.testMethod" label="1">抽样检验</el-radio>
-            <el-radio class="single-radio" v-model="params.testMethod" label="2">全样检验</el-radio>
+            <el-radio class="single-radio" v-model="testMethod" label="0">不检验</el-radio>
+            <el-radio class="single-radio" v-model="testMethod" label="1">抽样检验</el-radio>
+            <el-radio class="single-radio" v-model="testMethod" label="2">全样检验</el-radio>
           </div>
         </div>
       </el-col>
@@ -22,7 +22,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">检验水准：</div>
-            <el-select class="combine-selector" v-model="params.testLevel" placeholder="请选择">
+            <el-select class="combine-selector" v-model="testLevel" placeholder="请选择">
               <el-option
                 v-for="item in options.testLevelOptions"
                 :key="item.value"
@@ -38,7 +38,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">检验程度：</div>
-            <el-select class="combine-selector" v-model="params.testDegree" placeholder="请选择">
+            <el-select class="combine-selector" v-model="testDegree" placeholder="请选择">
               <el-option
                 v-for="item in options.testDegreeOptions"
                 :key="item.value"
@@ -57,7 +57,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">默认检验部门：</div>
-            <el-select class="combine-selector" v-model="params.defaultTestDep" placeholder="请选择">
+            <el-select class="combine-selector" v-model="defaultTestDep" placeholder="请选择">
               <el-option
                 v-for="item in options.defaultTestDepOptions"
                 :key="item.value"
@@ -73,7 +73,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">检验工时（时）：</div>
-            <el-input class="combine-selector" v-model="params.testHour" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="testHour" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -85,7 +85,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">存储期限（天）：</div>
-            <el-input class="combine-selector" v-model="params.testHour" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="testHour" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -94,7 +94,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">默认检验员：</div>
-            <el-input class="combine-selector" v-model="params.defaultTester" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="defaultTester" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -114,6 +114,7 @@
               :on-remove="handleRemove"
               :file-list="fileList"
               :auto-upload="false"
+              :disabled="true"
             >
               <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
               <el-button
@@ -200,7 +201,6 @@ export default {
   name: "MaterialQualityCard",
   data() {
     return {
-      radio: "1",
       fileList: [
         {
           name: "food.jpeg",
@@ -213,23 +213,6 @@ export default {
             "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"
         }
       ],
-      // 质量属性数据
-      params: {
-        // 检验方法
-        testMethod: '1',
-        // 检验水准
-        testLevel: '0',
-        // 检验程度
-        testDegree: '0',
-        // 默认检验部门
-        defaultTestDep: '0',
-        // 检验工时
-        testHour: '10',
-        // 存储期限
-        storageLimit: '10',
-        // 默认检验员
-        defaultTester: '李小四'
-      },
       // 部分质量属性需要的选项
       options: {
         // 检验水准选项
@@ -278,7 +261,7 @@ export default {
   },
   methods: {
     submitUpload() {
-      this.$refs.upload.submit();
+      // this.$refs.upload.submit();
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
@@ -286,6 +269,71 @@ export default {
     handlePreview(file) {
       console.log(file);
     }
+  },
+  computed: {
+    // 检验方法
+    testMethod: {
+      get() {
+        return this.$store.getters['qualityprop/testMethod'];
+      },
+      set(value) {
+        this.$store.commit('qualityprop/test-method', value);
+      }
+    },
+    // 检验水准
+    testLevel: {
+      get() {
+        return this.$store.getters['qualityprop/testLevel'];
+      },
+      set(value) {
+        this.$store.commit('qualityprop/test-lvl', value);
+      }
+    },
+    // 检验程度
+    testDegree: {
+      get() {
+        return this.$store.getters['qualityprop/testDegree'];
+      },
+      set(value) {
+        this.$store.commit('qualityprop/test-degree', value);
+      }
+    },
+    // 默认检验部门
+    defaultTestDep: {
+      get() {
+        return this.$store.getters['qualityprop/defaultTestDep'];
+      },
+      set(value) {
+        this.$store.commit('qualityprop/default-test-dep', value);
+      }
+    },
+    // 检验工时
+    testHour: {
+      get() {
+        return this.$store.getters['qualityprop/testHour'];
+      },
+      set(value) {
+        this.$store.commit('qualityprop/test-hour', value);
+      }
+    },
+    // 存储期限
+    storageLimit: {
+      get() {
+        return this.$store.getters['qualityprop/storageLimit'];
+      },
+      set(value) {
+        this.$store.commit('qualityprop/storage-limit', value);
+      }
+    },
+    // 默认检验员
+    defaultTester: {
+      get() {
+        return this.$store.getters['qualityprop/defaultTester'];
+      },
+      set(value) {
+        this.$store.commit('qualityprop/default-tester', value);
+      }
+    },
   }
 };
 </script>

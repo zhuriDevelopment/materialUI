@@ -76,15 +76,12 @@ const state = {
       sort: 0,
     },
   ],
-  // 采购和库存属性的数据
-  purchaseAndStoreInfos: [],
 };
 
 const getters = {
   categoryTree: state => state.categoryTree,
   catInfo: state => state.catInfo,
   basePropList: state => state.basePropList,
-  purchaseAndStoreInfos: state => state.purchaseAndStoreInfos,
 };
 
 const actions = {
