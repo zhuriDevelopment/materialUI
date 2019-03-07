@@ -1,6 +1,7 @@
 import * as types from '../mutation-types'
 
 const state = {
+  // 物料分类信息树
   categoryTree: [
     {
       label: '物料分类',
@@ -44,10 +45,46 @@ const state = {
       }]
     },
   ],
+  // 基本信息的数据
+  catInfo: {
+    // 分类编码
+    code: '',
+    // 分类名称
+    name: '',
+    // 物料类别
+    type: 0,
+    // 物料分类id
+    id: 0,
+  },
+  // 物料属性定义的数据
+  basePropList: [
+    {
+      // 属性类别
+      type: 1,
+      // 属性标签
+      label: '标签一',
+      // 属性名
+      name: '属性一',
+      // 取值范围类型
+      valueRangeType: 1,
+      // 取值范围
+      valueRange: {
+        min: 10,
+        max: 20,
+      },
+      // 排序号
+      sort: 0,
+    },
+  ],
+  // 采购和库存属性的数据
+  purchaseAndStore: [],
 };
 
 const getters = {
   categoryTree: state => state.categoryTree,
+  catInfo: state => state.catInfo,
+  basePropList: state => state.basePropList,
+  purchaseAndStore: state => state.purchaseAndStore,
 };
 
 const actions = {
@@ -76,8 +113,14 @@ const actions = {
 };
 
 const mutations = {
-  [types.CAT_MODIFY_TREE] (state, categoryTree) {
+  [types.CAT_TREE] (state, categoryTree) {
     state.categoryTree = categoryTree;
+  },
+  [types.CAT_INFO] (state, catInfo) {
+    state.catInfo = catInfo;
+  },
+  [types.CAT_BASE_PROP] (state, basePropList) {
+    state.basePropList = basePropList;
   },
 };
 

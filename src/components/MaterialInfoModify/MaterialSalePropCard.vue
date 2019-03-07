@@ -222,15 +222,15 @@ export default {
         defaultUnitOptions: [
           {
             label: '米',
-            value: 0,
+            value: '0',
           },
           {
             label: '匹',
-            value: 1,
+            value: '1',
           },
           {
             label: '箱',
-            value: 2,
+            value: '2',
           }
         ]
       }

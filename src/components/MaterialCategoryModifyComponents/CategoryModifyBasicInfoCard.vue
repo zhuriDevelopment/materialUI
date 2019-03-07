@@ -72,15 +72,6 @@ export default {
   name: "CategoryModifyBasicInfoCard",
   data() {
     return {
-      // 基本信息的数据
-      params: {
-        // 分类编码
-        code: '',
-        // 分类名称
-        name: '',
-        // 物料类别
-        type: 0,
-      },
       options: {
         // 物料类别选项
         typeOptions: [
@@ -105,6 +96,18 @@ export default {
             value: 4,
           },
         ],
+      }
+    }
+  },
+  computed: {
+    params: {
+      get() {
+        var that = this;
+        return that.$store.getters['categorymodify/catInfo'];
+      },
+      set(value) {
+        var that = this;
+        that.$store.commit('categorymodify/cat-info', value);
       }
     }
   }

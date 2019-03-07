@@ -17,43 +17,91 @@
 
 
 <script>
-  import categoryTree from '@/api/MaterialCategoryModifyAPIs/categoryTree';
-  export default {
-    name:"CategoryModifyNaviTree",
-    data() {
-      return {
-        defaultProps: {
-          children: 'children',
-          label: 'label'
-        }
-      };
-    },
-    methods: {
-      handleNodeClick(data) {
-        console.log(data);
+import CategoryModifyFuncs from "@/api/MaterialCategoryModifyAPIs/categorymodifyfuncs";
+import CommonApi from "@/api/commonApis";
+export default {
+  name: "CategoryModifyNaviTree",
+  data() {
+    return {
+      defaultProps: {
+        children: "children",
+        label: "label"
       }
-    },
-    mounted() {
+    };
+  },
+  methods: {
+    // 获取物料信息的函数
+    getMaterialInfos() {
       var that = this;
-      var url = `${window.$config.HOST}/materialmanagement/getMaterialCategory`;
-      that.$store.dispatch('categorymodify/getCatTree', {
-        url: url,
-        axios: that.$axios,
-        type: 'cat-tree',
-        main: that,
-      });
+      var code = that.$store.getters['categorymodify/catInfo'].code;
+      var name = that.$store.getters['categorymodify/catInfo'].name;
+      var typeArr = [5, 6, 7, 8, 9, 11];
+      that.$axios
+        .get(`${window.$config.HOST}/materialmanagement/getMaterialInfoWithCatCodeAndCatName`,
+          {
+            params: {
+              code: code,
+              name: name,
+              typeArr: typeArr,
+            },
+            paramsSerializer: CommonApi.paramsSerializer
+          }
+        )
+        .then(response => {
+          console.log(`getMaterialInfos response`, response);
+          var responseData = response.data;
+          var basePropList = Object.assign([], responseData.basePropList);
+          basePropList = CategoryModifyFuncs.handleBaseInfos(basePropList);
+          console.log(`basePropList`, basePropList);
+          that.$store.commit('categorymodify/cat-base-prop', basePropList);
+        })
+        .catch(error => {
+          CommonApi.handleError(error, that, "在获取所有物料信息的过程中发生错误，错误为：");
+        })
     },
-    computed: {
-      catTree: {
-        get() {
-          var that = this;
-          return that.$store.getters['categorymodify/categoryTree'];
-        },
-        set(value) {
-          var that = this;
-          that.$store.commit('categorymodify/cat-tree', value);
-        }
+    // 树结构节点的单击函数
+    handleNodeClick(data, node, self) {
+      var that = this;
+      that.$axios
+        .get(`${window.$config.HOST}/materialmanagement/getMaterialCategoryInfosWithId`,
+          {
+            params: {
+              id: data.id,
+            },
+          }
+        )
+        .then(response => {
+          let catInfo = response.data[0];
+          delete catInfo.parentId;
+          that.$store.commit('categorymodify/cat-info', catInfo);
+          that.getMaterialInfos();
+        })
+        .catch(error => {
+          CommonApi.handleError(error, that, "在获取物料分类信息的过程中发生错误，错误为：");
+        });
+    }
+  },
+  mounted() {
+    var that = this;
+    var url = `${window.$config.HOST}/materialmanagement/getMaterialCategory`;
+    that.$store.dispatch("categorymodify/getCatTree", {
+      url: url,
+      axios: that.$axios,
+      type: "cat-tree",
+      main: that
+    });
+  },
+  computed: {
+    catTree: {
+      get() {
+        var that = this;
+        return that.$store.getters["categorymodify/categoryTree"];
+      },
+      set(value) {
+        var that = this;
+        that.$store.commit("categorymodify/cat-tree", value);
       }
-    },
+    }
   }
+};
 </script>

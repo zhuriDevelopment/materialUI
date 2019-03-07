@@ -7,7 +7,7 @@
       <el-col :span="12">
         <div class="grid-content">
           <div class="input-combine">
-            <div class="content-font">物料置购类型：</div>
+            <div class="content-font">物料制购类型：</div>
             <el-select class="combine-selector" v-model="params.matPurchaseType" placeholder="请选择">
               <el-option
                 v-for="item in options.matPurchaseTypeOptions"
@@ -214,7 +214,7 @@ export default {
     return {
       // 采购和库存属性数据
       params: {
-        // 物料置购类型
+        // 物料制购类型
         matPurchaseType: '0',
         // ABC分类
         abcType: 'A',
@@ -245,11 +245,11 @@ export default {
         matPurchaseTypeOptions: [
           {
             label: '自制件',
-            value: 0,
+            value: '0',
           },
           {
             label: '采购件',
-            value: 1,
+            value: '1',
           },
         ],
         // 默认库存单位选项
