@@ -8,7 +8,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">销售计划价格：</div>
-            <el-input class="combine-selector" v-model="planPrice" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="params.planPrice" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -17,7 +17,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">计价货币：</div>
-            <el-select class="combine-selector" v-model="currency" placeholder="请选择">
+            <el-select class="combine-selector" v-model="params.currency" placeholder="请选择">
               <el-option
                 v-for="item in options.currencyOptions"
                 :key="item.value"
@@ -38,7 +38,7 @@
             <div class="content-font">是否售价控制：</div>
             <el-switch
               class="combine-selector"
-              v-model="isPriceCtr"
+              v-model="params.isPriceCtr"
               active-text="是"
               inactive-text="否">
             </el-switch>
@@ -50,7 +50,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">销售价格策略：</div>
-            <el-input class="combine-selector" v-model="priceStrategy" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="params.priceStrategy" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -62,7 +62,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">售价下限率：</div>
-            <el-input class="combine-selector" v-model="priceLowerLimitRate" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="params.priceLowerLimitRate" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -71,7 +71,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">销售成本科目：</div>
-            <el-input class="combine-selector" v-model="costSubject" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="params.costSubject" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -83,7 +83,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">默认客户：</div>
-            <el-input class="combine-selector" v-model="defaultClient" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="params.defaultClient" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -92,7 +92,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">销售地：</div>
-            <el-input class="combine-selector" v-model="location" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="params.location" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -104,7 +104,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">默认业务员：</div>
-            <el-input class="combine-selector" v-model="defaultSalesman" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="params.defaultSalesman" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -113,7 +113,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">默认销售单位：</div>
-            <el-select class="combine-selector" v-model="defaultUnit" placeholder="请选择">
+            <el-select class="combine-selector" v-model="params.defaultUnit" placeholder="请选择">
               <el-option
                 v-for="item in options.defaultUnitOptions"
                 :key="item.value"
@@ -214,96 +214,104 @@ export default {
     }
   },
   computed: {
-    // 销售计划价格
-    planPrice: {
+    params: {
       get() {
-        return this.$store.getters['salesprop/planPrice'];
+        return this.$store.getters['salesprop/salesInfos'];
       },
       set(value) {
-        this.$store.commit('salesprop/plan-price', value);
+        this.$store.commit('salesprop/sales', value);
       }
-    },
-    // 计价货币
-    currency: {
-      get() {
-        return this.$store.getters['salesprop/currency'];
-      },
-      set(value) {
-        this.$store.commit('salesprop/currency', value);
-      }
-    },
-    // 是否售价控制
-    isPriceCtr: {
-      get() {
-        return this.$store.getters['salesprop/isPriceCtr'];
-      },
-      set(value) {
-        this.$store.commit('salesprop/is-price-ctr', value);
-      }
-    },
-    // 销售价格策略
-    priceStrategy: {
-      get() {
-        return this.$store.getters['salesprop/priceStrategy'];
-      },
-      set(value) {
-        this.$store.commit('salesprop/price-stra', value);
-      }
-    },
-    // 售价下限率
-    priceLowerLimitRate: {
-      get() {
-        return this.$store.getters['salesprop/priceLowerLimitRate'];
-      },
-      set(value) {
-        this.$store.commit('salesprop/pri-lower-limit-rate', value);
-      }
-    },
-    // 销售成本科目
-    costSubject: {
-      get() {
-        return this.$store.getters['salesprop/costSubject'];
-      },
-      set(value) {
-        this.$store.commit('salesprop/cost-sub', value);
-      }
-    },
-    // 默认客户
-    defaultClient: {
-      get() {
-        return this.$store.getters['salesprop/defaultClient'];
-      },
-      set(value) {
-        this.$store.commit('salesprop/default-client', value);
-      }
-    },
-    // 销售地
-    location: {
-      get() {
-        return this.$store.getters['salesprop/location'];
-      },
-      set(value) {
-        this.$store.commit('salesprop/location', value);
-      }
-    },
-    // 默认业务员
-    defaultSalesman: {
-      get() {
-        return this.$store.getters['salesprop/defaultSalesman'];
-      },
-      set(value) {
-        this.$store.commit('salesprop/default-salesman', value);
-      }
-    },
-    // 默认销售单位
-    defaultUnit: {
-      get() {
-        return this.$store.getters['salesprop/defaultUnit'];
-      },
-      set(value) {
-        this.$store.commit('salesprop/default-unit', value);
-      }
-    },
+    }
+    // // 销售计划价格
+    // planPrice: {
+    //   get() {
+    //     return this.$store.getters['salesprop/planPrice'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('salesprop/plan-price', value);
+    //   }
+    // },
+    // // 计价货币
+    // currency: {
+    //   get() {
+    //     return this.$store.getters['salesprop/currency'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('salesprop/currency', value);
+    //   }
+    // },
+    // // 是否售价控制
+    // isPriceCtr: {
+    //   get() {
+    //     return this.$store.getters['salesprop/isPriceCtr'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('salesprop/is-price-ctr', value);
+    //   }
+    // },
+    // // 销售价格策略
+    // priceStrategy: {
+    //   get() {
+    //     return this.$store.getters['salesprop/priceStrategy'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('salesprop/price-stra', value);
+    //   }
+    // },
+    // // 售价下限率
+    // priceLowerLimitRate: {
+    //   get() {
+    //     return this.$store.getters['salesprop/priceLowerLimitRate'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('salesprop/pri-lower-limit-rate', value);
+    //   }
+    // },
+    // // 销售成本科目
+    // costSubject: {
+    //   get() {
+    //     return this.$store.getters['salesprop/costSubject'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('salesprop/cost-sub', value);
+    //   }
+    // },
+    // // 默认客户
+    // defaultClient: {
+    //   get() {
+    //     return this.$store.getters['salesprop/defaultClient'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('salesprop/default-client', value);
+    //   }
+    // },
+    // // 销售地
+    // location: {
+    //   get() {
+    //     return this.$store.getters['salesprop/location'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('salesprop/location', value);
+    //   }
+    // },
+    // // 默认业务员
+    // defaultSalesman: {
+    //   get() {
+    //     return this.$store.getters['salesprop/defaultSalesman'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('salesprop/default-salesman', value);
+    //   }
+    // },
+    // // 默认销售单位
+    // defaultUnit: {
+    //   get() {
+    //     return this.$store.getters['salesprop/defaultUnit'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('salesprop/default-unit', value);
+    //   }
+    // },
   }
 };
 </script>

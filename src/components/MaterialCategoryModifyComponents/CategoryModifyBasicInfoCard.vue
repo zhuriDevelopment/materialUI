@@ -41,7 +41,11 @@
 
       <el-col :span="3">
         <!-- 保存按钮 -->
-        <el-button type="primary" icon="el-icon-plus">保存</el-button>
+        <div class="buttonSpan">
+          <el-button type="primary" class="buttons" @click="saveCurrentTab">保存当前</el-button>
+          <el-button type="success" class="buttons">保存所有</el-button>
+        </div>
+        
       </el-col>
     </el-row>
   </el-card>
@@ -61,6 +65,17 @@
       margin: 5px;
     }
     .barSelector {
+      width: 100%;
+    }
+  }
+  .buttonSpan {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    .buttons {
+      margin-left: 10px;
+      margin-bottom: 10px;
       width: 100%;
     }
   }
@@ -110,6 +125,18 @@ export default {
         that.$store.commit('categorymodify/cat-info', value);
       }
     }
-  }
+  },
+  methods: {
+    saveCurrentTab () {
+      var that = this;
+      console.log(`catInfo`, that.$store.getters['categorymodify/catInfo']);
+      console.log(`basePropList`, that.$store.getters['categorymodify/basePropList']);
+      console.log(`purchaseAndStoreInfos`, that.$store.getters['purandstoreprop/purchaseAndStoreInfos']);
+      console.log(`planInfos`, that.$store.getters['planprop/planInfos']);
+      console.log(`salesInfos`, that.$store.getters['salesprop/salesInfos']);
+      console.log(`qualifyInfos`, that.$store.getters['qualityprop/qualifyInfos']);
+      console.log(`financeInfos`, that.$store.getters['financeprop/financeInfos']);
+    }
+  },
 };
 </script>

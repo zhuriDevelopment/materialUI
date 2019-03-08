@@ -29,6 +29,6 @@ export default new Vuex.Store({
     qualityprop,
     financeprop,
   },
-  strict: debug,
+  // strict: debug,
   plugins: [createLogger()]
 })

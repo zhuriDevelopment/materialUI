@@ -28,16 +28,16 @@ const state = {
 
 const getters = {
   salesInfos: state => state.salesInfos,
-  planPrice: state => state.salesInfos.planPrice,
-  currency: state => state.salesInfos.currency,
-  isPriceCtr: state => state.salesInfos.isPriceCtr,
-  priceStrategy: state => state.salesInfos.priceStrategy,
-  priceLowerLimitRate: state => state.salesInfos.priceLowerLimitRate,
-  costSubject: state => state.salesInfos.costSubject,
-  defaultClient: state => state.salesInfos.defaultClient,
-  location: state => state.salesInfos.location,
-  defaultSalesman: state => state.salesInfos.defaultSalesman,
-  defaultUnit: state => state.salesInfos.defaultUnit,
+  // planPrice: state => state.salesInfos.planPrice,
+  // currency: state => state.salesInfos.currency,
+  // isPriceCtr: state => state.salesInfos.isPriceCtr,
+  // priceStrategy: state => state.salesInfos.priceStrategy,
+  // priceLowerLimitRate: state => state.salesInfos.priceLowerLimitRate,
+  // costSubject: state => state.salesInfos.costSubject,
+  // defaultClient: state => state.salesInfos.defaultClient,
+  // location: state => state.salesInfos.location,
+  // defaultSalesman: state => state.salesInfos.defaultSalesman,
+  // defaultUnit: state => state.salesInfos.defaultUnit,
 };
 
 const actions = {};
@@ -46,36 +46,36 @@ const mutations = {
   [types.SALES](state, salesInfos) {
     state.salesInfos = salesInfos;
   },
-  ['plan-price'](state, planPrice) {
-    state.salesInfos.planPrice = planPrice;
-  },
-  ['currency'](state, currency) {
-    state.salesInfos.currency = currency;
-  },
-  ['is-price-ctr'](state, isPriceCtr) {
-    state.salesInfos.isPriceCtr = isPriceCtr;
-  },
-  ['price-stra'](state, priceStrategy) {
-    state.salesInfos.priceStrategy = priceStrategy;
-  },
-  ['pri-lower-limit-rate'](state, priceLowerLimitRate) {
-    state.salesInfos.priceLowerLimitRate = priceLowerLimitRate;
-  },
-  ['cost-sub'](state, costSubject) {
-    state.salesInfos.costSubject = costSubject;
-  },
-  ['default-client'](state, defaultClient) {
-    state.salesInfos.defaultClient = defaultClient;
-  },
-  ['location'](state, location) {
-    state.salesInfos.location = location;
-  },
-  ['default-salesman'](state, defaultSalesman) {
-    state.salesInfos.defaultSalesman = defaultSalesman;
-  },
-  ['default-unit'](state, defaultUnit) {
-    state.salesInfos.defaultUnit = defaultUnit;
-  },
+  // ['plan-price'](state, planPrice) {
+  //   state.salesInfos.planPrice = planPrice;
+  // },
+  // ['currency'](state, currency) {
+  //   state.salesInfos.currency = currency;
+  // },
+  // ['is-price-ctr'](state, isPriceCtr) {
+  //   state.salesInfos.isPriceCtr = isPriceCtr;
+  // },
+  // ['price-stra'](state, priceStrategy) {
+  //   state.salesInfos.priceStrategy = priceStrategy;
+  // },
+  // ['pri-lower-limit-rate'](state, priceLowerLimitRate) {
+  //   state.salesInfos.priceLowerLimitRate = priceLowerLimitRate;
+  // },
+  // ['cost-sub'](state, costSubject) {
+  //   state.salesInfos.costSubject = costSubject;
+  // },
+  // ['default-client'](state, defaultClient) {
+  //   state.salesInfos.defaultClient = defaultClient;
+  // },
+  // ['location'](state, location) {
+  //   state.salesInfos.location = location;
+  // },
+  // ['default-salesman'](state, defaultSalesman) {
+  //   state.salesInfos.defaultSalesman = defaultSalesman;
+  // },
+  // ['default-unit'](state, defaultUnit) {
+  //   state.salesInfos.defaultUnit = defaultUnit;
+  // },
 };
 
 export default {

@@ -12,6 +12,9 @@
             highlight-current-row
             style="width: 100%"
           >
+            <template slot="empty">
+              还没有数据，是否需要<el-button type="text" @click="handleAdd">添加</el-button>一下？
+            </template>
             <!-- 各列 -->
             <el-table-column type="index" label="序号" width="50"></el-table-column>
             <el-table-column property="type" label="属性类别" min-width="150">
@@ -65,14 +68,14 @@
             </el-table-column>
             <el-table-column property="sort" label="排序号" min-width="90">
               <template slot-scope="scope">
-                <el-button type="text" icon="el-icon-sort-up"></el-button>
-                <el-button type="text" icon="el-icon-sort-down"></el-button>
+                <el-button type="text" icon="el-icon-sort-up" @click="handleSortUp(scope.row)"></el-button>
+                <el-button type="text" icon="el-icon-sort-down" @click="handleSortDown(scope.row)"></el-button>
               </template>
             </el-table-column>
             <el-table-column fixed="right" width="150" label="操作">
               <template slot-scope="scope">
-                <el-button type="text" size="small">添加</el-button>
-                <el-button type="text" size="small">删除</el-button>
+                <el-button type="text" size="small" @click="handleAdd">添加</el-button>
+                <el-button type="text" size="small" @click="handleDelete(scope.row)">删除</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -166,6 +169,66 @@ export default {
         };
       } else {
         selection.row.valueRange = '';
+      }
+    },
+    // 处理表格添加的函数
+    handleAdd () {
+      var that = this;
+      var emptyElement = {
+        type: 1,
+        label: '样例标签',
+        name: '样例名字',
+        valueRangeType: 0,
+        // 取值范围
+        valueRange: '',
+        // 排序号
+        sort: 0,
+      };
+      var newArray = that.matDefs;
+      emptyElement.sort = newArray.length;
+      newArray.push(emptyElement);
+      that.matDefs = Object.assign([], newArray);
+    },
+    // 处理表格删除的函数
+    handleDelete (row) {
+      var that = this;
+      // 根据sort来处理删除
+      var newArray = [];
+      for (let element in that.matDefs) {
+        if (that.matDefs[element].sort !== row.sort) {
+          newArray.push(that.matDefs[element]);
+        }
+      }
+      that.matDefs = Object.assign([], newArray);
+    },
+    // 处理sort上升的函数
+    handleSortUp (row) {
+      var that = this;
+      var newArray = Object.assign([], that.matDefs);
+      var curIndex = row.sort;
+      if (curIndex > 0 && newArray.length > 1) {
+        // 不是第一行
+        var tmp = Object.assign({}, newArray[curIndex]);
+        newArray[curIndex] = newArray[curIndex - 1];
+        newArray[curIndex - 1] = tmp;
+        newArray[curIndex].sort = curIndex;
+        newArray[curIndex - 1].sort = curIndex - 1;
+        that.matDefs = Object.assign([], newArray);
+      }
+    },
+    // 处理sort下降的函数
+    handleSortDown (row) {
+      var that = this;
+      var newArray = Object.assign([], that.matDefs);
+      var curIndex = row.sort;
+      if (curIndex < newArray.length - 1 && newArray.length > 1) {
+        // 不是最后一行
+        var tmp = Object.assign({}, newArray[curIndex]);
+        newArray[curIndex] = newArray[curIndex + 1];
+        newArray[curIndex + 1] = tmp;
+        newArray[curIndex].sort = curIndex;
+        newArray[curIndex + 1].sort = curIndex + 1;
+        that.matDefs = Object.assign([], newArray);
       }
     },
   },

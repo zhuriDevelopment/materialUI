@@ -8,7 +8,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">物料制购类型：</div>
-            <el-select class="combine-selector" v-model="matPurchaseType" placeholder="请选择">
+            <el-select class="combine-selector" v-model="params.matPurchaseType" placeholder="请选择">
               <el-option
                 v-for="item in options.matPurchaseTypeOptions"
                 :key="item.value"
@@ -24,7 +24,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">ABC分类：</div>
-            <el-input class="combine-selector" v-model="abcType" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="params.abcType" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -36,7 +36,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">循环盘点编码：</div>
-            <el-input class="combine-selector" v-model="cycleCountCode" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="params.cycleCountCode" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -47,7 +47,7 @@
             <div class="content-font">是否批次管理：</div>
             <el-switch
               class="combine-selector"
-              v-model="isBatchManage"
+              v-model="params.isBatchManage"
               active-text="是"
               inactive-text="否">
             </el-switch>
@@ -64,7 +64,7 @@
             <div class="content-font">是否单件管理：</div>
             <el-switch
               class="combine-selector"
-              v-model="isSingleManage"
+              v-model="params.isSingleManage"
               active-text="是"
               inactive-text="否">
             </el-switch>
@@ -78,7 +78,7 @@
             <div class="content-font">是否进价控制：</div>
             <el-switch
               class="combine-selector"
-              v-model="isPurchasePriceCtr"
+              v-model="params.isPurchasePriceCtr"
               active-text="是"
               inactive-text="否">
             </el-switch>
@@ -93,7 +93,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">默认供应商：</div>
-            <el-input class="combine-selector" v-model="defaultSupplier" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="params.defaultSupplier" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -102,7 +102,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">默认采购部门：</div>
-            <el-input class="combine-selector" v-model="defaultPurchaseDept" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="params.defaultPurchaseDept" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -114,7 +114,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">默认仓库：</div>
-            <el-input class="combine-selector" v-model="defaultWarehouse" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="params.defaultWarehouse" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -123,7 +123,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">默认采购单位：</div>
-            <el-input class="combine-selector" v-model="defaultPurchaseCompany" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="params.defaultPurchaseCompany" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -135,7 +135,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">默认库存单位：</div>
-            <el-select class="combine-selector" v-model="defaultStoreUnit" placeholder="请选择">
+            <el-select class="combine-selector" v-model="params.defaultStoreUnit" placeholder="请选择">
               <el-option
                 v-for="item in options.defaultStoreUnitOptions"
                 :key="item.value"
@@ -151,7 +151,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">默认库位：</div>
-            <el-input class="combine-selector" v-model="defaultStoreLocation" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="params.defaultStoreLocation" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -240,114 +240,122 @@ export default {
     }
   },
   computed: {
-    // 物料制购类型
-    matPurchaseType: {
+    params: {
       get() {
-        return this.$store.getters['purandstoreprop/matPurchaseType'];
+        return this.$store.getters['purandstoreprop/purchaseAndStoreInfos'];
       },
       set(value) {
-        this.$store.commit('purandstoreprop/mat-pur-type', value);
+        this.$store.commit('purandstoreprop/purchase-and-store', value);
       }
-    },
-    // ABC分类
-    abcType: {
-      get() {
-        return this.$store.getters['purandstoreprop/abcType'];
-      },
-      set(value) {
-        this.$store.commit('purandstoreprop/abc-type', value);
-      }
-    },
-    // 循环盘点编码
-    cycleCountCode: {
-      get() {
-        return this.$store.getters['purandstoreprop/cycleCountCode'];
-      },
-      set(value) {
-        this.$store.commit('purandstoreprop/cycle-count-code', value);
-      }
-    },
-    // 是否批次管理
-    isBatchManage: {
-      get() {
-        return this.$store.getters['purandstoreprop/isBatchManage'];
-      },
-      set(value) {
-        this.$store.commit('purandstoreprop/is-batch-manage', value);
-      }
-    },
-    // 是否单件管理
-    isSingleManage: {
-      get() {
-        return this.$store.getters['purandstoreprop/isSingleManage'];
-      },
-      set(value) {
-        this.$store.commit('purandstoreprop/is-single-manage', value);
-      }
-    },
-    // 是否进价控制
-    isPurchasePriceCtr: {
-      get() {
-        return this.$store.getters['purandstoreprop/isPurchasePriceCtr'];
-      },
-      set(value) {
-        this.$store.commit('purandstoreprop/is-pur-price-ctr', value);
-      }
-    },
-    // 默认供应商
-    defaultSupplier: {
-      get() {
-        return this.$store.getters['purandstoreprop/defaultSupplier'];
-      },
-      set(value) {
-        this.$store.commit('purandstoreprop/default-supplier', value);
-      }
-    },
-    // 默认采购部门
-    defaultPurchaseDept: {
-      get() {
-        return this.$store.getters['purandstoreprop/defaultPurchaseDept'];
-      },
-      set(value) {
-        this.$store.commit('purandstoreprop/default-pur-dept', value);
-      }
-    },
-    // 默认仓库
-    defaultWarehouse: {
-      get() {
-        return this.$store.getters['purandstoreprop/defaultWarehouse'];
-      },
-      set(value) {
-        this.$store.commit('purandstoreprop/default-warehouse', value);
-      }
-    },
-    // 默认采购单位
-    defaultPurchaseCompany: {
-      get() {
-        return this.$store.getters['purandstoreprop/defaultPurchaseCompany'];
-      },
-      set(value) {
-        this.$store.commit('purandstoreprop/default-pur-company', value);
-      }
-    },
-    // 默认库存单位
-    defaultStoreUnit: {
-      get() {
-        return this.$store.getters['purandstoreprop/defaultStoreUnit'];
-      },
-      set(value) {
-        this.$store.commit('purandstoreprop/default-store-unit', value);
-      }
-    },
-    // 默认库位
-    defaultStoreLocation: {
-      get() {
-        return this.$store.getters['purandstoreprop/defaultStoreLocation'];
-      },
-      set(value) {
-        this.$store.commit('purandstoreprop/default-store-location', value);
-      }
-    },
+    }
+    // // 物料制购类型
+    // matPurchaseType: {
+    //   get() {
+    //     return this.$store.getters['purandstoreprop/matPurchaseType'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('purandstoreprop/mat-pur-type', value);
+    //   }
+    // },
+    // // ABC分类
+    // abcType: {
+    //   get() {
+    //     return this.$store.getters['purandstoreprop/abcType'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('purandstoreprop/abc-type', value);
+    //   }
+    // },
+    // // 循环盘点编码
+    // cycleCountCode: {
+    //   get() {
+    //     return this.$store.getters['purandstoreprop/cycleCountCode'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('purandstoreprop/cycle-count-code', value);
+    //   }
+    // },
+    // // 是否批次管理
+    // isBatchManage: {
+    //   get() {
+    //     return this.$store.getters['purandstoreprop/isBatchManage'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('purandstoreprop/is-batch-manage', value);
+    //   }
+    // },
+    // // 是否单件管理
+    // isSingleManage: {
+    //   get() {
+    //     return this.$store.getters['purandstoreprop/isSingleManage'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('purandstoreprop/is-single-manage', value);
+    //   }
+    // },
+    // // 是否进价控制
+    // isPurchasePriceCtr: {
+    //   get() {
+    //     return this.$store.getters['purandstoreprop/isPurchasePriceCtr'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('purandstoreprop/is-pur-price-ctr', value);
+    //   }
+    // },
+    // // 默认供应商
+    // defaultSupplier: {
+    //   get() {
+    //     return this.$store.getters['purandstoreprop/defaultSupplier'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('purandstoreprop/default-supplier', value);
+    //   }
+    // },
+    // // 默认采购部门
+    // defaultPurchaseDept: {
+    //   get() {
+    //     return this.$store.getters['purandstoreprop/defaultPurchaseDept'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('purandstoreprop/default-pur-dept', value);
+    //   }
+    // },
+    // // 默认仓库
+    // defaultWarehouse: {
+    //   get() {
+    //     return this.$store.getters['purandstoreprop/defaultWarehouse'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('purandstoreprop/default-warehouse', value);
+    //   }
+    // },
+    // // 默认采购单位
+    // defaultPurchaseCompany: {
+    //   get() {
+    //     return this.$store.getters['purandstoreprop/defaultPurchaseCompany'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('purandstoreprop/default-pur-company', value);
+    //   }
+    // },
+    // // 默认库存单位
+    // defaultStoreUnit: {
+    //   get() {
+    //     return this.$store.getters['purandstoreprop/defaultStoreUnit'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('purandstoreprop/default-store-unit', value);
+    //   }
+    // },
+    // // 默认库位
+    // defaultStoreLocation: {
+    //   get() {
+    //     return this.$store.getters['purandstoreprop/defaultStoreLocation'];
+    //   },
+    //   set(value) {
+    //     this.$store.commit('purandstoreprop/default-store-location', value);
+    //   }
+    // },
   },
 };
 </script>

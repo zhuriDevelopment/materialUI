@@ -119,9 +119,6 @@ const mutations = {
   [types.CAT_BASE_PROP] (state, basePropList) {
     state.basePropList = basePropList;
   },
-  [types.CAT_PURCHASE_PROP] (state, purchaseAndStoreInfos) {
-    state.purchaseAndStoreInfos = purchaseAndStoreInfos;
-  }
 };
 
 export default {

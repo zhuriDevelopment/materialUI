@@ -28,16 +28,16 @@ const state = {
 
 const getters = {
   planInfos: state => state.planInfos,
-  isIndependenceNeed: state => state.planInfos.isIndependenceNeed,
-  orderLeadTime: state => state.planInfos.orderLeadTime,
-  replenishPolicy: state => state.planInfos.replenishPolicy,
-  replenishCycle: state => state.planInfos.replenishCycle,
-  maxInventory: state => state.planInfos.maxInventory,
-  safeInventory: state => state.planInfos.safeInventory,
-  orderQuantity: state => state.planInfos.orderQuantity,
-  batchPolicy: state => state.planInfos.batchPolicy,
-  batchCycle: state => state.planInfos.batchCycle,
-  defaultPlanUnit: state => state.planInfos.defaultPlanUnit,
+  // isIndependenceNeed: state => state.planInfos.isIndependenceNeed,
+  // orderLeadTime: state => state.planInfos.orderLeadTime,
+  // replenishPolicy: state => state.planInfos.replenishPolicy,
+  // replenishCycle: state => state.planInfos.replenishCycle,
+  // maxInventory: state => state.planInfos.maxInventory,
+  // safeInventory: state => state.planInfos.safeInventory,
+  // orderQuantity: state => state.planInfos.orderQuantity,
+  // batchPolicy: state => state.planInfos.batchPolicy,
+  // batchCycle: state => state.planInfos.batchCycle,
+  // defaultPlanUnit: state => state.planInfos.defaultPlanUnit,
 };
 
 const actions = {
@@ -54,36 +54,36 @@ const mutations = {
   [types.PLANS](state, planInfos) {
     state.planInfos = planInfos;
   },
-  ['is-indep-need'](state, isIndependenceNeed) {
-    state.planInfos.isIndependenceNeed = isIndependenceNeed;
-  },
-  ['order-lead-time'](state, orderLeadTime) {
-    state.planInfos.orderLeadTime = orderLeadTime;
-  },
-  ['repl-policy'](state, replenishPolicy) {
-    state.planInfos.replenishPolicy = replenishPolicy;
-  },
-  ['repl-cycle'](state, replenishCycle) {
-    state.planInfos.replenishCycle = replenishCycle;
-  },
-  ['max-inv'](state, maxInventory) {
-    state.planInfos.maxInventory = maxInventory;
-  },
-  ['safe-inv'](state, safeInventory) {
-    state.planInfos.safeInventory = safeInventory;
-  },
-  ['order-quanlity'](state, orderQuantity) {
-    state.planInfos.orderQuantity = orderQuantity;
-  },
-  ['batch-policy'](state, batchPolicy) {
-    state.planInfos.batchPolicy = batchPolicy;
-  },
-  ['batch-cycle'](state, batchCycle) {
-    state.planInfos.batchCycle = batchCycle;
-  },
-  ['default-plan-unit'](state, defaultPlanUnit) {
-    state.planInfos.defaultPlanUnit = defaultPlanUnit;
-  },
+  // ['is-indep-need'](state, isIndependenceNeed) {
+  //   state.planInfos.isIndependenceNeed = isIndependenceNeed;
+  // },
+  // ['order-lead-time'](state, orderLeadTime) {
+  //   state.planInfos.orderLeadTime = orderLeadTime;
+  // },
+  // ['repl-policy'](state, replenishPolicy) {
+  //   state.planInfos.replenishPolicy = replenishPolicy;
+  // },
+  // ['repl-cycle'](state, replenishCycle) {
+  //   state.planInfos.replenishCycle = replenishCycle;
+  // },
+  // ['max-inv'](state, maxInventory) {
+  //   state.planInfos.maxInventory = maxInventory;
+  // },
+  // ['safe-inv'](state, safeInventory) {
+  //   state.planInfos.safeInventory = safeInventory;
+  // },
+  // ['order-quanlity'](state, orderQuantity) {
+  //   state.planInfos.orderQuantity = orderQuantity;
+  // },
+  // ['batch-policy'](state, batchPolicy) {
+  //   state.planInfos.batchPolicy = batchPolicy;
+  // },
+  // ['batch-cycle'](state, batchCycle) {
+  //   state.planInfos.batchCycle = batchCycle;
+  // },
+  // ['default-plan-unit'](state, defaultPlanUnit) {
+  //   state.planInfos.defaultPlanUnit = defaultPlanUnit;
+  // },
 };
 
 export default {

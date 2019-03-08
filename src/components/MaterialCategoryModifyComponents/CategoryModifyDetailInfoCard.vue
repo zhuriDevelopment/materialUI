@@ -7,9 +7,10 @@
         <div class="detailInfoEmbededCard" >
           <CategoryModifyPropertyDefinationCard>
           </CategoryModifyPropertyDefinationCard>
-        </div></el-tab-pane>
+        </div>
+      </el-tab-pane>
       <!-- 采购和库存属性选择按钮 -->
-      <el-tab-pane class="radio-group-member" label="采购和库存属性" name="pruchaseAndStore">
+      <el-tab-pane class="radio-group-member" label="采购和库存属性" name="purchaseAndStore">
         <div class="detailInfoEmbededCard" >
           <MaterialPurchaseAndStorePropCard>
           </MaterialPurchaseAndStorePropCard>
@@ -23,7 +24,7 @@
         </div>
       </el-tab-pane>
       <!-- 销售类属性选择按钮 -->
-      <el-tab-pane class="radio-group-member" label="销售类属性" name="sale">
+      <el-tab-pane class="radio-group-member" label="销售类属性" name="sales">
         <div class="detailInfoEmbededCard" >
           <MaterialSalePropCard>
           </MaterialSalePropCard>
@@ -37,7 +38,7 @@
         </div>
       </el-tab-pane>
       <!-- 财务类属性选择按钮 -->
-      <el-tab-pane class="radio-group-member" label="财务类属性" name="fianance">
+      <el-tab-pane class="radio-group-member" label="财务类属性" name="finance">
         <div class="detailInfoEmbededCard" >
           <MaterialFinanceCard>
           </MaterialFinanceCard>

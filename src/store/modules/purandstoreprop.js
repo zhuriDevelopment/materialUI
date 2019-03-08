@@ -32,18 +32,18 @@ const state = {
 
 const getters = {
   purchaseAndStoreInfos: state => state.purchaseAndStoreInfos,
-  matPurchaseType: state => state.purchaseAndStoreInfos.matPurchaseType,
-  abcType: state => state.purchaseAndStoreInfos.abcType,
-  cycleCountCode: state => state.purchaseAndStoreInfos.cycleCountCode,
-  isBatchManage: state => state.purchaseAndStoreInfos.isBatchManage,
-  isSingleManage: state => state.purchaseAndStoreInfos.isSingleManage,
-  isPurchasePriceCtr: state => state.purchaseAndStoreInfos.isPurchasePriceCtr,
-  defaultSupplier: state => state.purchaseAndStoreInfos.defaultSupplier,
-  defaultPurchaseDept: state => state.purchaseAndStoreInfos.defaultPurchaseDept,
-  defaultWarehouse: state => state.purchaseAndStoreInfos.defaultWarehouse,
-  defaultPurchaseCompany: state => state.purchaseAndStoreInfos.defaultPurchaseCompany,
-  defaultStoreUnit: state => state.purchaseAndStoreInfos.defaultStoreUnit,
-  defaultStoreLocation: state => state.purchaseAndStoreInfos.defaultStoreLocation,
+  // matPurchaseType: state => state.purchaseAndStoreInfos.matPurchaseType,
+  // abcType: state => state.purchaseAndStoreInfos.abcType,
+  // cycleCountCode: state => state.purchaseAndStoreInfos.cycleCountCode,
+  // isBatchManage: state => state.purchaseAndStoreInfos.isBatchManage,
+  // isSingleManage: state => state.purchaseAndStoreInfos.isSingleManage,
+  // isPurchasePriceCtr: state => state.purchaseAndStoreInfos.isPurchasePriceCtr,
+  // defaultSupplier: state => state.purchaseAndStoreInfos.defaultSupplier,
+  // defaultPurchaseDept: state => state.purchaseAndStoreInfos.defaultPurchaseDept,
+  // defaultWarehouse: state => state.purchaseAndStoreInfos.defaultWarehouse,
+  // defaultPurchaseCompany: state => state.purchaseAndStoreInfos.defaultPurchaseCompany,
+  // defaultStoreUnit: state => state.purchaseAndStoreInfos.defaultStoreUnit,
+  // defaultStoreLocation: state => state.purchaseAndStoreInfos.defaultStoreLocation,
 };
 
 const actions = {};
@@ -52,42 +52,42 @@ const mutations = {
   [types.PUR_AND_STORE](state, purchaseAndStoreInfos) {
     state.purchaseAndStoreInfos = purchaseAndStoreInfos;
   },
-  ['mat-pur-type'](state, matPurchaseType) {
-    state.purchaseAndStoreInfos.matPurchaseType = matPurchaseType;
-  },
-  ['abc-type'](state, abcType) {
-    state.purchaseAndStoreInfos.abcType = abcType;
-  },
-  ['cycle-count-code'](state, cycleCountCode) {
-    state.purchaseAndStoreInfos.cycleCountCode = cycleCountCode;
-  },
-  ['is-batch-manage'](state, isBatchManage) {
-    state.purchaseAndStoreInfos.isBatchManage = isBatchManage;
-  },
-  ['is-single-manage'](state, isSingleManage) {
-    state.purchaseAndStoreInfos.isSingleManage = isSingleManage;
-  },
-  ['is-pur-price-ctr'](state, isPurchasePriceCtr) {
-    state.purchaseAndStoreInfos.isPurchasePriceCtr = isPurchasePriceCtr;
-  },
-  ['default-supplier'](state, defaultSupplier) {
-    state.purchaseAndStoreInfos.defaultSupplier = defaultSupplier;
-  },
-  ['default-pur-dept'](state, defaultPurchaseDept) {
-    state.purchaseAndStoreInfos.defaultPurchaseDept = defaultPurchaseDept;
-  },
-  ['default-warehouse'](state, defaultWarehouse) {
-    state.purchaseAndStoreInfos.defaultWarehouse = defaultWarehouse;
-  },
-  ['default-pur-company'](state, defaultPurchaseCompany) {
-    state.purchaseAndStoreInfos.defaultPurchaseCompany = defaultPurchaseCompany;
-  },
-  ['default-store-unit'](state, defaultStoreUnit) {
-    state.purchaseAndStoreInfos.defaultStoreUnit = defaultStoreUnit;
-  },
-  ['default-store-location'](state, defaultStoreLocation) {
-    state.purchaseAndStoreInfos.defaultStoreLocation = defaultStoreLocation;
-  },
+  // ['mat-pur-type'](state, matPurchaseType) {
+  //   state.purchaseAndStoreInfos.matPurchaseType = matPurchaseType;
+  // },
+  // ['abc-type'](state, abcType) {
+  //   state.purchaseAndStoreInfos.abcType = abcType;
+  // },
+  // ['cycle-count-code'](state, cycleCountCode) {
+  //   state.purchaseAndStoreInfos.cycleCountCode = cycleCountCode;
+  // },
+  // ['is-batch-manage'](state, isBatchManage) {
+  //   state.purchaseAndStoreInfos.isBatchManage = isBatchManage;
+  // },
+  // ['is-single-manage'](state, isSingleManage) {
+  //   state.purchaseAndStoreInfos.isSingleManage = isSingleManage;
+  // },
+  // ['is-pur-price-ctr'](state, isPurchasePriceCtr) {
+  //   state.purchaseAndStoreInfos.isPurchasePriceCtr = isPurchasePriceCtr;
+  // },
+  // ['default-supplier'](state, defaultSupplier) {
+  //   state.purchaseAndStoreInfos.defaultSupplier = defaultSupplier;
+  // },
+  // ['default-pur-dept'](state, defaultPurchaseDept) {
+  //   state.purchaseAndStoreInfos.defaultPurchaseDept = defaultPurchaseDept;
+  // },
+  // ['default-warehouse'](state, defaultWarehouse) {
+  //   state.purchaseAndStoreInfos.defaultWarehouse = defaultWarehouse;
+  // },
+  // ['default-pur-company'](state, defaultPurchaseCompany) {
+  //   state.purchaseAndStoreInfos.defaultPurchaseCompany = defaultPurchaseCompany;
+  // },
+  // ['default-store-unit'](state, defaultStoreUnit) {
+  //   state.purchaseAndStoreInfos.defaultStoreUnit = defaultStoreUnit;
+  // },
+  // ['default-store-location'](state, defaultStoreLocation) {
+  //   state.purchaseAndStoreInfos.defaultStoreLocation = defaultStoreLocation;
+  // },
 };
 
 export default {
