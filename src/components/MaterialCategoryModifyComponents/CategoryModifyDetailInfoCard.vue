@@ -1,9 +1,9 @@
 <template>
 <!-- 类型修改中的详细信息展示卡 -->
   <div id="app">
-    <el-tabs class="radio-group" v-model="radio" type="card">
+    <el-tabs class="radio-group" v-model="curTab" type="card">
       <!-- 物料属性选择按钮 -->
-      <el-tab-pane class="radio-group-member" label="物料属性定义" name="propertyDefination">
+      <el-tab-pane class="radio-group-member" label="物料属性定义" name="basePropDefs">
         <div class="detailInfoEmbededCard" >
           <CategoryModifyPropertyDefinationCard>
           </CategoryModifyPropertyDefinationCard>
@@ -90,12 +90,15 @@
       MaterialQualityCard,
       MaterialFinanceCard
     },
-
-    /* data */
-    data(){
-      return {
-        radio: 'propertyDefination'
-      };
+    computed: {
+      curTab: {
+        get() {
+          return this.$store.getters['categorymodify/curTab'];
+        },
+        set(value) {
+          this.$store.commit('categorymodify/cat-cur-tab', value);
+        }
+      }
     }
   }
 </script>

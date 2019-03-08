@@ -76,15 +76,19 @@ const state = {
       sort: 0,
     },
   ],
+  // 当前标签页号
+  curTab: 'basePropDefs',
 };
 
 const getters = {
   categoryTree: state => state.categoryTree,
   catInfo: state => state.catInfo,
   basePropList: state => state.basePropList,
+  curTab: state => state.curTab,
 };
 
 const actions = {
+  // 获取物料分类信息树的函数
   getCatTree ({commit}, {url, axios, type, main}) {
     axios
       .get(url)
@@ -118,6 +122,9 @@ const mutations = {
   },
   [types.CAT_BASE_PROP] (state, basePropList) {
     state.basePropList = basePropList;
+  },
+  [types.CAT_CUR_TAB] (state, curTab) {
+    state.curTab = curTab;
   },
 };
 

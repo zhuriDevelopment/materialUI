@@ -44,17 +44,23 @@ class CategoryModifyFuncs {
       var valueRangeType = valueRangeOri.type;
       var valueRange = valueRangeOri.content;
       delete baseInfos[element].valueRange;
+      if ("id" in baseInfos[element]) {
+        delete baseInfos[element]["id"];
+      }
+      if ("materialCatId" in baseInfos[element]) {
+        delete baseInfos[element]["materialCatId"];
+      }
       baseInfos[element]["valueRange"] = valueRange;
       baseInfos[element]["valueRangeType"] = valueRangeType;
     }
     return baseInfos;
   };
-  // 处理采购与库存属性的函数
+  // 处理返回值中采购与库存属性的函数
   handlePurchaseAndStoreInfos = (purchaseAndStoreInfos) => {
     var result = {};
-    console.log(`purchaseAndStoreInfos`, purchaseAndStoreInfos);
+    // console.log(`purchaseAndStoreInfos`, purchaseAndStoreInfos);
     var valueList = purchaseAndStoreInfos.map(ele => ele.propertyValue);
-    console.log(`valueList`, valueList);
+    // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.purchaseAndStoreDict, 0);
     var nameList = CommonApi.keyToValue(CtrPropDict.purchaseAndStoreDict, keyList);
     for (let element in nameList) {
@@ -70,12 +76,12 @@ class CategoryModifyFuncs {
     }
     return result;
   };
-  // 处理计划类属性的函数
+  // 处理返回值中计划类属性的函数
   handlePlanInfos = (planInfos) => {
     var result = {};
-    console.log(`planInfos`, planInfos);
+    // console.log(`planInfos`, planInfos);
     var valueList = planInfos.map(ele => ele.propertyValue);
-    console.log(`valueList`, valueList);
+    // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.planDict, 0);
     var nameList = CommonApi.keyToValue(CtrPropDict.planDict, keyList);
     for (let element in nameList) {
@@ -93,12 +99,12 @@ class CategoryModifyFuncs {
     }
     return result;
   };
-  // 处理销售类属性的函数
+  // 处理返回值中销售类属性的函数
   handleSalesInfos = (salesInfos) => {
     var result = {};
-    console.log(`salesInfos`, salesInfos);
+    // console.log(`salesInfos`, salesInfos);
     var valueList = salesInfos.map(ele => ele.propertyValue);
-    console.log(`valueList`, valueList);
+    // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.salesDict, 0);
     var nameList = CommonApi.keyToValue(CtrPropDict.salesDict, keyList);
     for (let element in nameList) {
@@ -113,12 +119,12 @@ class CategoryModifyFuncs {
     }
     return result;
   };
-  // 处理质量类属性的函数
+  // 处理返回值中质量类属性的函数
   handleQualityInfos = (qualityInfos) => {
     var result = {};
-    console.log(`qualityInfos`, qualityInfos);
+    // console.log(`qualityInfos`, qualityInfos);
     var valueList = qualityInfos.map(ele => ele.propertyValue);
-    console.log(`valueList`, valueList);
+    // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.qualityDict, 0);
     var nameList = CommonApi.keyToValue(CtrPropDict.qualityDict, keyList);
     for (let element in nameList) {
@@ -126,12 +132,12 @@ class CategoryModifyFuncs {
     }
     return result;
   };
-  // 处理财务类属性的函数
+  // 处理返回值中财务类属性的函数
   handleFinanceInfos = (financeInfos) => {
     var result = {};
-    console.log(`financeInfos`, financeInfos);
+    // console.log(`financeInfos`, financeInfos);
     var valueList = financeInfos.map(ele => ele.propertyValue);
-    console.log(`valueList`, valueList);
+    // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.financeDict, 0);
     var nameList = CommonApi.keyToValue(CtrPropDict.financeDict, keyList);
     for (let element in nameList) {
@@ -139,6 +145,23 @@ class CategoryModifyFuncs {
     }
     return result;
   };
+  // 收集以供提交的基本属性的函数
+  collectBaseInfos = (_baseInfos) => {
+    let baseInfos = Object.assign([], _baseInfos);
+    for (let element in baseInfos) {
+      var targetValueRange = {
+        type: '',
+        content: '',
+      };
+      targetValueRange.type = baseInfos[element]["valueRangeType"];
+      targetValueRange.content = baseInfos[element]["valueRange"];
+      targetValueRange = JSON.stringify(targetValueRange);
+      delete baseInfos[element]["valueRangeType"];
+      delete baseInfos[element]["valueRange"];
+      baseInfos[element]["valueRange"] = targetValueRange;
+    }
+    return baseInfos;
+  }
 }
 
 export default new CategoryModifyFuncs();

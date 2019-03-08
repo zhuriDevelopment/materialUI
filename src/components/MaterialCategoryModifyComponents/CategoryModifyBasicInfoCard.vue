@@ -83,6 +83,7 @@
 </style>
 
 <script>
+import CategoryModifyFunc from "@/api/MaterialCategoryModifyAPIs/categorymodifyfuncs";
 export default {
   name: "CategoryModifyBasicInfoCard",
   data() {
@@ -129,13 +130,31 @@ export default {
   methods: {
     saveCurrentTab () {
       var that = this;
-      console.log(`catInfo`, that.$store.getters['categorymodify/catInfo']);
-      console.log(`basePropList`, that.$store.getters['categorymodify/basePropList']);
-      console.log(`purchaseAndStoreInfos`, that.$store.getters['purandstoreprop/purchaseAndStoreInfos']);
-      console.log(`planInfos`, that.$store.getters['planprop/planInfos']);
-      console.log(`salesInfos`, that.$store.getters['salesprop/salesInfos']);
-      console.log(`qualifyInfos`, that.$store.getters['qualityprop/qualifyInfos']);
-      console.log(`financeInfos`, that.$store.getters['financeprop/financeInfos']);
+      var submitRes = {};
+      // 添加基本信息
+      var catInfo = that.$store.getters['categorymodify/catInfo'];
+      submitRes["id"] = catInfo.id;
+      submitRes["catCode"] = catInfo.code;
+      submitRes["catName"] = catInfo.name;
+      submitRes["type"] = catInfo.type;
+      console.log(`catInfo`, catInfo);
+      // 获取目前的tab名以确定该提交那个选项卡的数据
+      var curTab = that.$store.getters['categorymodify/curTab'];
+      switch (curTab) {
+        // 物料属性定义
+        case 'basePropDefs':
+          var basePropList = that.$store.getters['categorymodify/basePropList'];
+          basePropList = CategoryModifyFunc.collectBaseInfos(basePropList);
+          console.log(`basePropList`, basePropList);
+          submitRes["baseProps"] = basePropList;
+          break;
+      }
+      // console.log(`basePropList`, that.$store.getters['categorymodify/basePropList']);
+      // console.log(`purchaseAndStoreInfos`, that.$store.getters['purandstoreprop/purchaseAndStoreInfos']);
+      // console.log(`planInfos`, that.$store.getters['planprop/planInfos']);
+      // console.log(`salesInfos`, that.$store.getters['salesprop/salesInfos']);
+      // console.log(`qualifyInfos`, that.$store.getters['qualityprop/qualifyInfos']);
+      // console.log(`financeInfos`, that.$store.getters['financeprop/financeInfos']);
     }
   },
 };
