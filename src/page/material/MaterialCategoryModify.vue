@@ -7,10 +7,10 @@
         <!-- 导航栏操作按钮栏 -->
         <el-row :gutter="0" class="navi-operation">
           <el-tooltip content="添加" placement="top">
-            <el-button type="primary" circle icon="el-icon-circle-plus-outline"></el-button>
+            <el-button type="primary" circle icon="el-icon-circle-plus-outline" :disabled="buttonFunc" @click="handleAdd"></el-button>
           </el-tooltip>
           <el-tooltip content="删除" placement="top">
-            <el-button type="danger" circle icon="el-icon-delete"></el-button>
+            <el-button type="danger" circle icon="el-icon-delete" :disabled="buttonFunc" @click="handleDelete"></el-button>
           </el-tooltip>
         </el-row>
 
@@ -33,6 +33,31 @@
         </el-row>
       </el-col>
     </el-row>
+
+    <el-dialog title="新增物料" :visible.sync="dialogVisible" modal-append-to-body append-to-body>
+      <el-form :model="newType" ref="newType" label-width="120px" label-position="left" :rules="rules" status-icon>
+        <el-form-item label="物料分类编码" prop="code">
+          <el-input v-model="newType.code" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="物料分类名称" prop="name">
+          <el-input v-model="newType.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="物料分类类别" prop="type">
+          <el-select v-model="newType.type" placeholder="请选择">
+            <el-option
+              v-for="item in typeOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div slot="footer">
+        <el-button type="primary" @click="createNewCategory">确 定</el-button>
+        <el-button @click="dialogVisible = false">取 消</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -96,14 +121,175 @@
 import CategoryModifyNaviTree from "@/components/MaterialCategoryModifyComponents/CategoryModifyNaviTree";
 import CategoryModifyBasicInfoCard from "@/components/MaterialCategoryModifyComponents/CategoryModifyBasicInfoCard";
 import CategoryModifyDetailInfoCard from "@/components/MaterialCategoryModifyComponents/CategoryModifyDetailInfoCard";
+import CommonApis from "@/api/commonApis";
 
 export default {
   name: "MaterialCategoryModify",
-
   components: {
     CategoryModifyNaviTree,
     CategoryModifyBasicInfoCard,
     CategoryModifyDetailInfoCard
+  },
+  data() {
+    return {
+      dialogVisible: false,
+      // 新增物料分类信息
+      newType: {
+        code: '',
+        name: '',
+        type: 0,
+      },
+      // 物料类别选项
+      typeOptions: [
+        {
+          label: '无类别',
+          value: 0,
+        },
+        {
+          label: '原材料',
+          value: 1,
+        },
+        {
+          label: '半成品',
+          value: 2,
+        },
+        {
+          label: '成品',
+          value: 3,
+        },
+        {
+          label: '设备',
+          value: 4,
+        },
+      ],
+      // 表单的规则
+      rules: {
+        code: [
+          { required: true, message: '请输入物料分类编码', trigger: 'change' },
+        ],
+        name: [
+          { required: true, message: '请输入物料分类名称', trigger: 'change' },
+        ],
+        type: [
+          { required: true, message: '请选择物料类别', trigger: 'change' },
+        ],
+      },
+    }
+  },
+  computed: {
+    buttonFunc: {
+      get() {
+        return this.$store.getters['categorymodify/hasClickedTree'];
+      },
+      set(value) {
+        this.$store.commit('categorymodify/cat-clicked-tree', value);
+      }
+    }
+  },
+  mounted() {
+    this.buttonFunc = true;
+  },
+  methods: {
+    handleAdd () {
+      this.dialogVisible = true;
+    },
+    refreshCatTree () {
+      var that = this;
+      var url = `${window.$config.HOST}/materialmanagement/getMaterialCategory`;
+      that.$store.dispatch("categorymodify/getCatTree", {
+        url: url,
+        axios: that.$axios,
+        type: "cat-tree",
+        main: that
+      });
+    },
+    handleDelete () {
+      var that = this;
+      var catInfo = that.$store.getters['categorymodify/catInfo'];
+      var params = {
+        id: catInfo.id,
+        name: catInfo.name,
+        code: catInfo.code,
+        parentId: catInfo.parentId,
+      };
+      that.$axios
+        .post(`${window.$config.HOST}/materialmanagement/deleteMaterialCategory`, params)
+        .then(response => {
+          let status = response.data;
+          var msg = '删除成功！';
+          var failed = false;
+          if (status === -1) {
+            msg = '删除物料分类信息请求不合法！';
+            failed = true;
+          } else if (status === 0) {
+            msg = '删除物料分类信息失败！';
+            failed = true;
+          } else if (status === -2) {
+            msg = "待删除的物料分类信息在数据库中有重复！";
+            failed = true;
+          } else if (status === -3) {
+            msg = "待删除的物料分类信息在数据库中不存在！";
+            failed = true;
+          }
+          that.$message({
+            message: msg,
+            showClose: true,
+            type: failed === false ? 'success' : 'error',
+          });
+          that.refreshCatTree();
+        })
+        .catch(error => {
+          CommonApis.handleError(error, that, '在删除物料分类的过程中发生错误，错误为：');
+          that.refreshCatTree();
+        })
+    },
+    createNewCategory () {
+      var that = this;
+      that.$refs["newType"].validate((valid) => {
+        if (valid) {
+          var param = {
+            code: that.newType.code,
+            name: that.newType.name,
+            type: that.newType.type,
+            parentId: that.$store.getters['categorymodify/catInfo'].id,
+          };
+          that.$axios
+            .post(`${window.$config.HOST}/materialmanagement/addMaterialCategory`, param)
+            .then(response => {
+              var respCode = response.data;
+              var msg = '新增成功！';
+              var failed = false;
+              if (respCode === -2) {
+                msg = '物料分类当前已有编码相同的记录！';
+                failed = true;
+              } else if (respCode === -3) {
+                msg = '父物料分类信息不存在！';
+                failed = true;
+              } else if (respCode === -4) {
+                msg = '物料分类当前已有名称相同的记录！';
+                failed = true;
+              } else if (respCode === 0) {
+                msg = '新增失败！';
+                failed = true;
+              }
+              that.$message({
+                message: msg,
+                showClose: true,
+                type: failed === false ? 'success' : 'error',
+              });
+              that.dialogVisible = false;
+              that.refreshCatTree();
+            })
+            .catch(error => {
+              CommonApis.handleError(error, that, '在创建新物料分类的过程中发生错误，错误为：');
+              that.refreshCatTree();
+            })
+        } else {
+          that.$message.error("请输入正确的参数！");
+          return false;
+        }
+      });
+    },
   }
 };
 </script>

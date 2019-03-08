@@ -7,6 +7,7 @@ export const CAT_TREE = 'cat-tree';
 export const CAT_INFO = 'cat-info';
 export const CAT_BASE_PROP = 'cat-base-prop';
 export const CAT_CUR_TAB = 'cat-cur-tab';
+export const CAT_HAS_CLICKED_TREE = 'cat-clicked-tree';
 
 // 物料控制属性
 // 采购与库存属性

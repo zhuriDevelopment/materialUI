@@ -15,7 +15,7 @@ class commonApis {
       console.log(`error.request`, error.request);
       console.log("error.message", error.message);
       main.$message.error({
-        message: "在获取物料分类信息的过程中发生错误，错误为：" + error.message,
+        message: message + error.message,
         showClose: true,
       });
     }

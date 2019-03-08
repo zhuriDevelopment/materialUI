@@ -55,6 +55,8 @@ const state = {
     type: 0,
     // 物料分类id
     id: 0,
+    // 父节点id
+    parentId: 0,
   },
   // 物料属性定义的数据
   basePropList: [
@@ -78,6 +80,8 @@ const state = {
   ],
   // 当前标签页号
   curTab: 'basePropDefs',
+  // 是否点击过分类树
+  hasClickedTree: true,
 };
 
 const getters = {
@@ -85,6 +89,7 @@ const getters = {
   catInfo: state => state.catInfo,
   basePropList: state => state.basePropList,
   curTab: state => state.curTab,
+  hasClickedTree: state => state.hasClickedTree,
 };
 
 const actions = {
@@ -126,6 +131,9 @@ const mutations = {
   [types.CAT_CUR_TAB] (state, curTab) {
     state.curTab = curTab;
   },
+  [types.CAT_HAS_CLICKED_TREE] (state, hasClickedTree) {
+    state.hasClickedTree = hasClickedTree;
+  }
 };
 
 export default {
