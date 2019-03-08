@@ -1,13 +1,12 @@
 <template>
   <!-- 物料采购信息卡 -->
   <el-card class="box-card">
-    <!-- 第一行 -->
-    <el-row :gutter="20">
-      <!--物料置购类型-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">物料制购类型：</div>
+    <el-form :model="params" ref="params" label-width="120px" label-position="left" :rules="rules" status-icon>
+      <!-- 第一行 -->
+      <el-row :gutter="20">
+        <!--物料置购类型-->
+        <el-col :span="12">
+          <el-form-item label="物料制购类型：">
             <el-select class="combine-selector" v-model="params.matPurchaseType" placeholder="请选择">
               <el-option
                 v-for="item in options.matPurchaseTypeOptions"
@@ -16,125 +15,177 @@
                 :value="item.value"
               ></el-option>
             </el-select>
-          </div>
-        </div>
-      </el-col>
-      <!--ABC分类-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">ABC分类：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">物料制购类型：</div>
+              <el-select class="combine-selector" v-model="params.matPurchaseType" placeholder="请选择">
+                <el-option
+                  v-for="item in options.matPurchaseTypeOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
+            </div>
+          </div> -->
+        </el-col>
+        <!--ABC分类-->
+        <el-col :span="12">
+          <el-form-item label="ABC分类：">
             <el-input class="combine-selector" v-model="params.abcType" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <!-- 第二行 -->
-    <el-row :gutter="20">
-      <!--循环盘点编码-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">循环盘点编码：</div>
-            <el-input class="combine-selector" v-model="params.cycleCountCode" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-      <!--是否批次管理-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">是否批次管理：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">ABC分类：</div>
+              <el-input class="combine-selector" v-model="params.abcType" placeholder="请输入内容"></el-input>
+            </div>
+          </div> -->
+        </el-col>
+      </el-row>
+      <!-- 第二行 -->
+      <el-row :gutter="20">
+        <!--循环盘点编码-->
+        <el-col :span="12">
+          <el-form-item label="循环盘点编码：" prop="cycleCountCode">
+            <el-input class="combine-selector" v-model.number="params.cycleCountCode" placeholder="请输入内容"></el-input>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">循环盘点编码：</div>
+              <el-input class="combine-selector" v-model="params.cycleCountCode" placeholder="请输入内容"></el-input>
+            </div>
+          </div> -->
+        </el-col>
+        <!--是否批次管理-->
+        <el-col :span="12">
+          <el-form-item label="是否批次管理：">
             <el-switch
               class="combine-selector"
               v-model="params.isBatchManage"
               active-text="是"
               inactive-text="否">
             </el-switch>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <!-- 第三行 -->
-    <el-row :gutter="20">
-      <!--是否单件管理-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">是否单件管理：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">是否批次管理：</div>
+              <el-switch
+                class="combine-selector"
+                v-model="params.isBatchManage"
+                active-text="是"
+                inactive-text="否">
+              </el-switch>
+            </div>
+          </div> -->
+        </el-col>
+      </el-row>
+      <!-- 第三行 -->
+      <el-row :gutter="20">
+        <!--是否单件管理-->
+        <el-col :span="12">
+          <el-form-item label="是否单件管理：">
             <el-switch
               class="combine-selector"
               v-model="params.isSingleManage"
               active-text="是"
               inactive-text="否">
             </el-switch>
-          </div>
-        </div>
-      </el-col>
-      <!--是否进价控制-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">是否进价控制：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">是否单件管理：</div>
+              <el-switch
+                class="combine-selector"
+                v-model="params.isSingleManage"
+                active-text="是"
+                inactive-text="否">
+              </el-switch>
+            </div>
+          </div> -->
+        </el-col>
+        <!--是否进价控制-->
+        <el-col :span="12">
+          <el-form-item label="是否进价控制：">
             <el-switch
               class="combine-selector"
               v-model="params.isPurchasePriceCtr"
               active-text="是"
               inactive-text="否">
             </el-switch>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <!-- 第四行 -->
-    <el-row :gutter="20">
-      <!--默认供应商-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">默认供应商：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">是否进价控制：</div>
+              <el-switch
+                class="combine-selector"
+                v-model="params.isPurchasePriceCtr"
+                active-text="是"
+                inactive-text="否">
+              </el-switch>
+            </div>
+          </div> -->
+        </el-col>
+      </el-row>
+      <!-- 第四行 -->
+      <el-row :gutter="20">
+        <!--默认供应商-->
+        <el-col :span="12">
+          <el-form-item label="默认供应商：">
             <el-input class="combine-selector" v-model="params.defaultSupplier" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-      <!--默认采购部门-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">默认采购部门：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">默认供应商：</div>
+              <el-input class="combine-selector" v-model="params.defaultSupplier" placeholder="请输入内容"></el-input>
+            </div>
+          </div> -->
+        </el-col>
+        <!--默认采购部门-->
+        <el-col :span="12">
+          <el-form-item label="默认采购部门：">
             <el-input class="combine-selector" v-model="params.defaultPurchaseDept" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <!-- 第五行 -->
-    <el-row :gutter="20">
-      <!--默认仓库-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">默认仓库：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">默认采购部门：</div>
+              <el-input class="combine-selector" v-model="params.defaultPurchaseDept" placeholder="请输入内容"></el-input>
+            </div>
+          </div> -->
+        </el-col>
+      </el-row>
+      <!-- 第五行 -->
+      <el-row :gutter="20">
+        <!--默认仓库-->
+        <el-col :span="12">
+          <el-form-item label="默认仓库：">
             <el-input class="combine-selector" v-model="params.defaultWarehouse" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-      <!--默认采购单位-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">默认采购单位：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">默认仓库：</div>
+              <el-input class="combine-selector" v-model="params.defaultWarehouse" placeholder="请输入内容"></el-input>
+            </div>
+          </div> -->
+        </el-col>
+        <!--默认采购单位-->
+        <el-col :span="12">
+          <el-form-item label="默认采购单位：">
             <el-input class="combine-selector" v-model="params.defaultPurchaseCompany" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <!-- 第六行 -->
-    <el-row :gutter="20">
-      <!--默认库存单位-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">默认库存单位：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">默认采购单位：</div>
+              <el-input class="combine-selector" v-model="params.defaultPurchaseCompany" placeholder="请输入内容"></el-input>
+            </div>
+          </div> -->
+        </el-col>
+      </el-row>
+      <!-- 第六行 -->
+      <el-row :gutter="20">
+        <!--默认库存单位-->
+        <el-col :span="12">
+          <el-form-item label="默认库存单位：">
             <el-select class="combine-selector" v-model="params.defaultStoreUnit" placeholder="请选择">
               <el-option
                 v-for="item in options.defaultStoreUnitOptions"
@@ -143,43 +194,46 @@
                 :value="item.value"
               ></el-option>
             </el-select>
-          </div>
-        </div>
-      </el-col>
-      <!--默认库位-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">默认库位：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">默认库存单位：</div>
+              <el-select class="combine-selector" v-model="params.defaultStoreUnit" placeholder="请选择">
+                <el-option
+                  v-for="item in options.defaultStoreUnitOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
+            </div>
+          </div> -->
+        </el-col>
+        <!--默认库位-->
+        <el-col :span="12">
+          <el-form-item label="默认库位：">
             <el-input class="combine-selector" v-model="params.defaultStoreLocation" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">默认库位：</div>
+              <el-input class="combine-selector" v-model="params.defaultStoreLocation" placeholder="请输入内容"></el-input>
+            </div>
+          </div> -->
+        </el-col>
+      </el-row>
+    </el-form>
+    
   </el-card>
 </template>
 
 <style lang="less" scoped>
 .box-card {
   min-width: 900px;
-
-  .input-combine {
-    display: flex;
-    align-items: center;
-
-    .content-font {
-      font-family: "PingFang SC";
-      text-align: left;
-      font-size: 14px;
-      margin: 5px;
-      min-width: 100px;
-      overflow: hidden;
-    }
-
-    .combine-selector {
-      width: 100%;
-    }
+  .combine-selector {
+    width: 100%;
   }
+
   .single-button {
     font-family: "PingFang SC";
     text-align: center;
@@ -187,13 +241,6 @@
     margin: 5px;
     min-width: 90px;
     overflow: hidden;
-  }
-
-  .el-row {
-    margin-bottom: 20px;
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   .el-col {
@@ -211,6 +258,14 @@
 export default {
   name: "MaterialPurchaseAndStorePropCard",
   data() {
+    let validNumber = (rule, value, callback) => {
+      let reg = /^[0-9]*$/;
+      if (!reg.test(value)) {
+        callback(new Error('此空必须输入数字！'));
+      }else{
+        callback();
+      }
+    };
     return {
       // 部分采购和库存属性需要的选项
       options: {
@@ -236,6 +291,13 @@ export default {
             value: '1',
           },
         ]
+      },
+      // 表单的规则
+      rules: {
+        cycleCountCode: [
+          { required: true, message: '请输入循环盘点编码', trigger: 'change' },
+          { validator: validNumber, trigger: 'change' },
+        ],
       },
     }
   },

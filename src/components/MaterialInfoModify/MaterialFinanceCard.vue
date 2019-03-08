@@ -1,62 +1,49 @@
 <template>
   <!-- 物料财务信息卡 -->
   <el-card class="box-card">
-    <!-- 第一行 -->
-    <el-row :gutter="20">
-      <!-- 财务类别 -->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">财务类别：</div>
+    <el-form :model="params" ref="params" label-width="110px" label-position="left" :rules="rules" status-icon>
+      <!-- 第一行 -->
+      <el-row :gutter="20">
+        <!-- 财务类别 -->
+        <el-col :span="12">
+          <el-form-item label="财务类别：">
             <el-select class="combine-selector" v-model="params.typeId" placeholder="请选择">
-              <el-option
-                v-for="item in options.typeOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-          </div>
-        </div>
-      </el-col>
-      <!-- 记账本位币 -->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">记账本位币：</div>
+                <el-option
+                  v-for="item in options.typeOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
+          </el-form-item>
+        </el-col>
+        <!-- 记账本位币 -->
+        <el-col :span="12">
+          <el-form-item label="记账本位币：" prop="recordCurrency">
             <el-input class="combine-selector" v-model="params.recordCurrency" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <!-- 第二行 -->
-    <el-row :gutter="20">
-      <!-- 会计科目 -->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">会计科目：</div>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <!-- 第二行 -->
+      <el-row :gutter="20">
+        <!-- 会计科目 -->
+        <el-col :span="12">
+          <el-form-item label="会计科目：" prop="accountName">
             <el-input class="combine-selector" v-model="params.accountName" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-      <!-- 增值税代码 -->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">增值税代码：</div>
+          </el-form-item>
+        </el-col>
+        <!-- 增值税代码 -->
+        <el-col :span="12">
+          <el-form-item label="增值税代码：" prop="vatCode">
             <el-input class="combine-selector" v-model="params.vatCode" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <!-- 第三行 -->
-    <el-row :gutter="20">
-      <!-- 存货计价方法 -->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">存货计价方法：</div>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <!-- 第三行 -->
+      <el-row :gutter="20">
+        <!-- 存货计价方法 -->
+        <el-col :span="12">
+          <el-form-item label="存货计价方法：">
             <el-select class="combine-selector" v-model="params.invCostMethod" placeholder="请选择">
               <el-option
                 v-for="item in options.invCostMethodOptions"
@@ -65,14 +52,11 @@
                 :value="item.value"
               ></el-option>
             </el-select>
-          </div>
-        </div>
-      </el-col>
-      <!-- 成本计算方法 -->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">成本计算方法：</div>
+          </el-form-item>
+        </el-col>
+        <!-- 成本计算方法 -->
+        <el-col :span="12">
+          <el-form-item label="成本计算方法：">
             <el-select class="combine-selector" v-model="params.costingMethod" placeholder="请选择">
               <el-option
                 v-for="item in options.costingMethodOptions"
@@ -81,17 +65,14 @@
                 :value="item.value"
               ></el-option>
             </el-select>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <!-- 第四行 -->
-    <el-row :gutter="20">
-      <!-- 开票类型 -->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">开票类型：</div>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <!-- 第四行 -->
+      <el-row :gutter="20">
+        <!-- 开票类型 -->
+        <el-col :span="12">
+          <el-form-item label="开票类型：">
             <el-select class="combine-selector" v-model="params.billingType" placeholder="请选择">
               <el-option
                 v-for="item in options.billingTypeOptions"
@@ -100,15 +81,18 @@
                 :value="item.value"
               ></el-option>
             </el-select>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
+          </el-form-item>
+        </el-col>
+      </el-row>
+    </el-form>
   </el-card>
 </template>
 
 <style lang="less" scoped>
 .box-card {
+  .combine-selector {
+    width: 100%;
+  }
   .input-combine {
     display: flex;
     align-items: center;
@@ -127,13 +111,6 @@
     }
   }
 
-  .el-row {
-    margin-bottom: 20px;
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
   .el-col {
     border-radius: 4px;
   }
@@ -148,6 +125,14 @@
 export default {
   name: "MaterialFinanceCard",
   data() {
+    let validNumber = (rule, value, callback) => {
+      let reg = /^[0-9]*$/;
+      if (!reg.test(value)) {
+        callback(new Error('此空必须输入数字！'));
+      }else{
+        callback();
+      }
+    };
     return {
       // 部分财务属性需要的选项
       options: {
@@ -218,6 +203,19 @@ export default {
             label: '专业发票',
             value: '2',
           },
+        ]
+      },
+      // 表单的规则
+      rules: {
+        recordCurrency: [
+          { required: true, message: '请输入记账本位币', trigger: 'change' }
+        ],
+        accountName: [
+          { required: true, message: '请输入会计科目', trigger: 'change' }
+        ],
+        vatCode: [
+          { required: true, message: '请输入增值税代码', trigger: 'change' },
+          { validator: validNumber, trigger: 'change' },
         ]
       },
     }

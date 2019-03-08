@@ -49,6 +49,7 @@ class CtrPropDict {
     '检验工时': 'testHour',
     '存储期限': 'storageLimit',
     '默认检验员': 'defaultTester',
+    '检验标准文件': 'testStandFile',
   };
   // 用于转化财务类属性名与属性值的字典
   financeDict = {

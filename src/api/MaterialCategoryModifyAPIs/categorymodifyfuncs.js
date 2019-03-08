@@ -7,27 +7,27 @@ class CategoryModifyFuncs {
     // 基本属性
     var basePropList = Object.assign([], allInfos.basePropList);
     basePropList = that.handleBaseInfos(basePropList);
-    console.log(`basePropList`, basePropList);
+    // console.log(`basePropList`, basePropList);
     // 采购与库存属性
     var purchaseAndStoreInfos = Object.assign([], allInfos.purchaseAndStoreInfos);
     purchaseAndStoreInfos = that.handlePurchaseAndStoreInfos(purchaseAndStoreInfos);
-    console.log(`purchaseAndStoreInfos`, purchaseAndStoreInfos);
+    // console.log(`purchaseAndStoreInfos`, purchaseAndStoreInfos);
     // 计划类属性
     var planInfos = Object.assign([], allInfos.planInfos);
     planInfos = that.handlePlanInfos(planInfos);
-    console.log(`planInfos`, planInfos);
+    // console.log(`planInfos`, planInfos);
     // 销售类属性
     var salesInfos = Object.assign([], allInfos.salesInfos);
     salesInfos = that.handleSalesInfos(salesInfos);
-    console.log(`salesInfos`, salesInfos);
+    // console.log(`salesInfos`, salesInfos);
     // 质量类属性
     var qualityInfos = Object.assign([], allInfos.qualityInfos);
     qualityInfos = that.handleQualityInfos(qualityInfos);
-    console.log(`qualityInfos`, qualityInfos);
+    // console.log(`qualityInfos`, qualityInfos);
     // 财务类属性
     var financeInfos = Object.assign([], allInfos.financeInfos);
     financeInfos = that.handleFinanceInfos(financeInfos);
-    console.log(`financeInfos`, financeInfos);
+    // console.log(`financeInfos`, financeInfos);
 
     // 统一commit到store中
     store.commit('categorymodify/cat-base-prop', basePropList);
@@ -64,6 +64,9 @@ class CategoryModifyFuncs {
           nameList[element] === 'isSingleManage') {
         result[nameList[element]] = valueList[element] === 'true' ? true : false;
       }
+      if (nameList[element] === 'cycleCountCode') {
+        result[nameList[element]] = parseInt(valueList[element]);
+      }
     }
     return result;
   };
@@ -79,6 +82,13 @@ class CategoryModifyFuncs {
       result[nameList[element]] = valueList[element];
       if (nameList[element] === 'isIndependenceNeed') {
         result[nameList[element]] = valueList[element] === 'true' ? true : false;
+      }
+      if (nameList[element] === 'orderLeadTime' ||
+          nameList[element] === 'replenishCycle' ||
+          nameList[element] === 'maxInventory' ||
+          nameList[element] === 'safeInventory' ||
+          nameList[element] === 'batchCycle') {
+        result[nameList[element]] = parseInt(valueList[element]);
       }
     }
     return result;
@@ -96,6 +106,10 @@ class CategoryModifyFuncs {
       if (nameList[element] === 'isPriceCtr') {
         result[nameList[element]] = valueList[element] === 'true' ? true : false;
       }
+      if (nameList[element] === 'planPrice' ||
+          nameList[element] === 'priceLowerLimitRate') {
+        result[nameList[element]] = parseInt(valueList[element]);
+      } 
     }
     return result;
   };

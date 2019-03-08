@@ -12,7 +12,7 @@ const state = {
     // 销售价格策略
     priceStrategy: "保守策略",
     // 售价下限率
-    priceLowerLimitRate: "25%",
+    priceLowerLimitRate: "25",
     // 销售成本科目
     costSubject: "科目一",
     // 默认客户

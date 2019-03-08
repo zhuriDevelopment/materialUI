@@ -1,27 +1,31 @@
 <template>
   <!-- 物料质量类属性卡 -->
   <el-card class="box-card">
-    <!-- 第一行 -->
-    <el-row :gutter="20">
-      <!--检验方式-->
-      <el-col :span="24">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">检验方式：</div>
+    <el-form :model="params" ref="params" label-width="135px" label-position="left" :rules="rules" status-icon>
+      <!-- 第一行 -->
+      <el-row :gutter="20">
+        <!--检验方式-->
+        <el-col :span="24">
+          <el-form-item label="检验方式：">
             <el-radio class="single-radio" v-model="params.testMethod" label="0">不检验</el-radio>
             <el-radio class="single-radio" v-model="params.testMethod" label="1">抽样检验</el-radio>
             <el-radio class="single-radio" v-model="params.testMethod" label="2">全样检验</el-radio>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <!-- 第二行 -->
-    <el-row :gutter="20">
-      <!--检验水准-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">检验水准：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">检验方式：</div>
+              <el-radio class="single-radio" v-model="params.testMethod" label="0">不检验</el-radio>
+              <el-radio class="single-radio" v-model="params.testMethod" label="1">抽样检验</el-radio>
+              <el-radio class="single-radio" v-model="params.testMethod" label="2">全样检验</el-radio>
+            </div>
+          </div> -->
+        </el-col>
+      </el-row>
+      <!-- 第二行 -->
+      <el-row :gutter="20">
+        <!--检验水准-->
+        <el-col :span="12">
+          <el-form-item label="检验水准：">
             <el-select class="combine-selector" v-model="params.testLevel" placeholder="请选择">
               <el-option
                 v-for="item in options.testLevelOptions"
@@ -30,14 +34,24 @@
                 :value="item.value"
               ></el-option>
             </el-select>
-          </div>
-        </div>
-      </el-col>
-      <!--检验程度-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">检验程度：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">检验水准：</div>
+              <el-select class="combine-selector" v-model="params.testLevel" placeholder="请选择">
+                <el-option
+                  v-for="item in options.testLevelOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
+            </div>
+          </div> -->
+        </el-col>
+        <!--检验程度-->
+        <el-col :span="12">
+          <el-form-item label="检验程度：">
             <el-select class="combine-selector" v-model="params.testDegree" placeholder="请选择">
               <el-option
                 v-for="item in options.testDegreeOptions"
@@ -46,17 +60,27 @@
                 :value="item.value"
               ></el-option>
             </el-select>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <!-- 第三行 -->
-    <el-row :gutter="20">
-      <!--默认检验部门-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">默认检验部门：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">检验程度：</div>
+              <el-select class="combine-selector" v-model="params.testDegree" placeholder="请选择">
+                <el-option
+                  v-for="item in options.testDegreeOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
+            </div>
+          </div> -->
+        </el-col>
+      </el-row>
+      <!-- 第三行 -->
+      <el-row :gutter="20">
+        <!--默认检验部门-->
+        <el-col :span="12">
+          <el-form-item label="默认检验部门：">
             <el-select class="combine-selector" v-model="params.defaultTestDep" placeholder="请选择">
               <el-option
                 v-for="item in options.defaultTestDepOptions"
@@ -65,94 +89,105 @@
                 :value="item.value"
               ></el-option>
             </el-select>
-          </div>
-        </div>
-      </el-col>
-      <!--检验工时(时)-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">检验工时（时）：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">默认检验部门：</div>
+              <el-select class="combine-selector" v-model="params.defaultTestDep" placeholder="请选择">
+                <el-option
+                  v-for="item in options.defaultTestDepOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
+            </div>
+          </div> -->
+        </el-col>
+        <!--检验工时(时)-->
+        <el-col :span="12">
+          <el-form-item label="检验工时（时）：" prop="testHour">
             <el-input class="combine-selector" v-model="params.testHour" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <!-- 第四行 -->
-    <el-row :gutter="20">
-      <!--存储期限(天)-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">存储期限（天）：</div>
-            <el-input class="combine-selector" v-model="params.testHour" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-      <!--默认检验员-->
-      <el-col :span="12">
-        <div class="grid-content">
-          <div class="input-combine">
-            <div class="content-font">默认检验员：</div>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">检验工时（时）：</div>
+              <el-input class="combine-selector" v-model="params.testHour" placeholder="请输入内容"></el-input>
+            </div>
+          </div> -->
+        </el-col>
+      </el-row>
+      <!-- 第四行 -->
+      <el-row :gutter="20">
+        <!--存储期限(天)-->
+        <el-col :span="12">
+          <el-form-item label="存储期限（天）：" prop="storageLimit">
+            <el-input class="combine-selector" v-model="params.storageLimit" placeholder="请输入内容"></el-input>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">存储期限（天）：</div>
+              <el-input class="combine-selector" v-model="params.testHour" placeholder="请输入内容"></el-input>
+            </div>
+          </div> -->
+        </el-col>
+        <!--默认检验员-->
+        <el-col :span="12">
+          <el-form-item label="默认检验员：">
             <el-input class="combine-selector" v-model="params.defaultTester" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <!-- 第五行 -->
-    <el-row :gutter="20">
-      <!--检验工时(时)-->
-      <el-col :span="24">
-        <div class="grid-content upload-grid">
-          <div class="input-combine">
-            <div class="content-font">检验标准文件：</div>
-            <el-upload
-              class="upload-element"
-              ref="upload"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :on-preview="handlePreview"
-              :on-remove="handleRemove"
-              :file-list="fileList"
-              :auto-upload="false"
-              :disabled="true"
-            >
-              <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-              <el-button
-                style="margin-left: 10px;"
-                size="small"
-                type="success"
-                @click="submitUpload"
-              >上传到服务器</el-button>
-              <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
-            </el-upload>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
+          </el-form-item>
+          <!-- <div class="grid-content">
+            <div class="input-combine">
+              <div class="content-font">默认检验员：</div>
+              <el-input class="combine-selector" v-model="params.defaultTester" placeholder="请输入内容"></el-input>
+            </div>
+          </div> -->
+        </el-col>
+      </el-row>
+      <!-- 第五行 -->
+      <el-row :gutter="20">
+        <!--检验工时(时)-->
+        <el-col :span="24">
+          <el-form-item label="检验标准文件：">
+            <el-input class="combine-selector" v-model="params.testStandFile" placeholder="请输入内容"></el-input>
+          </el-form-item>
+          <!-- <div class="grid-content upload-grid">
+            <div class="input-combine">
+              <div class="content-font">检验标准文件：</div>
+              <el-upload
+                class="upload-element"
+                ref="upload"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :file-list="fileList"
+                :auto-upload="false"
+                :disabled="true"
+              >
+                <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+                <el-button
+                  style="margin-left: 10px;"
+                  size="small"
+                  type="success"
+                  @click="submitUpload"
+                >上传到服务器</el-button>
+              </el-upload>
+            </div>
+          </div> -->
+        </el-col>
+      </el-row>
+    </el-form>
+    
   </el-card>
 </template>
 
 <style lang="less" scoped>
 .box-card {
   min-width: 900px;
-  .input-combine {
-    display: flex;
-    height: 100%;
-    align-items: center;
-
-    .content-font {
-      font-family: "PingFang SC";
-      text-align: left;
-      font-size: 14px;
-      margin: 5px;
-      min-width: 115px;
-      overflow: hidden;
-    }
-
-    .combine-selector {
-      width: 100%;
-    }
+  .combine-selector {
+    width: 100%;
   }
+
   .single-button {
     font-family: "PingFang SC";
     text-align: center;
@@ -168,13 +203,6 @@
     overflow: hidden;
     margin: 5px;
     text-align: center;
-  }
-
-  .el-row {
-    margin-bottom: 20px;
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   .el-col {
@@ -200,6 +228,14 @@
 export default {
   name: "MaterialQualityCard",
   data() {
+    let validNumber = (rule, value, callback) => {
+      let reg = /^[0-9]*$/;
+      if (!reg.test(value)) {
+        callback(new Error('此空必须输入数字！'));
+      }else{
+        callback();
+      }
+    };
     return {
       fileList: [
         {
@@ -257,19 +293,20 @@ export default {
           },
         ]
       },
+      // 表单的规则
+      rules: {
+        testHour: [
+          { required: true, message: '请输入检验工时', trigger: 'change' },
+          { validator: validNumber, trigger: 'change' },
+        ],
+        storageLimit: [
+          { required: true, message: '请输入存储期限', trigger: 'change' },
+          { validator: validNumber, trigger: 'change' },
+        ],
+      },
     };
   },
-  methods: {
-    submitUpload() {
-      // this.$refs.upload.submit();
-    },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePreview(file) {
-      console.log(file);
-    }
-  },
+  methods: {},
   computed: {
     params: {
       get() {

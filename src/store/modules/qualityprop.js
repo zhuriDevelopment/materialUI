@@ -16,7 +16,9 @@ const state = {
     // 存储期限
     storageLimit: '10',
     // 默认检验员
-    defaultTester: '李小四'
+    defaultTester: '李小四',
+    // 检验标准文件
+    testStandFile: 'FileA',
   },
 };
 
