@@ -62,7 +62,7 @@ class CategoryModifyFuncs {
     var valueList = purchaseAndStoreInfos.map(ele => ele.propertyValue);
     // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.purchaseAndStoreDict, 0);
-    var nameList = CommonApi.keyToValue(CtrPropDict.purchaseAndStoreDict, keyList);
+    var nameList = CommonApi.keysToValues(CtrPropDict.purchaseAndStoreDict, keyList);
     for (let element in nameList) {
       result[nameList[element]] = valueList[element];
       if (nameList[element] === 'isBatchManage' ||
@@ -83,7 +83,7 @@ class CategoryModifyFuncs {
     var valueList = planInfos.map(ele => ele.propertyValue);
     // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.planDict, 0);
-    var nameList = CommonApi.keyToValue(CtrPropDict.planDict, keyList);
+    var nameList = CommonApi.keysToValues(CtrPropDict.planDict, keyList);
     for (let element in nameList) {
       result[nameList[element]] = valueList[element];
       if (nameList[element] === 'isIndependenceNeed') {
@@ -106,7 +106,7 @@ class CategoryModifyFuncs {
     var valueList = salesInfos.map(ele => ele.propertyValue);
     // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.salesDict, 0);
-    var nameList = CommonApi.keyToValue(CtrPropDict.salesDict, keyList);
+    var nameList = CommonApi.keysToValues(CtrPropDict.salesDict, keyList);
     for (let element in nameList) {
       result[nameList[element]] = valueList[element];
       if (nameList[element] === 'isPriceCtr') {
@@ -115,7 +115,7 @@ class CategoryModifyFuncs {
       if (nameList[element] === 'planPrice' ||
           nameList[element] === 'priceLowerLimitRate') {
         result[nameList[element]] = parseInt(valueList[element]);
-      } 
+      }
     }
     return result;
   };
@@ -126,7 +126,7 @@ class CategoryModifyFuncs {
     var valueList = qualityInfos.map(ele => ele.propertyValue);
     // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.qualityDict, 0);
-    var nameList = CommonApi.keyToValue(CtrPropDict.qualityDict, keyList);
+    var nameList = CommonApi.keysToValues(CtrPropDict.qualityDict, keyList);
     for (let element in nameList) {
       result[nameList[element]] = valueList[element];
     }
@@ -139,7 +139,7 @@ class CategoryModifyFuncs {
     var valueList = financeInfos.map(ele => ele.propertyValue);
     // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.financeDict, 0);
-    var nameList = CommonApi.keyToValue(CtrPropDict.financeDict, keyList);
+    var nameList = CommonApi.keysToValues(CtrPropDict.financeDict, keyList);
     for (let element in nameList) {
       result[nameList[element]] = valueList[element];
     }
@@ -161,6 +161,54 @@ class CategoryModifyFuncs {
       baseInfos[element]["valueRange"] = targetValueRange;
     }
     return baseInfos;
+  };
+  collectCtrProps = (_ctrProps) => {
+    let ctrProps = Object.assign([], _ctrProps);
+    let resultArr = [];
+    for (let key in ctrProps) {
+      resultArr.push(ctrProps[key].toString());
+    }
+    return resultArr;
+  };
+  collectCtrPropsWithType = (_ctrProps, type) => {
+    let ctrProps = Object.assign([], _ctrProps);
+    ctrProps = this.collectCtrProps(ctrProps);
+    var keyList = [];
+    var result = {
+      propertyType: type,
+      ctrPropList: [],
+    };
+    switch (type) {
+      case 5:
+        keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.purchaseAndStoreDict, 1);
+        keyList = CommonApi.valuesToKeys(CtrPropDict.purchaseAndStoreDict, keyList);
+        break;
+      case 6:
+        keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.planDict, 1);
+        keyList = CommonApi.valuesToKeys(CtrPropDict.planDict, keyList);
+        break;
+      case 7:
+        keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.salesDict, 1);
+        keyList = CommonApi.valuesToKeys(CtrPropDict.salesDict, keyList);
+        break;
+      case 8:
+        keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.qualityDict, 1);
+        keyList = CommonApi.valuesToKeys(CtrPropDict.qualityDict, keyList);
+        break;
+      case 9:
+        keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.financeDict, 1);
+        keyList = CommonApi.valuesToKeys(CtrPropDict.financeDict, keyList);
+        break;
+      default:
+        break;
+    };
+    for (let index in ctrProps) {
+      result.ctrPropList.push({
+        name: keyList[index],
+        value: ctrProps[index].toString(),
+      });
+    }
+    return result;
   }
 }
 

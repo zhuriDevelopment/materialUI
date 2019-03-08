@@ -3,7 +3,7 @@ import * as types from '../mutation-types';
 const state = {
   // 质量属性数据
   qualifyInfos: {
-    // 检验方法
+    // 检验方式
     testMethod: '1',
     // 检验水准
     testLevel: '0',

@@ -17,14 +17,14 @@ class CtrPropDict {
   // 用于转化计划类属性名与属性值的字典
   planDict = {
     '是否独立需求': 'isIndependenceNeed',
-    '订货提前期': 'orderLeadTime',
+    '订货提前期（天）': 'orderLeadTime',
     '补货政策': 'replenishPolicy',
-    '补货周期': 'replenishCycle',
+    '补货周期（天）': 'replenishCycle',
     '最大库存量': 'maxInventory',
     '安全库存量': 'safeInventory',
     '订货批量': 'orderQuantity',
     '批量政策': 'batchPolicy',
-    '批量周期': 'batchCycle',
+    '批量周期（天）': 'batchCycle',
     '默认计划单位': 'defaultPlanUnit',
   };
   // 用于转化销售类属性名与属性值的字典
@@ -33,7 +33,7 @@ class CtrPropDict {
     '计价货币': 'currency',
     '是否售价控制': 'isPriceCtr',
     '销售价格策略': 'priceStrategy',
-    '售价下限率': 'priceLowerLimitRate',
+    '销价下限率（%）': 'priceLowerLimitRate',
     '销售成本科目': 'costSubject',
     '默认客户': 'defaultClient',
     '销售地': 'location',
@@ -42,12 +42,12 @@ class CtrPropDict {
   };
   // 用于转化质量类属性名与属性值的字典
   qualityDict = {
-    '检验方法': 'testMethod',
+    '检验方式': 'testMethod',
     '检验水准': 'testLevel',
     '检验程度': 'testDegree',
     '默认检验部门': 'defaultTestDep',
-    '检验工时': 'testHour',
-    '存储期限': 'storageLimit',
+    '检验工时（时）': 'testHour',
+    '存储期限（天）': 'storageLimit',
     '默认检验员': 'defaultTester',
     '检验标准文件': 'testStandFile',
   };

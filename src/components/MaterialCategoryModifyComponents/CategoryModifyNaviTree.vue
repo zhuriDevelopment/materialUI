@@ -72,6 +72,11 @@ export default {
           delete catInfo.parentId;
           that.$store.commit('categorymodify/cat-info', catInfo);
           that.getMaterialInfos();
+          that.$message({
+            message: '获取物料分类信息成功！',
+            showClose: true,
+            type: 'success'
+          });
         })
         .catch(error => {
           CommonApi.handleError(error, that, "在获取物料分类信息的过程中发生错误，错误为：");

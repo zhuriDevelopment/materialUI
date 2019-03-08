@@ -8,7 +8,7 @@ class commonApis {
       console.log("error.response.status", error.response.status);
       console.log("error.response.headers", error.response.headers);
       main.$message.error({
-        message: message + error.status, 
+        message: message + error.status,
         showClose: true
       });
     } else {
@@ -24,8 +24,8 @@ class commonApis {
   paramsSerializer = params => {
     return qs.stringify(params, { indices: false })
   };
-  // 从给定字典的key转化成value
-  keyToValue = (dict, keys) => {
+  // 从给定字典的keys转化成values
+  keysToValues = (dict, keys) => {
     var result = [];
     for (var keyIndex in keys) {
       for (var key in dict) {
@@ -37,8 +37,8 @@ class commonApis {
     }
     return result;
   };
-  // 从给定字典的value转化成key
-  valueToKey = (dict, values) => {
+  // 从给定字典的values转化成keys
+  valuesToKeys = (dict, values) => {
     var result = [];
     for (var valueIndex in values) {
       for (var key in dict) {

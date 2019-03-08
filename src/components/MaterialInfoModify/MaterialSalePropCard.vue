@@ -84,7 +84,7 @@
       <el-row :gutter="20">
         <!--售价下限率-->
         <el-col :span="12">
-          <el-form-item label="售价下限率：" prop="priceLowerLimitRate">
+          <el-form-item label="销价下限率：" prop="priceLowerLimitRate">
             <el-input class="combine-selector" v-model="params.priceLowerLimitRate" placeholder="请输入内容">
               <template slot="append">%</template>
             </el-input>
@@ -178,7 +178,7 @@
         </el-col>
       </el-row>
     </el-form>
-    
+
 
   </el-card>
 </template>

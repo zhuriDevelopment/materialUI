@@ -12,7 +12,6 @@
               <el-input v-model="params.code" class="barSelector" placeholder="请输入内容"></el-input>
             </div>
           </el-col>
-
           <!-- 第二列 -->
           <el-col :span="12">
             <div class="bar">
@@ -43,9 +42,9 @@
         <!-- 保存按钮 -->
         <div class="buttonSpan">
           <el-button type="primary" class="buttons" @click="saveCurrentTab">保存当前</el-button>
-          <el-button type="success" class="buttons">保存所有</el-button>
+          <el-button type="success" class="buttons" @click="saveAllTab">保存所有</el-button>
         </div>
-        
+
       </el-col>
     </el-row>
   </el-card>
@@ -128,6 +127,38 @@ export default {
     }
   },
   methods: {
+    // 提交函数
+    submitResult (submitRes) {
+      var that = this;
+      that.$axios
+        .put(`${window.$config.HOST}/materialmanagement/updateMaterialInfoWithCatCodeAndCatName`, submitRes)
+        .then(response => {
+          console.log(`response`, response);
+          let fail = false;
+          let msg = '更新成功！';
+          if (response.data.errCode === -1) {
+            fail = true;
+            msg = "不存在对应物料分类信息！";
+          } else {
+            if (response.data.errCodeInBaseProp === 0) {
+              fail = true;
+              msg = "更新基本属性出错！";
+            } else if (response.data.errCodeInCtrProp === 0) {
+              fail = true;
+              msg = "更新控制属性出错！";
+            }
+          }
+          that.$message({
+            showClose: true,
+            message: msg,
+            type: fail === false ? 'success' : 'error',
+          });
+        })
+        .catch(error => {
+          console.log(`error`, error);
+        })
+    },
+    // 保存当前
     saveCurrentTab () {
       var that = this;
       var submitRes = {};
@@ -140,6 +171,9 @@ export default {
       console.log(`catInfo`, catInfo);
       // 获取目前的tab名以确定该提交那个选项卡的数据
       var curTab = that.$store.getters['categorymodify/curTab'];
+      if (curTab !== 'basePropDefs') {
+        submitRes["ctrProps"] = [];
+      }
       switch (curTab) {
         // 物料属性定义
         case 'basePropDefs':
@@ -148,14 +182,95 @@ export default {
           console.log(`basePropList`, basePropList);
           submitRes["baseProps"] = basePropList;
           break;
+        // 采购和库存属性
+        case 'purchaseAndStore':
+          var purchaseAndStoreInfos = CategoryModifyFunc.collectCtrPropsWithType(
+            that.$store.getters['purandstoreprop/purchaseAndStoreInfos'],
+            5);
+          console.log(`purchaseAndStoreInfos`, purchaseAndStoreInfos);
+          submitRes["ctrProps"].push(purchaseAndStoreInfos);
+          break;
+        // 计划属性
+        case 'plan':
+          var planInfos = CategoryModifyFunc.collectCtrPropsWithType(
+            that.$store.getters['planprop/planInfos'],
+            6);
+          console.log(`planInfos`, planInfos);
+          submitRes["ctrProps"].push(planInfos);
+          break;
+        // 销售属性
+        case 'sales':
+          var salesInfos = CategoryModifyFunc.collectCtrPropsWithType(
+            that.$store.getters['salesprop/salesInfos'],
+            7);
+          console.log(`salesInfos`, salesInfos);
+          submitRes["ctrProps"].push(salesInfos);
+          break;
+        // 质量属性
+        case 'quality':
+          var qualifyInfos = CategoryModifyFunc.collectCtrPropsWithType(
+            that.$store.getters['qualityprop/qualifyInfos'],
+            8);
+          console.log(`qualifyInfos`, qualifyInfos);
+          submitRes["ctrProps"].push(qualifyInfos);
+          break;
+        // 财务属性
+        case 'finance':
+          var financeInfos = CategoryModifyFunc.collectCtrPropsWithType(
+            that.$store.getters['financeprop/financeInfos'],
+            9);
+          console.log(`financeInfos`, financeInfos);
+          submitRes["ctrProps"].push(financeInfos);
+          break;
+        default:
+          break;
       }
-      // console.log(`basePropList`, that.$store.getters['categorymodify/basePropList']);
-      // console.log(`purchaseAndStoreInfos`, that.$store.getters['purandstoreprop/purchaseAndStoreInfos']);
-      // console.log(`planInfos`, that.$store.getters['planprop/planInfos']);
-      // console.log(`salesInfos`, that.$store.getters['salesprop/salesInfos']);
-      // console.log(`qualifyInfos`, that.$store.getters['qualityprop/qualifyInfos']);
-      // console.log(`financeInfos`, that.$store.getters['financeprop/financeInfos']);
-    }
+      that.submitResult(submitRes);
+    },
+    // 保存所有
+    saveAllTab () {
+      var that = this;
+      var submitRes = {};
+      // 添加基本信息
+      var catInfo = that.$store.getters['categorymodify/catInfo'];
+      submitRes["id"] = catInfo.id;
+      submitRes["catCode"] = catInfo.code;
+      submitRes["catName"] = catInfo.name;
+      submitRes["type"] = catInfo.type;
+      console.log(`catInfo`, catInfo);
+      submitRes["ctrProps"] = [];
+      var basePropList = that.$store.getters['categorymodify/basePropList'];
+      basePropList = CategoryModifyFunc.collectBaseInfos(basePropList);
+      // 逐个tab数据收集
+      console.log(`basePropList`, basePropList);
+      submitRes["baseProps"] = basePropList;
+      var purchaseAndStoreInfos = CategoryModifyFunc.collectCtrPropsWithType(
+        that.$store.getters['purandstoreprop/purchaseAndStoreInfos'],
+        5);
+      console.log(`purchaseAndStoreInfos`, purchaseAndStoreInfos);
+      submitRes["ctrProps"].push(purchaseAndStoreInfos);
+      var planInfos = CategoryModifyFunc.collectCtrPropsWithType(
+        that.$store.getters['planprop/planInfos'],
+        6);
+      console.log(`planInfos`, planInfos);
+      submitRes["ctrProps"].push(planInfos);
+      var salesInfos = CategoryModifyFunc.collectCtrPropsWithType(
+        that.$store.getters['salesprop/salesInfos'],
+        7);
+      console.log(`salesInfos`, salesInfos);
+      submitRes["ctrProps"].push(salesInfos);
+      var qualifyInfos = CategoryModifyFunc.collectCtrPropsWithType(
+        that.$store.getters['qualityprop/qualifyInfos'],
+        8);
+      console.log(`qualifyInfos`, qualifyInfos);
+      submitRes["ctrProps"].push(qualifyInfos);
+      var financeInfos = CategoryModifyFunc.collectCtrPropsWithType(
+        that.$store.getters['financeprop/financeInfos'],
+        9);
+      console.log(`financeInfos`, financeInfos);
+      submitRes["ctrProps"].push(financeInfos);
+      that.submitResult(submitRes);
+    },
   },
 };
 </script>

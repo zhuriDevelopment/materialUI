@@ -1,7 +1,7 @@
 import * as types from '../mutation-types';
 
 const state = {
-  // 销售属性数据
+  // 计划属性数据
   planInfos: {
     // 是否独立需求
     isIndependenceNeed: true,
