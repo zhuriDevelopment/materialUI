@@ -62,7 +62,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">最大库存量：</div>
-            <el-input class="combine-selector" v-model="params.maxInventory" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="maxInventory" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -71,7 +71,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">安全库存量：</div>
-            <el-input class="combine-selector" v-model="params.safeInventory" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="safeInventory" placeholder="请输入内容"></el-input>
           </div>
         </div>
       </el-col>
@@ -83,7 +83,7 @@
         <div class="grid-content">
           <div class="input-combine">
             <div class="content-font">订货批量：</div>
-            <el-input class="combine-selector" v-model="params.orderQuantity" :disabled="true" placeholder="请输入内容"></el-input>
+            <el-input class="combine-selector" v-model="orderQuantity" :disabled="true" placeholder="请输入内容"></el-input>
           </div>
           </div>
         </div>
@@ -234,7 +234,7 @@ export default {
       set(value) {
         this.$store.commit('planprop/plans', value);
       }
-    }
+    },
     // // 是否独立需求
     // isIndependenceNeed: {
     //   get() {
@@ -271,36 +271,36 @@ export default {
     //     this.$store.commit('planprop/repl-cycle', value);
     //   }
     // },
-    // // 最大库存量
-    // maxInventory: {
-    //   get() {
-    //     return this.$store.getters['planprop/maxInventory'];
-    //   },
-    //   set(value) {
-    //     this.$store.dispatch('planprop/updateOrderQuantity', {
-    //       url: 'max-inv',
-    //       value: value,
-    //     });
-    //   }
-    // },
-    // // 安全库存量
-    // safeInventory: {
-    //   get() {
-    //     return this.$store.getters['planprop/safeInventory'];
-    //   },
-    //   set(value) {
-    //     this.$store.dispatch('planprop/updateOrderQuantity', {
-    //       url: 'safe-inv',
-    //       value: value,
-    //     });
-    //   }
-    // },
-    // // 订货批量 = 最大库存量 - 安全库存量
-    // orderQuantity: {
-    //   get() {
-    //     return this.$store.getters['planprop/orderQuantity'];
-    //   },
-    // },
+    // 最大库存量
+    maxInventory: {
+      get() {
+        return this.$store.getters['planprop/maxInventory'];
+      },
+      set(value) {
+        this.$store.dispatch('planprop/updateOrderQuantity', {
+          url: 'max-inv',
+          value: value,
+        });
+      }
+    },
+    // 安全库存量
+    safeInventory: {
+      get() {
+        return this.$store.getters['planprop/safeInventory'];
+      },
+      set(value) {
+        this.$store.dispatch('planprop/updateOrderQuantity', {
+          url: 'safe-inv',
+          value: value,
+        });
+      }
+    },
+    // 订货批量 = 最大库存量 - 安全库存量
+    orderQuantity: {
+      get() {
+        return this.$store.getters['planprop/orderQuantity'];
+      },
+    },
     // // 批量政策
     // batchPolicy: {
     //   get() {

@@ -32,9 +32,9 @@ const getters = {
   // orderLeadTime: state => state.planInfos.orderLeadTime,
   // replenishPolicy: state => state.planInfos.replenishPolicy,
   // replenishCycle: state => state.planInfos.replenishCycle,
-  // maxInventory: state => state.planInfos.maxInventory,
-  // safeInventory: state => state.planInfos.safeInventory,
-  // orderQuantity: state => state.planInfos.orderQuantity,
+  maxInventory: state => state.planInfos.maxInventory,
+  safeInventory: state => state.planInfos.safeInventory,
+  orderQuantity: state => state.planInfos.orderQuantity,
   // batchPolicy: state => state.planInfos.batchPolicy,
   // batchCycle: state => state.planInfos.batchCycle,
   // defaultPlanUnit: state => state.planInfos.defaultPlanUnit,
@@ -45,7 +45,6 @@ const actions = {
     commit(url, value);
     var maxInv = state.planInfos.maxInventory == null ? 0 : state.planInfos.maxInventory;
     var safeInv = state.planInfos.safeInventory == null ? 0 : state.planInfos.safeInventory;
-    console.log(`maxinv, safeInv`, maxInv, safeInv);
     commit('order-quanlity', maxInv - safeInv);
   }
 };
@@ -66,15 +65,15 @@ const mutations = {
   // ['repl-cycle'](state, replenishCycle) {
   //   state.planInfos.replenishCycle = replenishCycle;
   // },
-  // ['max-inv'](state, maxInventory) {
-  //   state.planInfos.maxInventory = maxInventory;
-  // },
-  // ['safe-inv'](state, safeInventory) {
-  //   state.planInfos.safeInventory = safeInventory;
-  // },
-  // ['order-quanlity'](state, orderQuantity) {
-  //   state.planInfos.orderQuantity = orderQuantity;
-  // },
+  ['max-inv'](state, maxInventory) {
+    state.planInfos.maxInventory = maxInventory;
+  },
+  ['safe-inv'](state, safeInventory) {
+    state.planInfos.safeInventory = safeInventory;
+  },
+  ['order-quanlity'](state, orderQuantity) {
+    state.planInfos.orderQuantity = orderQuantity;
+  },
   // ['batch-policy'](state, batchPolicy) {
   //   state.planInfos.batchPolicy = batchPolicy;
   // },
