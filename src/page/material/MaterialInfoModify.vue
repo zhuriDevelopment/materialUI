@@ -5,7 +5,7 @@
       <el-row :gutter="10" style="display: flex; flex-direction: row-reverse">
         <el-button-group>
           <el-button type="primary">提交当前</el-button>
-          <el-button type="primary">提交所有</el-button>
+          <el-button type="primary" @click="collectAllMaterialInfo">提交所有</el-button>
         </el-button-group>
       </el-row>
     </el-card>
@@ -112,6 +112,7 @@ import MaterialQualityCard from "@/components/MaterialInfoModify/MaterialQuality
 import MaterialFinanceCard from "@/components/MaterialInfoModify/MaterialFinanceCard";
 import CommonApi from "@/api/commonApis";
 import InfoModify from "@/api/MaterialInfoModifyAPIs/infomodify";
+import CtrPropFunc from "@/api/ctrprop";
 
 export default {
   name: "MaterialInfoModify",
@@ -199,7 +200,54 @@ export default {
         .catch(error => {
           CommonApi.handleError(error, that, '在加载物料信息时出现错误，错误为：');
         });
-    }
+    },
+    // 收集所有物料信息的函数
+    collectAllMaterialInfo () {
+      var that = this;
+      var result = {};
+      // 物料基本信息
+      result['baseDatas'] = Object.assign({}, that.$store.getters['baseinfo/baseInfos']);
+      // 物料信息
+      result['materialDatas'] = {
+        materialList: InfoModify.collectMaterialInfos(that.$store),
+      };
+      // 规格信息
+      result['formatDatas'] = {
+        formatList: InfoModify.collectFormatInfos(that.$store),
+      };
+      // SKU信息
+      result['skuDatas'] = {
+        skuList: that.$store.getters['skuinfo/skuInfos']
+      };
+      // 控制属性
+      var ctrList = [];
+      result['ctrPropDatas'] = {};
+      result['ctrPropDatas']['ctrPropList'] = [];
+      ctrList = ctrList.concat(CtrPropFunc.collectCtrPropsWithTypeForBase(
+        that.$store.getters['purandstoreprop/purchaseAndStoreInfos'],
+        5));
+      ctrList = ctrList.concat(CtrPropFunc.collectCtrPropsWithTypeForBase(
+        that.$store.getters['planprop/planInfos'],
+        6));
+      ctrList = ctrList.concat(CtrPropFunc.collectCtrPropsWithTypeForBase(
+        that.$store.getters['salesprop/salesInfos'],
+        7));
+      ctrList = ctrList.concat(CtrPropFunc.collectCtrPropsWithTypeForBase(
+        that.$store.getters['qualityprop/qualifyInfos'],
+        8));
+      ctrList = ctrList.concat(CtrPropFunc.collectCtrPropsWithTypeForBase(
+        that.$store.getters['financeprop/financeInfos'],
+        9));
+      result['ctrPropDatas']['ctrPropList'] = ctrList;
+      // 单位信息
+      result['unitDatas'] = {
+        defaultUnitId: that.$store.getters['unit/defaultUnitId'],
+        unitList: that.$store.getters['unit/unitLists'],
+      };
+
+      console.log(`result`, result);
+    },
   },
+
 };
 </script>

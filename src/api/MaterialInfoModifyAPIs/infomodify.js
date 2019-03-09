@@ -1,5 +1,6 @@
 import CtrPropFunc from "@/api/ctrprop";
 class InfoModifyFuncs {
+  // 处理后端传过来的所有物料信息的函数
   handleAllMaterialInfo = (respData, store) => {
     var that = this;
     // 处理物料编码选项
@@ -113,11 +114,10 @@ class InfoModifyFuncs {
       unitLists: [],
     }
     unitresult.defaultUnitId = units.defaultUnit.id;
+    console.log(`units.unitList`, units.unitList);
     for (let index in units.unitList) {
       var param = {};
-      param['label'] = units.unitList[index]['label'];
-      param['name'] = units.unitList[index]['name'];
-      param['englishName'] = units.unitList[index]['englishName'];
+      param['unitId'] = units.unitList[index]['id'];
       param['conversionFactor'] = units.unitList[index]['conversionFactor'];
       param['sort'] = units.unitList[index]['sort'];
       unitresult.unitLists.push(param);
@@ -170,7 +170,44 @@ class InfoModifyFuncs {
     }
     return result;
   };
-
+  // 收集物料信息的函数
+  collectMaterialInfos = (store) => {
+    var materialInfos = store.getters['materialinfo/materialInfos'];
+    var result = [];
+    for (let index in materialInfos) {
+      let curData = materialInfos[index];
+      let param = {
+        materialCode: curData.materialCode,
+        materialName: curData.materialName,
+        oldMaterialName: curData.oldMaterialName,
+        barCode: curData.barCode,
+      };
+      result.push(param);
+    }
+    return result;
+  };
+  // 收集规格属性的函数
+  collectFormatInfos = (store) => {
+    var result = [];
+    var materialInfos = Object.assign([], store.getters['materialinfo/materialInfos']);
+    for (let index in materialInfos) {
+      delete materialInfos[index].barCode;
+      delete materialInfos[index].oldMaterialName;
+      delete materialInfos[index].materialName;
+      let materialCode = materialInfos[index].materialCode;
+      delete materialInfos[index].materialCode;
+      for (let name in materialInfos[index]) {
+        let value = materialInfos[index][name];
+        let param = {
+          name: name,
+          value: value,
+          materialCode: materialCode,
+        };
+        result.push(param);
+      }
+    }
+    return result;
+  };
 }
 
 export default new InfoModifyFuncs();

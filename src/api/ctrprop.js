@@ -4,9 +4,7 @@ class CtrPropFunc {
   // 处理返回值中采购与库存属性的函数
   handlePurchaseAndStoreInfos = (purchaseAndStoreInfos) => {
     var result = {};
-    // console.log(`purchaseAndStoreInfos`, purchaseAndStoreInfos);
     var valueList = purchaseAndStoreInfos.map(ele => ele.propertyValue);
-    // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.purchaseAndStoreDict, 0);
     var nameList = CommonApi.keysToValues(CtrPropDict.purchaseAndStoreDict, keyList);
     for (let element in nameList) {
@@ -25,9 +23,7 @@ class CtrPropFunc {
   // 处理返回值中计划类属性的函数
   handlePlanInfos = (planInfos) => {
     var result = {};
-    // console.log(`planInfos`, planInfos);
     var valueList = planInfos.map(ele => ele.propertyValue);
-    // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.planDict, 0);
     var nameList = CommonApi.keysToValues(CtrPropDict.planDict, keyList);
     for (let element in nameList) {
@@ -48,9 +44,7 @@ class CtrPropFunc {
   // 处理返回值中销售类属性的函数
   handleSalesInfos = (salesInfos) => {
     var result = {};
-    // console.log(`salesInfos`, salesInfos);
     var valueList = salesInfos.map(ele => ele.propertyValue);
-    // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.salesDict, 0);
     var nameList = CommonApi.keysToValues(CtrPropDict.salesDict, keyList);
     for (let element in nameList) {
@@ -68,9 +62,7 @@ class CtrPropFunc {
   // 处理返回值中质量类属性的函数
   handleQualityInfos = (qualityInfos) => {
     var result = {};
-    // console.log(`qualityInfos`, qualityInfos);
     var valueList = qualityInfos.map(ele => ele.propertyValue);
-    // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.qualityDict, 0);
     var nameList = CommonApi.keysToValues(CtrPropDict.qualityDict, keyList);
     for (let element in nameList) {
@@ -81,9 +73,7 @@ class CtrPropFunc {
   // 处理返回值中财务类属性的函数
   handleFinanceInfos = (financeInfos) => {
     var result = {};
-    // console.log(`financeInfos`, financeInfos);
     var valueList = financeInfos.map(ele => ele.propertyValue);
-    // console.log(`valueList`, valueList);
     var keyList = CommonApi.getArrOfKeyOrValue(CtrPropDict.financeDict, 0);
     var nameList = CommonApi.keysToValues(CtrPropDict.financeDict, keyList);
     for (let element in nameList) {
@@ -138,6 +128,13 @@ class CtrPropFunc {
       });
     }
     return result;
-  }
+  };
+  collectCtrPropsWithTypeForBase = (_ctrProps, type) => {
+    let ctrProps = Object.assign([], _ctrProps);
+    let result = [];
+    let ctrPropType = this.collectCtrPropsWithType(ctrProps, type);
+    result = result.concat(ctrPropType.ctrPropList);
+    return result;
+  };
 }
 export default new CtrPropFunc();

@@ -1,19 +1,19 @@
 <template>
   <!-- 物料基础信息卡片 -->
   <el-card class="box-card">
-    <el-form :model="baseInfos" ref="baseInfos" label-width="90px" label-position="left" :rules="rulesBaseInfo" status-icon>
+    <el-form :model="baseInfos" ref="baseInfos" label-width="100px" label-position="left" :rules="rulesBaseInfo" status-icon>
       <!-- 第一行 -->
       <el-row :gutter="10">
         <!--SPU编号输入-->
         <el-col :span="8">
-          <el-form-item label="SPU编号：">
+          <el-form-item label="SPU编号：" prop="spuCode">
             <el-input v-model="baseInfos.spuCode" class="combine-selector" placeholder="请输入内容"></el-input>
           </el-form-item>
         </el-col>
 
         <!--SPU名称输入-->
         <el-col :span="8">
-          <el-form-item label="SPU名称：">
+          <el-form-item label="SPU名称：" prop="spuName">
             <el-input v-model="baseInfos.spuName" class="combine-selector" placeholder="请输入内容"></el-input>
           </el-form-item>
         </el-col>
@@ -115,7 +115,7 @@
     <!--分割线-->
     <hr>
 
-    <el-form :model="units" ref="units" label-width="110px" label-position="left" :rules="rulesUnit" status-icon style="margin-top: 20px">
+    <el-form :model="units" ref="units" label-width="110px" label-position="left" style="margin-top: 20px">
 
       <el-row :gutter="10">
         <!-- 默认计量单位选择 -->
@@ -147,7 +147,19 @@
               stripe
             >
               <el-table-column type="index" label="序号" width="70"></el-table-column>
-              <el-table-column property="label" label="单位标识" min-width="120">
+              <el-table-column prop="unitId" label="计量单位" min-width="150">
+                <template slot-scope="scope">
+                  <el-select class="combine-selector" v-model="scope.row.unitId" placeholder="请选择">
+                    <el-option
+                      v-for="item in unitOptions"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    ></el-option>
+                  </el-select>
+                </template>
+              </el-table-column>
+              <!-- <el-table-column property="label" label="单位标识" min-width="120">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.label" class="combine-selector" placeholder="请输入内容"></el-input>
                 </template>
@@ -161,7 +173,7 @@
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.englishName" class="combine-selector" placeholder="请输入内容"></el-input>
                 </template>
-              </el-table-column>
+              </el-table-column> -->
               <el-table-column property="conversionFactor" label="换算系数" min-width="120">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.conversionFactor" class="combine-selector" placeholder="请输入内容"></el-input>
@@ -173,10 +185,9 @@
                   <el-button type="text" icon="el-icon-sort-down"></el-button>
                 </template>
               </el-table-column>
-              <el-table-column fixed="right" label="操作" width="160">
+              <el-table-column fixed="right" label="操作" width="120">
                 <div slot-scope="scope">
-                  <el-button type="text" size="small">查看</el-button>
-                  <el-button type="text" size="small">编辑</el-button>
+                  <el-button type="text" size="small">添加</el-button>
                   <el-button type="text" size="small">删除</el-button>
                 </div>
               </el-table-column>
@@ -232,11 +243,12 @@ export default {
     return {
       // 物料基本信息规则
       rulesBaseInfo: {
-
-      },
-      // 物料计量单位规则
-      rulesUnit: {
-
+        spuCode: [
+          { required: true, message: '请输入spu编码', trigger: 'change' }
+        ],
+        spuName: [
+          { required: true, message: '请输入spu名称', trigger: 'change' }
+        ],
       },
       options: {
         // 物料类别选项
