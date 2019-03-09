@@ -24,42 +24,29 @@ const state = {
 
 const getters = {
   qualifyInfos: state => state.qualifyInfos,
-  // testMethod: state => state.qualifyInfos.testMethod,
-  // testLevel: state => state.qualifyInfos.testLevel,
-  // testDegree: state => state.qualifyInfos.testDegree,
-  // defaultTestDep: state => state.qualifyInfos.defaultTestDep,
-  // testHour: state => state.qualifyInfos.testHour,
-  // storageLimit: state => state.qualifyInfos.storageLimit,
-  // defaultTester: state => state.qualifyInfos.defaultTester,
 };
 
-const actions = {};
+const actions = {
+  // 清空财务属性
+  clearQualifyInfos ({commit}) {
+    var params = {
+      testMethod: '0',
+      testLevel: '0',
+      testDegree: '0',
+      defaultTestDep: '0',
+      testHour: '0',
+      storageLimit: '0',
+      defaultTester: '默认建研院',
+      testStandFile: '默认文件',
+    }
+    commit(types.QUALITY, params);
+  }
+};
 
 const mutations = {
   [types.QUALITY](state, qualifyInfos) {
     state.qualifyInfos = qualifyInfos;
   },
-  // ['test-method'](state, testMethod) {
-  //   state.qualifyInfos.testMethod = testMethod;
-  // },
-  // ['test-lvl'](state, testLevel) {
-  //   state.qualifyInfos.testLevel = testLevel;
-  // },
-  // ['test-degree'](state, testDegree) {
-  //   state.qualifyInfos.testDegree = testDegree;
-  // },
-  // ['default-test-dep'](state, defaultTestDep) {
-  //   state.qualifyInfos.defaultTestDep = defaultTestDep;
-  // },
-  // ['test-hour'](state, testHour) {
-  //   state.qualifyInfos.testHour = testHour;
-  // },
-  // ['storage-limit'](state, storageLimit) {
-  //   state.qualifyInfos.storageLimit = storageLimit;
-  // },
-  // ['default-tester'](state, defaultTester) {
-  //   state.qualifyInfos.defaultTester = defaultTester;
-  // },
 };
 
 export default {

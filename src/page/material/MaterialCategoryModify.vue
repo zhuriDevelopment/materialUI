@@ -187,6 +187,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.dispatch('clearAllInfoInType');
     this.buttonFunc = true;
   },
   methods: {

@@ -1,6 +1,18 @@
 // 物料信息列表
-export const MODIFY_INFOLISTTABLE = 'list-update';
-export const MODIFY_INFOLISTPAGESIZE = 'list-ps-update';
+export const LIST_TABLE = 'list-table';
+export const LIST_CUR_INFO = 'list-cur-info';
+
+// 物料信息管理
+export const INFO_BASE_INFO_MODIFY = 'modify-base';
+export const INFO_UNIT_OPT_ARR = 'unit-opt-arr';
+export const INFO_CAT_OPT_ARR = 'cat-opt-arr';
+export const INFO_UNIT = 'unit-info';
+export const INFO_DEF_UNIT_ID = 'unit-def';
+export const INFO_UNIT_ARR = 'unit-arr';
+export const INFO_MATERIAL = 'material-info';
+export const INFO_MAT_OPT_ARR = 'material-opt-arr';
+export const INFO_MATERIAL_COLS = 'material-cols';
+export const INFO_SKU = 'sku-info';
 
 // 物料分类管理
 export const CAT_TREE = 'cat-tree';

@@ -83,6 +83,7 @@
 
 <script>
 import CategoryModifyFunc from "@/api/MaterialCategoryModifyAPIs/categorymodifyfuncs";
+import CtrPropFunc from "@/api/ctrprop";
 export default {
   name: "CategoryModifyBasicInfoCard",
   data() {
@@ -184,7 +185,7 @@ export default {
           break;
         // 采购和库存属性
         case 'purchaseAndStore':
-          var purchaseAndStoreInfos = CategoryModifyFunc.collectCtrPropsWithType(
+          var purchaseAndStoreInfos = CtrPropFunc.collectCtrPropsWithType(
             that.$store.getters['purandstoreprop/purchaseAndStoreInfos'],
             5);
           console.log(`purchaseAndStoreInfos`, purchaseAndStoreInfos);
@@ -192,7 +193,7 @@ export default {
           break;
         // 计划属性
         case 'plan':
-          var planInfos = CategoryModifyFunc.collectCtrPropsWithType(
+          var planInfos = CtrPropFunc.collectCtrPropsWithType(
             that.$store.getters['planprop/planInfos'],
             6);
           console.log(`planInfos`, planInfos);
@@ -200,7 +201,7 @@ export default {
           break;
         // 销售属性
         case 'sales':
-          var salesInfos = CategoryModifyFunc.collectCtrPropsWithType(
+          var salesInfos = CtrPropFunc.collectCtrPropsWithType(
             that.$store.getters['salesprop/salesInfos'],
             7);
           console.log(`salesInfos`, salesInfos);
@@ -208,7 +209,7 @@ export default {
           break;
         // 质量属性
         case 'quality':
-          var qualifyInfos = CategoryModifyFunc.collectCtrPropsWithType(
+          var qualifyInfos = CtrPropFunc.collectCtrPropsWithType(
             that.$store.getters['qualityprop/qualifyInfos'],
             8);
           console.log(`qualifyInfos`, qualifyInfos);
@@ -216,7 +217,7 @@ export default {
           break;
         // 财务属性
         case 'finance':
-          var financeInfos = CategoryModifyFunc.collectCtrPropsWithType(
+          var financeInfos = CtrPropFunc.collectCtrPropsWithType(
             that.$store.getters['financeprop/financeInfos'],
             9);
           console.log(`financeInfos`, financeInfos);
@@ -244,27 +245,27 @@ export default {
       // 逐个tab数据收集
       console.log(`basePropList`, basePropList);
       submitRes["baseProps"] = basePropList;
-      var purchaseAndStoreInfos = CategoryModifyFunc.collectCtrPropsWithType(
+      var purchaseAndStoreInfos = CtrPropFunc.collectCtrPropsWithType(
         that.$store.getters['purandstoreprop/purchaseAndStoreInfos'],
         5);
       console.log(`purchaseAndStoreInfos`, purchaseAndStoreInfos);
       submitRes["ctrProps"].push(purchaseAndStoreInfos);
-      var planInfos = CategoryModifyFunc.collectCtrPropsWithType(
+      var planInfos = CtrPropFunc.collectCtrPropsWithType(
         that.$store.getters['planprop/planInfos'],
         6);
       console.log(`planInfos`, planInfos);
       submitRes["ctrProps"].push(planInfos);
-      var salesInfos = CategoryModifyFunc.collectCtrPropsWithType(
+      var salesInfos = CtrPropFunc.collectCtrPropsWithType(
         that.$store.getters['salesprop/salesInfos'],
         7);
       console.log(`salesInfos`, salesInfos);
       submitRes["ctrProps"].push(salesInfos);
-      var qualifyInfos = CategoryModifyFunc.collectCtrPropsWithType(
+      var qualifyInfos = CtrPropFunc.collectCtrPropsWithType(
         that.$store.getters['qualityprop/qualifyInfos'],
         8);
       console.log(`qualifyInfos`, qualifyInfos);
       submitRes["ctrProps"].push(qualifyInfos);
-      var financeInfos = CategoryModifyFunc.collectCtrPropsWithType(
+      var financeInfos = CtrPropFunc.collectCtrPropsWithType(
         that.$store.getters['financeprop/financeInfos'],
         9);
       console.log(`financeInfos`, financeInfos);

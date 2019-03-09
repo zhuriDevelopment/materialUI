@@ -28,16 +28,9 @@ const state = {
 
 const getters = {
   planInfos: state => state.planInfos,
-  // isIndependenceNeed: state => state.planInfos.isIndependenceNeed,
-  // orderLeadTime: state => state.planInfos.orderLeadTime,
-  // replenishPolicy: state => state.planInfos.replenishPolicy,
-  // replenishCycle: state => state.planInfos.replenishCycle,
   maxInventory: state => state.planInfos.maxInventory,
   safeInventory: state => state.planInfos.safeInventory,
   orderQuantity: state => state.planInfos.orderQuantity,
-  // batchPolicy: state => state.planInfos.batchPolicy,
-  // batchCycle: state => state.planInfos.batchCycle,
-  // defaultPlanUnit: state => state.planInfos.defaultPlanUnit,
 };
 
 const actions = {
@@ -46,6 +39,32 @@ const actions = {
     var maxInv = state.planInfos.maxInventory == null ? 0 : state.planInfos.maxInventory;
     var safeInv = state.planInfos.safeInventory == null ? 0 : state.planInfos.safeInventory;
     commit('order-quanlity', maxInv - safeInv);
+  },
+  // 清空计划属性
+  clearPlanInfos ({commit}) {
+    var params = {
+      // 是否独立需求
+      isIndependenceNeed: false,
+      // 订货提前期
+      orderLeadTime: '0',
+      // 补货政策
+      replenishPolicy: '0',
+      // 补货周期
+      replenishCycle: '0',
+      // 最大库存量
+      maxInventory: '0',
+      // 安全库存量
+      safeInventory: '0',
+      // 订货批量 = 最大库存量 - 安全库存量
+      orderQuantity: '0',
+      // 批量政策
+      batchPolicy: '0',
+      // 批量周期
+      batchCycle: '0',
+      // 默认计划单位
+      defaultPlanUnit: '天',
+    }
+    commit(types.PLANS, params);
   }
 };
 
@@ -53,18 +72,6 @@ const mutations = {
   [types.PLANS](state, planInfos) {
     state.planInfos = planInfos;
   },
-  // ['is-indep-need'](state, isIndependenceNeed) {
-  //   state.planInfos.isIndependenceNeed = isIndependenceNeed;
-  // },
-  // ['order-lead-time'](state, orderLeadTime) {
-  //   state.planInfos.orderLeadTime = orderLeadTime;
-  // },
-  // ['repl-policy'](state, replenishPolicy) {
-  //   state.planInfos.replenishPolicy = replenishPolicy;
-  // },
-  // ['repl-cycle'](state, replenishCycle) {
-  //   state.planInfos.replenishCycle = replenishCycle;
-  // },
   ['max-inv'](state, maxInventory) {
     state.planInfos.maxInventory = maxInventory;
   },
@@ -74,15 +81,6 @@ const mutations = {
   ['order-quanlity'](state, orderQuantity) {
     state.planInfos.orderQuantity = orderQuantity;
   },
-  // ['batch-policy'](state, batchPolicy) {
-  //   state.planInfos.batchPolicy = batchPolicy;
-  // },
-  // ['batch-cycle'](state, batchCycle) {
-  //   state.planInfos.batchCycle = batchCycle;
-  // },
-  // ['default-plan-unit'](state, defaultPlanUnit) {
-  //   state.planInfos.defaultPlanUnit = defaultPlanUnit;
-  // },
 };
 
 export default {

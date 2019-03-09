@@ -3,11 +3,10 @@
   <!--物料定义的展示编辑表格-->
   <el-card class="box-card">
     <el-table
-      border="true"
+      border
       ref="singleTable"
-      :data="tableData"
+      :data="materialInfos"
       highlight-current-row
-      @current-change="handleCurrentChange"
       style="width: 100%"
       stripe
     >
@@ -15,53 +14,41 @@
       <el-table-column label="序号" type="index" width="50"></el-table-column>
 
       <!--第一列-->
-      <el-table-column prop="date" label="物料编码" min-width="120">
+      <el-table-column prop="materialCode" label="物料编码" min-width="120">
         <template slot-scope="scope">
-          <el-input placeholder="请输入内容" v-model="input1" :disabled="false"></el-input>
+          <el-input placeholder="请输入内容" v-model="scope.row.materialCode" :disabled="false"></el-input>
         </template>
       </el-table-column>
 
       <!--第二列-->
-      <el-table-column prop="name" label="物料名称" min-width="120">
+      <el-table-column prop="materialName" label="物料名称" min-width="120">
         <template slot-scope="scope">
-          <el-input placeholder="请输入内容" v-model="input1" :disabled="false"></el-input>
+          <el-input placeholder="请输入内容" v-model="scope.row.materialName" :disabled="false"></el-input>
         </template>
       </el-table-column>
 
       <!--第三列-->
-      <el-table-column prop="name" label="旧物料名称" min-width="120">
+      <el-table-column prop="oldMaterialName" label="旧物料名称" min-width="120">
         <template slot-scope="scope">
-          <el-input placeholder="请输入内容" v-model="input1" :disabled="false"></el-input>
+          <el-input placeholder="请输入内容" v-model="scope.row.oldMaterialName" :disabled="false"></el-input>
         </template>
       </el-table-column>
 
       <!--第四列-->
-      <el-table-column prop="name" label="条形码" min-width="120">
+      <el-table-column prop="barCode" label="条形码" min-width="120">
         <template slot-scope="scope">
-          <el-input placeholder="请输入内容" v-model="input1" :disabled="false"></el-input>
+          <el-input placeholder="请输入内容" v-model="scope.row.barCode" :disabled="false"></el-input>
         </template>
       </el-table-column>
 
-      <!--第五列-->
-      <el-table-column prop="name" label="规格1">
+      <!-- 规格信息 -->
+      <el-table-column
+        min-width="120"
+        v-for="col in materialInfoColumns"
+        :prop="col.prop" :label="col.label" :key="col.label">
         <template slot-scope="scope">
-          <el-input placeholder="请输入内容" v-model="input1" :disabled="false"></el-input>
+          <el-input placeholder="请输入内容" v-model="scope.row[col.prop]"></el-input>
         </template>
-      </el-table-column>
-
-      <!--第六列-->
-      <el-table-column prop="name" label="规格2">
-        <template slot-scope="scope">
-          <el-input placeholder="请输入内容" v-model="input1" :disabled="false"></el-input>
-        </template>
-      </el-table-column>
-
-      <!--第七列-->
-      <el-table-column prop="name" label="规格N">
-        <template slot-scope="scope">
-          <el-input placeholder="请输入内容" v-model="input1" :disabled="false"></el-input>
-        </template>
-        <a href></a>
       </el-table-column>
 
       <!--操作栏列-->
@@ -86,19 +73,25 @@ export default {
   name: "MaterialDefinationCard",
   data() {
     return {
-      tableData: [
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1518 弄",
-          zip: 200333
-        }
-      ],
-      input: "",
-      currentRow: null
     };
+  },
+  computed: {
+    materialInfos: {
+      get() {
+        return this.$store.getters['materialinfo/materialInfos'];
+      },
+      set(value) {
+        this.$store.commit('materialinfo/material-info');
+      }
+    },
+    materialInfoColumns: {
+      get() {
+        return this.$store.getters['materialinfo/materialInfoColumns'];
+      },
+      set(value) {
+        this.$store.commit('materialinfo/material-cols');
+      }
+    }
   }
 };
 </script>

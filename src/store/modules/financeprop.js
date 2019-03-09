@@ -22,42 +22,31 @@ const state = {
 
 const getters = {
   financeInfos: state => state.financeInfos,
-  // typeId: state => state.financeInfos.typeId,
-  // recordCurrency: state => state.financeInfos.recordCurrency,
-  // accountName: state => state.financeInfos.accountName,
-  // vatCode: state => state.financeInfos.vatCode,
-  // invCostMethod: state => state.financeInfos.invCostMethod,
-  // costingMethod: state => state.financeInfos.costingMethod,
-  // billingType: state => state.financeInfos.billingType,
 };
 
-const actions = {};
+const actions = {
+  // 清空财务属性
+  clearFinanceInfos ({commit}) {
+    // 财务属性默认数据
+    var financeInfos = {
+      // 财务类别
+      typeId: '0',
+      recordCurrency: '人民币',
+      accountName: '资产类',
+      vatCode: '0',
+      invCostMethod: '0',
+      costingMethod: '0',
+      billingType: '0',
+    };
+    commit(types.FINANCE, financeInfos);
+  }
+
+};
 
 const mutations = {
   [types.FINANCE](state, financeInfos) {
     state.financeInfos = financeInfos;
   },
-  // ['type-id'](state, typeId) {
-  //   state.financeInfos.typeId = typeId;
-  // },
-  // ['record-cur'](state, recordCurrency) {
-  //   state.financeInfos.recordCurrency = recordCurrency;
-  // },
-  // ['account-name'](state, accountName) {
-  //   state.financeInfos.accountName = accountName;
-  // },
-  // ['vat-code'](state, vatCode) {
-  //   state.financeInfos.vatCode = vatCode;
-  // },
-  // ['inv-cost-method'](state, invCostMethod) {
-  //   state.financeInfos.invCostMethod = invCostMethod;
-  // },
-  // ['costing-method'](state, costingMethod) {
-  //   state.financeInfos.costingMethod = costingMethod;
-  // },
-  // ['billing-type'](state, billingType) {
-  //   state.financeInfos.billingType = billingType;
-  // },
 };
 
 export default {

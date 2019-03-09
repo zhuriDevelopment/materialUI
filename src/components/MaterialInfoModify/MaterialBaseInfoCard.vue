@@ -1,252 +1,202 @@
 <template>
   <!-- 物料基础信息卡片 -->
   <el-card class="box-card">
-    <!-- 第一行 -->
-    <el-row :gutter="100">
-      <!--SPU编号输入-->
-      <el-col :span="7">
-        <div class="grid-content bg-purple">
-          <div class="input-combine">
-            <div class="content-font">SPU编号：</div>
-            <el-input v-model="input" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-      <!--SPU名称输入-->
-      <el-col :span="7">
-        <div class="grid-content bg-purple">
-          <div class="input-combine">
-            <div class="content-font">SPU名称：</div>
-            <el-input v-model="input" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-      <!--SPU物料类型选择-->
-      <el-col :span="7">
-        <div class="grid-content bg-purple">
-          <div class="input-combine">
-            <div class="content-font">物料类型：</div>
-            <el-select class="combine-selector" v-model="value" placeholder="请选择">
+    <el-form :model="baseInfos" ref="baseInfos" label-width="90px" label-position="left" :rules="rulesBaseInfo" status-icon>
+      <!-- 第一行 -->
+      <el-row :gutter="10">
+        <!--SPU编号输入-->
+        <el-col :span="8">
+          <el-form-item label="SPU编号：">
+            <el-input v-model="baseInfos.spuCode" class="combine-selector" placeholder="请输入内容"></el-input>
+          </el-form-item>
+        </el-col>
+
+        <!--SPU名称输入-->
+        <el-col :span="8">
+          <el-form-item label="SPU名称：">
+            <el-input v-model="baseInfos.spuName" class="combine-selector" placeholder="请输入内容"></el-input>
+          </el-form-item>
+        </el-col>
+
+        <!--SPU物料类型选择-->
+        <el-col :span="8">
+          <el-form-item label="物料类型：">
+            <el-select class="combine-selector" v-model="baseInfos.type" placeholder="请选择">
               <el-option
-                v-for="item in options"
+                v-for="item in options.typeOptions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
               ></el-option>
             </el-select>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
+          </el-form-item>
+        </el-col>
+      </el-row>
 
-    <!-- 第二行 -->
-    <el-row :gutter="100">
-      <!-- 物料分类选择 -->
-      <el-col :span="7">
-        <div class="grid-content bg-purple">
-          <div class="input-combine">
-            <div class="content-font">物料分类：</div>
-            <el-select class="combine-selector" v-model="value" placeholder="请选择">
+      <!-- 第二行 -->
+      <el-row :gutter="10">
+        <!-- 物料分类选择 -->
+        <el-col :span="8">
+          <el-form-item label="物料分类：">
+            <el-select class="combine-selector" v-model="baseInfos.materialCatId" placeholder="请选择">
               <el-option
-                v-for="item in options"
+                v-for="item in catOptions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
               ></el-option>
             </el-select>
-          </div>
-        </div>
-      </el-col>
+          </el-form-item>
+        </el-col>
 
-      <!-- 来源选择 -->
-      <el-col :span="7">
-        <div class="grid-content bg-purple">
-          <div class="input-combine">
-            <div class="content-font">来源：</div>
-            <el-select class="combine-selector" v-model="value" placeholder="请选择">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-          </div>
-        </div>
-      </el-col>
-      <!-- 用途输入 -->
-      <el-col :span="7">
-        <div class="grid-content bg-purple">
-          <div class="input-combine">
-            <div class="content-font">用途：</div>
-            <el-input v-model="input" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
+        <!-- 来源选择 -->
+        <el-col :span="8">
+          <el-form-item label="来源：">
+            <el-input v-model="baseInfos.source" class="combine-selector" placeholder="请输入内容"></el-input>
+          </el-form-item>
+        </el-col>
+        <!-- 用途输入 -->
+        <el-col :span="8">
+          <el-form-item label="用途：">
+            <el-input v-model="baseInfos.usage" class="combine-selector" placeholder="请输入内容"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
 
-    <!-- 第三行 -->
-    <el-row :gutter="100">
-      <!-- 设计图号输入 -->
-      <el-col :span="7">
-        <div class="grid-content bg-purple">
-          <div class="input-combine">
-            <div class="content-font">设计图号：</div>
-            <el-input v-model="input" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-      <!-- 设计版次输入 -->
-      <el-col :span="7">
-        <div class="grid-content bg-purple">
-          <div class="input-combine">
-            <div class="content-font">设计版次：</div>
-            <el-input v-model="input" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-      <!-- 助记码输入 -->
-      <el-col :span="7">
-        <div class="grid-content bg-purple">
-          <div class="input-combine">
-            <div class="content-font">助记码：</div>
-            <el-input v-model="input" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
+      <!-- 第三行 -->
+      <el-row :gutter="10">
+        <!-- 设计图号输入 -->
+        <el-col :span="8">
+          <el-form-item label="设计图号：">
+            <el-input v-model="baseInfos.designCode" class="combine-selector" placeholder="请输入内容"></el-input>
+          </el-form-item>
+        </el-col>
+        <!-- 设计版次输入 -->
+        <el-col :span="8">
+          <el-form-item label="设计版次：">
+            <el-input v-model="baseInfos.designVersion" class="combine-selector" placeholder="请输入内容"></el-input>
+          </el-form-item>
+        </el-col>
+        <!-- 助记码输入 -->
+        <el-col :span="8">
+          <el-form-item label="助记码：">
+            <el-input v-model="baseInfos.mnemonic" class="combine-selector" placeholder="请输入内容"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
 
-    <el-row :gutter="100">
-      <!-- 规格描述输入 -->
-      <el-col :span="21">
-        <div class="grid-content bg-purple">
-          <div class="input-combine">
-            <div class="content-font">物料描述：</div>
-            <el-input class="combine-selector" v-model="input" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-      </el-col>
-      <!-- 多规格描述按钮
-      <el-col :span="5">
-        <div class="grid-content bg-purple">
-          <el-switch
-            class="switch-button"
-            v-model="value3"
-            active-text="单规格描述"
-            inactive-text="多规格描述">
-          </el-switch>
-        </div>
-      </el-col>-->
-    </el-row>
+      <!-- 第四行 -->
+      <el-row :gutter="10">
+        <!-- 物料描述输入 -->
+        <el-col :span="24">
+          <el-form-item label="物料描述：">
+            <el-input class="combine-selector" v-model="baseInfos.description" placeholder="请输入内容"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
 
-    <el-row :gutter="100">
-      <!-- 备注输入 -->
-      <el-col :span="21">
-        <div class="grid-content bg-purple">
-          <div class="input-combine">
-            <div class="content-font">备注：</div>
+      <!-- 第五行 -->
+      <el-row :gutter="10">
+        <!-- 备注输入 -->
+        <el-col :span="24">
+          <el-form-item label="备注：">
             <el-input
               class="combine-selector"
               type="textarea"
               :rows="2"
               placeholder="请输入内容"
-              v-model="textarea"
+              v-model="baseInfos.note"
             ></el-input>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
+          </el-form-item>
+        </el-col>
+      </el-row>
+    </el-form>
 
     <!--分割线-->
     <hr>
 
-    <el-row :gutter="100">
-      <!-- 默认计量单位选择 -->
-      <el-col :span="7">
-        <div class="grid-content bg-purple">
-          <div class="input-combine">
-            <div class="content-font">默认计量单位：</div>
-            <el-select class="combine-selector" v-model="value" placeholder="请选择">
+    <el-form :model="units" ref="units" label-width="110px" label-position="left" :rules="rulesUnit" status-icon style="margin-top: 20px">
+
+      <el-row :gutter="10">
+        <!-- 默认计量单位选择 -->
+        <el-col :span="8">
+          <el-form-item label="默认计量单位：">
+            <el-select class="combine-selector" v-model="units.defaultUnitId" placeholder="请选择">
               <el-option
-                v-for="item in options"
+                v-for="item in unitOptions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
               ></el-option>
             </el-select>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
+          </el-form-item>
 
-    <!-- 辅助计量单位表 -->
-    <el-row :gutter="30">
-      <el-col :span="2.5">
-        <div class="grid-content bg-purple">
-          <div class="input-combine">
-            <div class="content-font">辅助计量单位：</div>
-          </div>
-        </div>
-      </el-col>
+        </el-col>
+      </el-row>
 
       <!-- 辅助计量单位表 -->
-      <el-col :span="16">
-        <div class="grid-content bg-purple">
-          <el-table
-            ref="singleTable"
-            :data="tableData"
-            highlight-current-row
-            @current-change="handleCurrentChange"
-            style="width: 100%"
-            stripe
-          >
-            <el-table-column type="index" label="序号" min-width="50"></el-table-column>
+      <el-row :gutter="10">
+        <el-col :span="24">
+          <el-form-item label="辅助计量单位：">
+            <el-table
+              border
+              :data="units.unitLists"
+              highlight-current-row
+              @current-change="handleCurrentChange"
+              style="width: 100%"
+              stripe
+            >
+              <el-table-column type="index" label="序号" width="70"></el-table-column>
+              <el-table-column property="label" label="单位标识" min-width="120">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.label" class="combine-selector" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column property="name" label="名称" min-width="120">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.name" class="combine-selector" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column property="englishName" label="英文名称" min-width="120">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.englishName" class="combine-selector" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column property="conversionFactor" label="换算系数" min-width="120">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.conversionFactor" class="combine-selector" placeholder="请输入内容"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column property="sort" label="排序号" width="150">
+                <template slot-scope="scope" style="display:flex;">
+                  <el-button type="text" icon="el-icon-sort-up"></el-button>
+                  <el-button type="text" icon="el-icon-sort-down"></el-button>
+                </template>
+              </el-table-column>
+              <el-table-column fixed="right" label="操作" width="160">
+                <div slot-scope="scope">
+                  <el-button type="text" size="small">查看</el-button>
+                  <el-button type="text" size="small">编辑</el-button>
+                  <el-button type="text" size="small">删除</el-button>
+                </div>
+              </el-table-column>
+            </el-table>
+          </el-form-item>
+        </el-col>
 
-            <el-table-column property="date" label="计量单位" min-width="120"></el-table-column>
+      </el-row>
+    </el-form>
 
-            <el-table-column property="name" label="换算系数" min-width="120">true</el-table-column>
-
-            <el-table-column property="name" label="排序号" min-width="150">
-              <template slot-scope="scope" style="display:flex;">
-                <el-button type="primary" icon="el-icon-sort-up"></el-button>
-                <el-button type="primary" icon="el-icon-sort-down"></el-button>
-              </template>
-            </el-table-column>
-
-            <el-table-column fixed="right" label="操作">
-              <div slot-scope="scope">
-                <el-button type="text" size="small">查看</el-button>
-                <el-button type="text" size="small">编辑</el-button>
-                <el-button type="text" size="small">删除</el-button>
-              </div>
-            </el-table-column>
-          </el-table>
-        </div>
-      </el-col>
-    </el-row>
   </el-card>
 </template>
 
 <style lang="less" scoped>
 .box-card {
   min-width: 950px;
-  .input-combine {
-    display: flex;
-    align-items: center;
-
-    .content-font {
-      font-family: "PingFang SC";
-      text-align: left;
-      font-size: 14px;
-      margin: 5px;
-      min-width: 100px;
-      overflow: hidden;
-    }
-
-    .combine-selector {
-      width: 100%;
-    }
+  .combine-selector {
+    width: 100%;
   }
+
   .single-button {
     font-family: "PingFang SC";
     text-align: center;
@@ -254,12 +204,6 @@
     margin: 5px;
     min-width: 90px;
     overflow: hidden;
-  }
-  .el-row {
-    margin-bottom: 20px;
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   .el-col {
@@ -281,38 +225,72 @@
 </style>
 
 <script>
+import CommonApi from "@/api/commonApis";
 export default {
   name: "MaterialBaseInfoCard",
   data() {
     return {
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        }
-      ],
-      currentRow: null,
-      input: "",
-      value3: true
+      // 物料基本信息规则
+      rulesBaseInfo: {
+
+      },
+      // 物料计量单位规则
+      rulesUnit: {
+
+      },
+      options: {
+        // 物料类别选项
+        typeOptions: [
+          {
+            label: '无类别',
+            value: 0,
+          },
+          {
+            label: '原材料',
+            value: 1,
+          },
+          {
+            label: '半成品',
+            value: 2,
+          },
+          {
+            label: '成品',
+            value: 3,
+          },
+          {
+            label: '设备',
+            value: 4,
+          },
+        ],
+      }
     };
   },
-
+  computed: {
+    // 物料分类选项
+    catOptions() {
+      return this.$store.getters['baseinfo/catOptions'];
+    },
+    // 计量单位选项
+    unitOptions() {
+      return this.$store.getters['baseinfo/unitOptions'];
+    },
+    baseInfos: {
+      get() {
+        return this.$store.getters['baseinfo/baseInfos'];
+      },
+      set(value) {
+        this.$store.commit('baseinfo/baseInfos');
+      }
+    },
+    units: {
+      get() {
+        return this.$store.getters['unit/units'];
+      },
+      set(value) {
+        this.$store.commit('unit/unit-info');
+      }
+    },
+  },
   methods: {
     setCurrent(row) {
       this.$refs.singleTable.setCurrentRow(row);
