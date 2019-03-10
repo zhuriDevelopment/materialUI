@@ -82,7 +82,7 @@
 </style>
 
 <script>
-import CategoryModifyFunc from "@/api/MaterialCategoryModifyAPIs/categorymodifyfuncs";
+import CategoryModify from "@/api/MaterialCategoryModifyAPIs/categorymodify";
 import CtrPropFunc from "@/api/ctrprop";
 export default {
   name: "CategoryModifyBasicInfoCard",
@@ -179,7 +179,7 @@ export default {
         // 物料属性定义
         case 'basePropDefs':
           var basePropList = that.$store.getters['categorymodify/basePropList'];
-          basePropList = CategoryModifyFunc.collectBaseInfos(basePropList);
+          basePropList = CategoryModify.collectBaseInfos(basePropList);
           console.log(`basePropList`, basePropList);
           submitRes["baseProps"] = basePropList;
           break;
@@ -241,7 +241,7 @@ export default {
       console.log(`catInfo`, catInfo);
       submitRes["ctrProps"] = [];
       var basePropList = that.$store.getters['categorymodify/basePropList'];
-      basePropList = CategoryModifyFunc.collectBaseInfos(basePropList);
+      basePropList = CategoryModify.collectBaseInfos(basePropList);
       // 逐个tab数据收集
       console.log(`basePropList`, basePropList);
       submitRes["baseProps"] = basePropList;

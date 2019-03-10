@@ -37,7 +37,7 @@
       </el-table-column>
 
       <el-table-column
-        prop="materialCatId"
+        prop="materialCat"
         label="物料分类"
         min-width="120">
       </el-table-column>
@@ -61,7 +61,7 @@
       </el-table-column>
 
       <el-table-column
-        prop="defaultUnitId"
+        prop="defaultUnit"
         label="默认计量单位"
         min-width="120">
       </el-table-column>
@@ -84,23 +84,21 @@
         show-overflow-tooltip
         fixed="right">
         <template slot-scope="scope">
-          <el-button type="text" size="small">查看</el-button>
+          <!-- <el-button type="text" size="small">查看</el-button> -->
           <el-button type="text" size="small">编辑</el-button>
           <el-button type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    
+
   </el-card>
 </template>
 
 <style lang="less" scoped>
   .box-card {
-    width: 100%;
-    min-width: 50%;
-    margin: 1% 1%;
-  } 
+    margin-left: 20px;
+  }
 </style>
 
 <script>
@@ -108,24 +106,13 @@
     name:"MaterialInfoSearchDisplayCard",
     data(){
       return {
-        /* 测试数据 */
-        baseInfoData: [
-          {
-            "spuCode": "1001",
-            "spuName": "1001",
-            "materialCatId": "1001",
-            "designCode": "1001",
-            "designVersion": "1001",
-            "source": "1001",
-            "defaultUnitId": 1,
-            "description": "1001",
-            "note": "1001",
-          },
-        ],
-        currentRow: null
       }
     },
-
+    computed: {
+      baseInfoData() {
+        return this.$store.getters['infolist/baseInfoData'];
+      }
+    },
     methods: {
       /* 取消选择按钮的响应函数 */
       toggleSelection(rows) {
@@ -138,6 +125,6 @@
         }
       },
       handleSelectionChange (selection) {},
-    }
+    },
   }
 </script>

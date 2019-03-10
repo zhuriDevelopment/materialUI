@@ -17,7 +17,7 @@
 
 
 <script>
-import CategoryModifyFuncs from "@/api/MaterialCategoryModifyAPIs/categorymodifyfuncs";
+import CategoryModify from "@/api/MaterialCategoryModifyAPIs/categorymodify";
 import CommonApi from "@/api/commonApis";
 export default {
   name: "CategoryModifyNaviTree",
@@ -50,7 +50,7 @@ export default {
         .then(response => {
           console.log(`getMaterialInfos response`, response);
           var responseData = response.data;
-          CategoryModifyFuncs.handleAllInfos(responseData, that.$store);
+          CategoryModify.handleAllInfos(responseData, that.$store);
         })
         .catch(error => {
           CommonApi.handleError(error, that, "在获取所有物料信息的过程中发生错误，错误为：");

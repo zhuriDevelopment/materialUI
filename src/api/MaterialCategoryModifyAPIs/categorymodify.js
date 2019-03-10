@@ -1,5 +1,5 @@
 import CtrPropFuncs from "@/api/ctrprop";
-class CategoryModifyFuncs {
+class CategoryModify {
   // 处理获取信息时返回值中所有属性的函数
   handleAllInfos = (allInfos, store) => {
     var that = this;
@@ -67,4 +67,4 @@ class CategoryModifyFuncs {
   };
 }
 
-export default new CategoryModifyFuncs();
+export default new CategoryModify();
