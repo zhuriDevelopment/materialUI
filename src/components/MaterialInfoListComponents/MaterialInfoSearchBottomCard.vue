@@ -7,8 +7,10 @@
         background
         layout="prev, pager, next, sizes, total, jumper"
         :total="resultSum"
-        :page-sizes="[10, 20, 50, 100]"
+        :page-sizes="[10,20,50]"
         :page-size="pageSize"
+        @current-change="handleCurrentChange"
+        :current-page="pageNum"
         @size-change="handleSizeChange">
       </el-pagination>
     </div>
@@ -21,35 +23,57 @@
     min-width: 50%;
     margin: 1% 1%;
     .block{
-      display: flex; 
-      flex-direction: row; 
-      padding: 0 15px; 
+      display: flex;
+      flex-direction: row;
+      padding: 0 15px;
       align-items: center;
       justify-content: flex-end;
     }
-  } 
+  }
 </style>
 
 <script>
   export default {
     name:"MaterialInfoSearchBottomCard",
     data() {
-      return {
-        resultSum: 100,
-      }
+      return {}
     },
     methods: {
       handleSizeChange (val) {
         this.pageSize = val;
+        console.log(`pageSize`, this.pageSize);
+        this.$store.dispatch('infolist/setBaseInfoWithPages', {
+          pageSize: this.pageSize,
+          pageNum: this.currentPage,
+        });
+      },
+      handleCurrentChange (val) {
+        this.currentPage = val;
+        console.log(`currentPage`, this.currentPage);
+        this.$store.dispatch('infolist/setBaseInfoWithPages', {
+          pageSize: this.pageSize,
+          pageNum: this.currentPage,
+        });
       }
     },
     computed: {
+      resultSum() {
+        return this.$store.getters['infolist/baseInfoDataAll'].length;
+      },
       pageSize: {
-        get () {
-          return this.$store.pageSize;
+        get() {
+          return this.$store.getters['infolist/pageSize'];
         },
-        set (value) {
-          this.$store.commit('list-ps-update', value);
+        set(value) {
+          this.$store.commit('infolist/list-ps', value);
+        }
+      },
+      pageNum: {
+        get() {
+          return this.$store.getters['infolist/pageNum'];
+        },
+        set(value) {
+          this.$store.commit('infolist/list-pn', value);
         }
       }
     }

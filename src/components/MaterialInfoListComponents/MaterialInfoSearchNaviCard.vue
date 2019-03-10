@@ -10,7 +10,7 @@
             <!-- 物料分类输入框 -->
             <el-col :span="8">
               <el-form-item label="物料分类：" prop="catetory" :class="[advSearchShow ? '' : 'last-form-item']">
-                <el-select class="barSelector" v-model="searchParams.materialCatId" placeholder="请选择">
+                <el-select class="barSelector" filterable v-model="searchParams.materialCatId" placeholder="请选择">
                   <el-option
                   v-for="item in catOptions"
                   :key="item.value"

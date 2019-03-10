@@ -3,14 +3,20 @@ import CommonApi from '@/api/commonApis.js'
 
 const state = {
   baseInfoData: [],
+  baseInfoDataAll: [],
   curBaseInfo: {
     spuCode: '110101',
   },
+  pageSize: 10,
+  pageNum: 1,
 };
 
 const getters = {
   baseInfoData: state => state.baseInfoData,
+  baseInfoDataAll: state => state.baseInfoDataAll,
   curBaseInfo: state => state.curBaseInfo,
+  pageSize: state => state.pageSize,
+  pageNum: state => state.pageNum,
 };
 
 const actions = {
@@ -31,6 +37,7 @@ const actions = {
       baseInfoArr.push(param);
     }
     commit('list-table', baseInfoArr);
+    commit('list-table-all', baseInfoArr);
   },
   getAllBaseInfoData ({dispatch}, {axios, main}) {
     axios
@@ -89,6 +96,11 @@ const actions = {
         CommonApi.handleError(error, main, '在获取物料信息列表时发生错误，错误为：');
       })
   },
+  setBaseInfoWithPages ({commit}, {pageSize, pageNum}) {
+    var baseInfo = Object.assign([], state.baseInfoDataAll);
+    baseInfo = baseInfo.slice(pageSize * (pageNum - 1), pageSize * pageNum);
+    commit('list-table', baseInfo);
+  }
 };
 
 const mutations = {
@@ -97,7 +109,16 @@ const mutations = {
   },
   [types.LIST_CUR_INFO] (state, curBaseInfo) {
     state.curBaseInfo = curBaseInfo;
-  }
+  },
+  [types.LIST_TABLE_ALL] (state, baseInfoDataAll) {
+    state.baseInfoDataAll = baseInfoDataAll;
+  },
+  [types.LIST_PAGE_SIZE] (state, pageSize) {
+    state.pageSize = pageSize;
+  },
+  [types.LIST_PAGE_NUM] (state, pageNum) {
+    state.pageNum = pageNum;
+  },
 }
 
 export default {

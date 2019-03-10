@@ -1,6 +1,9 @@
 // 物料信息列表
 export const LIST_TABLE = 'list-table';
+export const LIST_TABLE_ALL = 'list-table-all';
 export const LIST_CUR_INFO = 'list-cur-info';
+export const LIST_PAGE_SIZE = 'list-ps';
+export const LIST_PAGE_NUM = 'list-pn';
 
 // 物料信息管理
 export const INFO_BASE_INFO_MODIFY = 'modify-base';
