@@ -4,7 +4,7 @@
       <!-- 功能按钮 -->
       <el-row :gutter="10" style="display: flex; flex-direction: row-reverse">
         <el-button-group>
-          <el-button type="primary">提交当前</el-button>
+          <el-button type="primary" @click="collectCurMaterialInfo">提交当前</el-button>
           <el-button type="primary" @click="collectAllMaterialInfo">提交所有</el-button>
         </el-button-group>
       </el-row>
@@ -43,7 +43,7 @@
           </el-tab-pane>
 
           <!-- 采购和库存属性选择按钮 -->
-          <el-tab-pane class="radio-group-member" label="采购和库存属性" name="pruchaseAndStore">
+          <el-tab-pane class="radio-group-member" label="采购和库存属性" name="purchaseAndStore">
             <div class="detailInfoEmbededCard">
               <MaterialPurchaseAndStorePropCard></MaterialPurchaseAndStorePropCard>
             </div>
@@ -71,7 +71,7 @@
           </el-tab-pane>
 
           <!-- 财务类属性选择按钮 -->
-          <el-tab-pane class="radio-group-member" label="财务类属性" name="fianance">
+          <el-tab-pane class="radio-group-member" label="财务类属性" name="finance">
             <div class="detailInfoEmbededCard">
               <MaterialFinanceCard></MaterialFinanceCard>
             </div>
@@ -206,6 +206,105 @@ export default {
           CommonApi.handleError(error, that, '在加载物料信息时出现错误，错误为：');
         });
     },
+    // 收集当前物料信息的函数
+    collectCurMaterialInfo  () {
+      var that = this;
+      var result = {};
+      let ctrList = [];
+      switch (that.radio) {
+        case 'baseInfo':
+          result['baseDatas'] = Object.assign({}, that.$store.getters['baseinfo/baseInfos']);
+          // 单位信息
+          result['unitDatas'] = {
+            defaultUnitId: that.$store.getters['unit/defaultUnitId'],
+            unitList: that.$store.getters['unit/unitLists'],
+          };
+          break;
+        case 'defination':
+          // 物料信息
+          result['materialDatas'] = {
+            materialList: InfoModify.collectMaterialInfos(that.$store),
+          };
+          // 规格信息
+          result['formatDatas'] = {
+            formatList: InfoModify.collectFormatInfos(that.$store),
+          };
+          break;
+        case 'SKUDefination':
+          var skuList = that.$store.getters['skuinfo/skuInfos'];
+          skuList = Object.assign([], skuList).map(ele => {
+            delete ele.idx;
+          });
+          result['skuDatas'] = {
+            skuList: that.$store.getters['skuinfo/skuInfos']
+          };
+        case 'purchaseAndStore':
+          result['ctrPropDatas'] = {};
+          result['ctrPropDatas']['ctrPropList'] = [];
+          ctrList = ctrList.concat(CtrPropFunc.collectCtrPropsWithTypeForBase(
+            that.$store.getters['purandstoreprop/purchaseAndStoreInfos'],
+            5));
+          result['ctrPropDatas']['ctrPropList'] = ctrList;
+          break;
+        case 'plan':
+          result['ctrPropDatas'] = {};
+          result['ctrPropDatas']['ctrPropList'] = [];
+          ctrList = ctrList.concat(CtrPropFunc.collectCtrPropsWithTypeForBase(
+            that.$store.getters['planprop/planInfos'],
+            6));
+          result['ctrPropDatas']['ctrPropList'] = ctrList;
+          break;
+        case 'sale':
+          result['ctrPropDatas'] = {};
+          result['ctrPropDatas']['ctrPropList'] = [];
+          ctrList = ctrList.concat(CtrPropFunc.collectCtrPropsWithTypeForBase(
+            that.$store.getters['salesprop/salesInfos'],
+            7));
+          result['ctrPropDatas']['ctrPropList'] = ctrList;
+          break;
+        case 'quality':
+          result['ctrPropDatas'] = {};
+          result['ctrPropDatas']['ctrPropList'] = [];
+          ctrList = ctrList.concat(CtrPropFunc.collectCtrPropsWithTypeForBase(
+            that.$store.getters['qualityprop/qualifyInfos'],
+            8));
+          result['ctrPropDatas']['ctrPropList'] = ctrList;
+          break;
+        case 'finance':
+          result['ctrPropDatas'] = {};
+          result['ctrPropDatas']['ctrPropList'] = [];
+          ctrList = ctrList.concat(CtrPropFunc.collectCtrPropsWithTypeForBase(
+            that.$store.getters['financeprop/financeInfos'],
+            9));
+          result['ctrPropDatas']['ctrPropList'] = ctrList;
+          break;
+        default:
+          break;
+      }
+      result['spuCode'] = that.$store.getters['infolist/curBaseInfo'].spuCode;
+      result['spuCode'] = that.$store.getters['infolist/curBaseInfo'].spuCode;
+      console.log(`result`, result);
+      that.$axios
+        .put(`${window.$config.HOST}/materialmanagement/updateMaterialInfo`, result)
+        .then(response => {
+          if (response.data === 0) {
+            that.$message({
+              message: '在修改当前物料信息时出现错误，请检查提交的数据是否正确！',
+              showClose: true,
+              type: 'error',
+            });
+          } else {
+            that.$message({
+              message: '修改当前物料信息成功！',
+              showClose: true,
+              type: 'success',
+            });
+          }
+        })
+        .catch(error => {
+          CommonApi.handleError(error, that, '在修改当前物料信息时出现错误，错误为：');
+        });
+    },
     // 收集所有物料信息的函数
     collectAllMaterialInfo () {
       var that = this;
@@ -253,8 +352,28 @@ export default {
         defaultUnitId: that.$store.getters['unit/defaultUnitId'],
         unitList: that.$store.getters['unit/unitLists'],
       };
-
+      result['spuCode'] = that.$store.getters['infolist/curBaseInfo'].spuCode;
       console.log(`result`, result);
+      that.$axios
+        .put(`${window.$config.HOST}/materialmanagement/updateMaterialInfo`, result)
+        .then(response => {
+          if (response.data === 0) {
+            that.$message({
+              message: '在修改物料信息时出现错误，请检查提交的数据是否正确！',
+              showClose: true,
+              type: 'error',
+            });
+          } else {
+            that.$message({
+              message: '修改物料信息成功！',
+              showClose: true,
+              type: 'success',
+            });
+          }
+        })
+        .catch(error => {
+          CommonApi.handleError(error, that, '在修改物料信息时出现错误，错误为：');
+        });
     },
   },
 

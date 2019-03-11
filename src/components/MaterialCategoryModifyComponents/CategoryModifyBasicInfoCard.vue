@@ -159,9 +159,37 @@ export default {
           console.log(`error`, error);
         })
     },
+    checkData() {
+      var that = this;
+      var curTab = that.$store.getters['categorymodify/curTab'];
+      if (curTab === 'basePropDefs') {
+        var basePropList = Object.assign([], that.$store.getters['categorymodify/basePropList']);
+        if (basePropList.length > 0) {
+          for (let idx in basePropList) {
+            console.log(`idx`, basePropList[idx]);
+            if (basePropList[idx]['valueRangeType'] === 1) {
+              var reg=/^[0-9]+.?[0-9]*$/;
+              let minStr = reg.test(basePropList[idx]['valueRange']['min']);
+              let maxStr = reg.test(basePropList[idx]['valueRange']['max']);
+              console.log(minStr, maxStr);
+              if (minStr !== true || maxStr !== true) {
+                that.$message({
+                  message: '最大最小值框中只允许数字！',
+                  type: 'error',
+                  showClose: true,
+                });
+                return false;
+              }
+            }
+          }
+        }
+      }
+      return true;
+    },
     // 保存当前
     saveCurrentTab () {
       var that = this;
+      if (!that.checkData()) return;
       var submitRes = {};
       // 添加基本信息
       var catInfo = that.$store.getters['categorymodify/catInfo'];
@@ -231,6 +259,7 @@ export default {
     // 保存所有
     saveAllTab () {
       var that = this;
+      if (!that.checkData()) return;
       var submitRes = {};
       // 添加基本信息
       var catInfo = that.$store.getters['categorymodify/catInfo'];

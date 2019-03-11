@@ -10,14 +10,19 @@
             <!-- 物料分类输入框 -->
             <el-col :span="8">
               <el-form-item label="物料分类：" prop="catetory" :class="[advSearchShow ? '' : 'last-form-item']">
-                <el-select class="barSelector" filterable v-model="searchParams.materialCatId" placeholder="请选择">
+                <!-- <el-select class="barSelector" filterable v-model="searchParams.materialCatId" placeholder="请选择">
                   <el-option
                   v-for="item in catOptions"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
                   </el-option>
-                </el-select>
+                </el-select> -->
+                <el-cascader
+                  :options="catOptions"
+                  expand-trigger="hover"
+                  v-model="searchParams.materialCatIds">
+                </el-cascader>
               </el-form-item>
             </el-col>
             <!-- 物料名称输入框 -->
@@ -125,7 +130,7 @@ export default {
     return {
       advSearchShow: false,
       searchParams: {
-        materialCatId: '',
+        materialCatIds: [],
         materialName: '',
         skuCode: '',
         timeRange: '',
@@ -141,11 +146,26 @@ export default {
     that.loadAllCatOptions();
   },
   methods:{
+    deleteEmptyChildren(data) {
+      var that = this;
+      console.log(`data = `, data);
+      delete data.value;
+      data["value"] = data["id"];
+      delete data.id;
+      if (data.children.length === 0) {
+        delete data.children;
+      } else {
+        for (let idx in data.children) {
+          that.deleteEmptyChildren(data.children[idx]);
+        }
+      }
+    },
     loadAllCatOptions() {
       var that = this;
       that.$axios
-        .get(`${window.$config.HOST}/materialmanagement/getAllMaterialCategoryInfos`)
+        .get(`${window.$config.HOST}/materialmanagement/getMaterialCategory`)
         .then(response => {
+          that.deleteEmptyChildren(response.data[0]);
           that.$store.commit('baseinfo/cat-opt-arr', response.data);
         })
         .catch(error => {
@@ -160,18 +180,25 @@ export default {
       // console.log(`searchParams`, this.searchParams);
       var params = {};
       for (let key in this.searchParams) {
-        // console.log(`key`, key, `value`, value);
         let value = this.searchParams[key];
+        // console.log(`key`, key, `value`, value);
         if (value !== null && value != '') {
           if (key === 'timeRange') {
             params["startDate"] = this.searchParams[key][0];
             params["endDate"] = this.searchParams[key][1];
+          } else if (key === 'materialCatIds') {
+            let curCatId = this.searchParams[key];
+            if (curCatId.length > 0) {
+              params['materialCatId'] = curCatId[curCatId.length - 1];
+            } else {
+              params['materialCatId'] = null;
+            }
           } else {
             params[key] = value;
           }
         }
       }
-      // console.log(`params`, params);
+      console.log(`params`, params);
       that.$store.dispatch('infolist/getBaseInfoDataWithParams', {
         axios: that.$axios,
         main: that,

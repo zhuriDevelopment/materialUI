@@ -223,7 +223,7 @@
         </el-col>
       </el-row>
     </el-form>
-    
+
   </el-card>
 </template>
 
@@ -278,6 +278,10 @@ export default {
           {
             label: '采购件',
             value: '1',
+          },
+          {
+            label: '委外',
+            value: '2',
           },
         ],
         // 默认库存单位选项
