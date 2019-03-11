@@ -26,6 +26,7 @@ const actions = {
   clearBaseInfo ({commit}) {
     commit(types.INFO_MATERIAL, []);
     commit(types.INFO_MATERIAL_COLS, []);
+    commit(types.INFO_MAT_OPT_ARR, []);
   }
 };
 

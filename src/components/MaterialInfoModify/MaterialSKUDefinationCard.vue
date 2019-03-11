@@ -88,8 +88,8 @@
       <!--操作栏列-->
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">添加</el-button>
-          <el-button type="text" size="small">删除</el-button>
+          <el-button @click="handleAdd" type="text" size="small">添加</el-button>
+          <el-button @click="handleDelete(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -109,6 +109,39 @@ export default {
   data() {
     return {
     };
+  },
+  methods: {
+    handleAdd() {
+      var skuInfos = Object.assign([], this.$store.getters['skuinfo/skuInfos']);
+      var param = {
+        skuCode: '',
+        skuName: '',
+        materialCode: '',
+        unitId: '',
+        barCode: '',
+        purchasePrice: '',
+        sellingPrice: '',
+        description: '',
+        idx: skuInfos.length,
+      }
+      skuInfos.push(param);
+      this.$store.commit('skuinfo/sku-info', skuInfos);
+    },
+    handleDelete(row) {
+      var skuInfos = Object.assign([], this.$store.getters['skuinfo/skuInfos']);
+      var targetInfo = [];
+      for (let idx in skuInfos) {
+        if (skuInfos[idx]["idx"] != row.idx) {
+          targetInfo.push(skuInfos[idx]);
+        }
+      }
+      let i = 0;
+      for (let idx in targetInfo) {
+        targetInfo[idx]["idx"] = i;
+        i++;
+      }
+      this.$store.commit('skuinfo/sku-info', targetInfo);
+    },
   },
   computed: {
     skuInfos: {

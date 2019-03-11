@@ -92,7 +92,7 @@
               <el-button class="col-button" type="info" @click="advancedSearchButtonClick">高级搜索</el-button>
             </el-col>
             <el-col :span="8">
-              <el-button class="col-button" type="success">新建物料</el-button>
+              <el-button class="col-button" type="success" @click="createNewMaterial">新建物料</el-button>
             </el-col>
           </el-row>
         </el-col>
@@ -178,6 +178,13 @@ export default {
         param: params,
       });
     },
+    createNewMaterial() {
+      var param = {
+        spuCode: '',
+      };
+      this.$store.commit('infolist/list-cur-info', param);
+      this.$router.push({ path:'/material/infomodify'})
+    }
   },
   computed: {
     // 物料分类选项

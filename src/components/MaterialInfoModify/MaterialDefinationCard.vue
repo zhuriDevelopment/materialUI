@@ -54,8 +54,8 @@
       <!--操作栏列-->
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
-          <el-button type="text" size="small">删除</el-button>
+          <el-button @click="handleAdd" type="text" size="small">添加</el-button>
+          <el-button @click="handleDelete(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -74,6 +74,39 @@ export default {
   data() {
     return {
     };
+  },
+  methods: {
+    handleAdd() {
+      var param = {
+        materialCode: '',
+        materialName: '',
+        oldMaterialName: '',
+        barCode: '',
+      };
+      var materialInfoColumns = this.$store.getters['materialinfo/materialInfoColumns'];
+      for (let idx in materialInfoColumns) {
+        param[materialInfoColumns[idx]['prop']] = '';
+      }
+      param["idx"] = this.$store.getters['materialinfo/materialInfos'].length;
+      var materialInfo = Object.assign([], this.$store.getters['materialinfo/materialInfos']);
+      materialInfo.push(param);
+      this.$store.commit('materialinfo/material-info', materialInfo);
+    },
+    handleDelete(row) {
+      var materialInfo = Object.assign([], this.$store.getters['materialinfo/materialInfos']);
+      var targetInfo = [];
+      for (let idx in materialInfo) {
+        if (materialInfo[idx]["idx"] != row.idx) {
+          targetInfo.push(materialInfo[idx]);
+        }
+      }
+      let i = 0;
+      for (let idx in targetInfo) {
+        targetInfo[idx]["idx"] = i;
+        i++;
+      }
+      this.$store.commit('materialinfo/material-info', targetInfo);
+    }
   },
   computed: {
     materialInfos: {

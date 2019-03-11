@@ -14,8 +14,7 @@
       ref="multipleTable"
       :data="baseInfoData"
       tooltip-effect="dark"
-      style="width: 100%"
-      @selection-change="handleSelectionChange">
+      style="width: 100%">
 
       <!-- 各列 -->
       <el-table-column
@@ -85,7 +84,7 @@
         fixed="right">
         <template slot-scope="scope">
           <!-- <el-button type="text" size="small">查看</el-button> -->
-          <el-button type="text" size="small">编辑</el-button>
+          <el-button type="text" size="small" @click="handleEdit(scope.row)">编辑</el-button>
           <el-button type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
@@ -124,7 +123,13 @@
           this.$refs.multipleTable.clearSelection();
         }
       },
-      handleSelectionChange (selection) {},
+      handleEdit(row) {
+        var param = {
+          spuCode: row.spuCode,
+        };
+        this.$store.commit('infolist/list-cur-info', param);
+        this.$router.push({ path:'/material/infomodify'})
+      }
     },
   }
 </script>

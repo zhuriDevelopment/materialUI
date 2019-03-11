@@ -139,7 +139,10 @@ export default {
     console.log(`store`, that.$store);
     that.$store.dispatch('clearAllInfoInModify');
     that.loadAllOptions();
-    that.loadAllTabDatas();
+    var curSpuCode = that.$store.getters['infolist/curBaseInfo'].spuCode;
+    if (curSpuCode !== '') {
+      that.loadAllTabDatas();
+    }
   },
   methods: {
     loadAllUnitOptions() {
@@ -218,6 +221,10 @@ export default {
         formatList: InfoModify.collectFormatInfos(that.$store),
       };
       // SKU信息
+      var skuList = that.$store.getters['skuinfo/skuInfos'];
+      skuList = Object.assign([], skuList).map(ele => {
+        delete ele.idx;
+      });
       result['skuDatas'] = {
         skuList: that.$store.getters['skuinfo/skuInfos']
       };

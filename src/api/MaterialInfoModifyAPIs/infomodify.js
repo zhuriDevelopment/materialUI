@@ -134,6 +134,7 @@ class InfoModifyFuncs {
       param['materialName'] = curMatInfoData['materialName'];
       param['oldMaterialName'] = curMatInfoData['oldMaterialName'];
       param['barCode'] = curMatInfoData['barCode'];
+      param['idx'] = parseInt(index);
       for (let icols in materialInfoColumns) {
         let find = false;
         for (let ivals in basePropValList) {
@@ -165,6 +166,7 @@ class InfoModifyFuncs {
         purchasePrice: curData.purchasePrice,
         sellingPrice: curData.sellingPrice,
         description: curData.description,
+        idx: parseInt(index),
       };
       result.push(param);
     }
@@ -196,6 +198,7 @@ class InfoModifyFuncs {
       delete materialInfos[index].materialName;
       let materialCode = materialInfos[index].materialCode;
       delete materialInfos[index].materialCode;
+      delete materialInfos[index].idx;
       for (let name in materialInfos[index]) {
         let value = materialInfos[index][name];
         let param = {

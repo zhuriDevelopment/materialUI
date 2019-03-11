@@ -142,7 +142,6 @@
               border
               :data="units.unitLists"
               highlight-current-row
-              @current-change="handleCurrentChange"
               style="width: 100%"
               stripe
             >
@@ -159,21 +158,6 @@
                   </el-select>
                 </template>
               </el-table-column>
-              <!-- <el-table-column property="label" label="单位标识" min-width="120">
-                <template slot-scope="scope">
-                  <el-input v-model="scope.row.label" class="combine-selector" placeholder="请输入内容"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column property="name" label="名称" min-width="120">
-                <template slot-scope="scope">
-                  <el-input v-model="scope.row.name" class="combine-selector" placeholder="请输入内容"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column property="englishName" label="英文名称" min-width="120">
-                <template slot-scope="scope">
-                  <el-input v-model="scope.row.englishName" class="combine-selector" placeholder="请输入内容"></el-input>
-                </template>
-              </el-table-column> -->
               <el-table-column property="conversionFactor" label="换算系数" min-width="120">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.conversionFactor" class="combine-selector" placeholder="请输入内容"></el-input>
@@ -187,8 +171,8 @@
               </el-table-column>
               <el-table-column fixed="right" label="操作" width="120">
                 <div slot-scope="scope">
-                  <el-button type="text" size="small">添加</el-button>
-                  <el-button type="text" size="small">删除</el-button>
+                  <el-button @click="handleAdd" type="text" size="small">添加</el-button>
+                  <el-button @click="handleDelete(scope.row)" type="text" size="small">删除</el-button>
                 </div>
               </el-table-column>
             </el-table>
@@ -304,12 +288,31 @@ export default {
     },
   },
   methods: {
-    setCurrent(row) {
-      this.$refs.singleTable.setCurrentRow(row);
+    handleAdd() {
+      var unitLists = Object.assign([], this.$store.getters['unit/unitLists']);
+      var param = {
+        unitId: 1,
+        conversionFactor: 0,
+        sort: unitLists.length + 1,
+      }
+      unitLists.push(param);
+      this.$store.commit('unit/unit-arr', unitLists);
     },
-    handleCurrentChange(val) {
-      this.currentRow = val;
-    }
+    handleDelete(row) {
+      var unitLists = Object.assign([], this.$store.getters['unit/unitLists']);
+      var targetList = [];
+      for (let idx in unitLists) {
+        if (unitLists[idx]["sort"] != row.sort) {
+          targetList.push(unitLists[idx]);
+        }
+      }
+      let i = 1;
+      for (let idx in targetList) {
+        targetList[idx]["sort"] = i;
+        i++;
+      }
+      this.$store.commit('unit/unit-arr', targetList);
+    },
   }
 };
 </script>
