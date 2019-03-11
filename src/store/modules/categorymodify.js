@@ -118,20 +118,8 @@ const actions = {
   },
   // 清空物料属性定义
   clearBasePropList ({commit}) {
-    var param = [
-      {
-        type: 0,
-        label: '标签一',
-        name: '属性一',
-        valueRangeType: 1,
-        valueRange: {
-          min: 0,
-          max: 0,
-        },
-        sort: 0,
-      },
-    ];
-    commit(types.CAT_TREE, param);
+    var param = [];
+    commit(types.CAT_BASE_PROP, param);
   }
 };
 

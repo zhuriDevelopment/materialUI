@@ -34,7 +34,7 @@
       </el-col>
     </el-row>
 
-    <el-dialog title="新增物料" :visible.sync="dialogVisible" modal-append-to-body append-to-body>
+    <el-dialog title="新增物料分类" :visible.sync="dialogVisible" modal-append-to-body append-to-body>
       <el-form :model="newType" ref="newType" label-width="120px" label-position="left" :rules="rules" status-icon>
         <el-form-item label="物料分类编码" prop="code">
           <el-input v-model="newType.code" autocomplete="off"></el-input>
@@ -65,10 +65,9 @@
 <style lang="less" scoped>
 .body {
   height: 800px;
-
+  margin-left: 20px;
+  margin-right: 10px;
   .row-outest {
-    padding-left: 10px;
-    padding-right: 10px;
     height: 100%;
     .col-outest {
       height: 100%;
@@ -78,7 +77,7 @@
       .navi-operation {
         display: flex;
         align-items: center;
-        width: 100%;
+        // width: 100%;
         height: 8%;
         overflow: hidden;
         background: #c2c1c1;
@@ -87,8 +86,8 @@
 
       /* 树形导航栏样式 */
       .navigation-tree {
-        width: 100%;
-        height: 80%;
+        // width: 100%;
+        // height: 80%;
         //background: #c59a9d;
 
         .el-menu-navi-tree {
@@ -98,7 +97,7 @@
 
       /* 基本信息卡 */
       .baseInfo-card {
-        width: 100%;
+        // width: 100%;
         height: 100%;
         min-height: 100px;
         //background: #0bc52a
@@ -106,7 +105,7 @@
 
       /* 分类详细信息卡 */
       .classification-detail-card {
-        width: 100%;
+        // width: 100%;
         min-height: 400px;
         top: 8px;
         //background: #83079c

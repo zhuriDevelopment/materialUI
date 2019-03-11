@@ -157,10 +157,10 @@ export default {
     },
     searchClick () {
       var that = this;
-      console.log(`searchParams`, this.searchParams);
+      // console.log(`searchParams`, this.searchParams);
       var params = {};
       for (let key in this.searchParams) {
-        console.log(`key`, key, `value`, value);
+        // console.log(`key`, key, `value`, value);
         let value = this.searchParams[key];
         if (value !== null && value != '') {
           if (key === 'timeRange') {
@@ -171,7 +171,7 @@ export default {
           }
         }
       }
-      console.log(`params`, params);
+      // console.log(`params`, params);
       that.$store.dispatch('infolist/getBaseInfoDataWithParams', {
         axios: that.$axios,
         main: that,

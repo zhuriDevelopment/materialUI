@@ -84,9 +84,11 @@
 
 <style lang="less" scoped>
 .body {
-  margin: 0% 2%;
   .box-card {
-    width: 100%;
+    // width: 100%;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 10px;
     .radio-group {
       .radio-group-member {
         font-size: 18px;

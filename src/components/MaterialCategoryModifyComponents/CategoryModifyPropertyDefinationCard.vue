@@ -12,9 +12,9 @@
             highlight-current-row
             style="width: 100%"
           >
-            <template slot="empty">
+            <!-- <template slot="empty">
               还没有数据，是否需要<el-button type="text" @click="handleAdd">添加</el-button>一下？
-            </template>
+            </template> -->
             <!-- 各列 -->
             <el-table-column type="index" label="序号" width="50"></el-table-column>
             <el-table-column property="type" label="属性类别" min-width="150">

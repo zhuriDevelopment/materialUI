@@ -14,6 +14,12 @@
   </div>
 </template>
 
+<style lang="less" scoped>
+.body {
+  margin-right: 10px;
+}
+</style>
+
 <script>
   import MaterialInfoSearchNaviCard from '@/components/MaterialInfoListComponents/MaterialInfoSearchNaviCard';
   import MaterialInfoSearchDisplayCard from '@/components/MaterialInfoListComponents/MaterialInfoSearchDisplayCard';

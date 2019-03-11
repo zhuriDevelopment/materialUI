@@ -88,7 +88,8 @@
           </el-form-item>
         </el-form>
         <div class="login-account">
-          <span>账号：sosout</span><span>密码：sosout</span>
+          <!-- <span>账号：sosout</span><span>密码：sosout</span> -->
+          <span>账号密码随意输</span>
         </div>
       </div>
     </transition>

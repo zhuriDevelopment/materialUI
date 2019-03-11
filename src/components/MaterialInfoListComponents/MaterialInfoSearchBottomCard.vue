@@ -19,9 +19,8 @@
 
 <style lang="less" scoped>
   .box-card {
-    width: 100%;
-    min-width: 50%;
-    margin: 1% 1%;
+    margin-top: 20px;
+    margin-left: 20px;
     .block{
       display: flex;
       flex-direction: row;
