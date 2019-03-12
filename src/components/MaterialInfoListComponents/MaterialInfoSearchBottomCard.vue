@@ -40,18 +40,16 @@
     methods: {
       handleSizeChange (val) {
         this.pageSize = val;
-        console.log(`pageSize`, this.pageSize);
         this.$store.dispatch('infolist/setBaseInfoWithPages', {
           pageSize: this.pageSize,
-          pageNum: this.currentPage,
+          pageNum: this.pageNum,
         });
       },
       handleCurrentChange (val) {
         this.currentPage = val;
-        console.log(`currentPage`, this.currentPage);
         this.$store.dispatch('infolist/setBaseInfoWithPages', {
           pageSize: this.pageSize,
-          pageNum: this.currentPage,
+          pageNum: this.pageNum,
         });
       }
     },
