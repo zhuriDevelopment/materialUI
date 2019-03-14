@@ -59,6 +59,7 @@ export default {
     // 树结构节点的单击函数
     handleNodeClick(data, node, self) {
       var that = this;
+      this.$store.dispatch('clearAllInfoInType');
       that.$axios
         .get(`${window.$config.HOST}/materialmanagement/getMaterialCategoryInfosWithId`,
           {
@@ -70,6 +71,7 @@ export default {
         .then(response => {
           let catInfo = response.data[0];
           // delete catInfo.parentId;
+          that.$store.dispatch('clearAllInfoInType');
           that.$store.commit('categorymodify/cat-info', catInfo);
           that.getMaterialInfos();
           that.$message({

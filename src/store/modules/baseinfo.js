@@ -11,7 +11,7 @@ const state = {
     // 物料分类
     materialCatId: '',
     // 来源
-    source: '',
+    // source: '',
     // 用途
     usage: '',
     // 设计图号
@@ -43,7 +43,7 @@ const actions = {
       spuName: '',
       type: '',
       materialCatId: '',
-      source: '',
+      // source: '',
       usage: '',
       designCode: '',
       designVersion: '',

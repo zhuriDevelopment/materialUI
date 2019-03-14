@@ -131,6 +131,7 @@ export default {
     // 提交函数
     submitResult (submitRes) {
       var that = this;
+      console.log(`submitRes`, submitRes);
       that.$axios
         .put(`${window.$config.HOST}/materialmanagement/updateMaterialInfoWithCatCodeAndCatName`, submitRes)
         .then(response => {
@@ -208,7 +209,7 @@ export default {
         case 'basePropDefs':
           var basePropList = that.$store.getters['categorymodify/basePropList'];
           basePropList = CategoryModify.collectBaseInfos(basePropList);
-          console.log(`basePropList`, basePropList);
+          // console.log(`basePropList`, basePropList);
           submitRes["baseProps"] = basePropList;
           break;
         // 采购和库存属性
@@ -216,7 +217,7 @@ export default {
           var purchaseAndStoreInfos = CtrPropFunc.collectCtrPropsWithType(
             that.$store.getters['purandstoreprop/purchaseAndStoreInfos'],
             5);
-          console.log(`purchaseAndStoreInfos`, purchaseAndStoreInfos);
+          // console.log(`purchaseAndStoreInfos`, purchaseAndStoreInfos);
           submitRes["ctrProps"].push(purchaseAndStoreInfos);
           break;
         // 计划属性
@@ -224,7 +225,7 @@ export default {
           var planInfos = CtrPropFunc.collectCtrPropsWithType(
             that.$store.getters['planprop/planInfos'],
             6);
-          console.log(`planInfos`, planInfos);
+          // console.log(`planInfos`, planInfos);
           submitRes["ctrProps"].push(planInfos);
           break;
         // 销售属性
@@ -232,7 +233,7 @@ export default {
           var salesInfos = CtrPropFunc.collectCtrPropsWithType(
             that.$store.getters['salesprop/salesInfos'],
             7);
-          console.log(`salesInfos`, salesInfos);
+          // console.log(`salesInfos`, salesInfos);
           submitRes["ctrProps"].push(salesInfos);
           break;
         // 质量属性
@@ -240,7 +241,7 @@ export default {
           var qualifyInfos = CtrPropFunc.collectCtrPropsWithType(
             that.$store.getters['qualityprop/qualifyInfos'],
             8);
-          console.log(`qualifyInfos`, qualifyInfos);
+          // console.log(`qualifyInfos`, qualifyInfos);
           submitRes["ctrProps"].push(qualifyInfos);
           break;
         // 财务属性
@@ -248,7 +249,7 @@ export default {
           var financeInfos = CtrPropFunc.collectCtrPropsWithType(
             that.$store.getters['financeprop/financeInfos'],
             9);
-          console.log(`financeInfos`, financeInfos);
+          // console.log(`financeInfos`, financeInfos);
           submitRes["ctrProps"].push(financeInfos);
           break;
         default:

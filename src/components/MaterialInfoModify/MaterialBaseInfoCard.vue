@@ -50,11 +50,11 @@
         </el-col>
 
         <!-- 来源选择 -->
-        <el-col :span="8">
+        <!-- <el-col :span="8">
           <el-form-item label="来源：">
             <el-input v-model="baseInfos.source" class="combine-selector" placeholder="请输入内容"></el-input>
           </el-form-item>
-        </el-col>
+        </el-col> -->
         <!-- 用途输入 -->
         <el-col :span="8">
           <el-form-item label="用途：">
