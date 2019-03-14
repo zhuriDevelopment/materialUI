@@ -160,18 +160,20 @@ export default {
           console.log(`error`, error);
         })
     },
-    checkData() {
+    checkData(flag) {
       var that = this;
       var curTab = that.$store.getters['categorymodify/curTab'];
-      if (curTab === 'basePropDefs') {
-        var basePropList = Object.assign([], that.$store.getters['categorymodify/basePropList']);
+      if (flag === 'all' || (flag === 'cur' && curTab === 'basePropDefs')) {
+        var basePropList = that.$store.getters['categorymodify/basePropList'];
+        console.log(`basePropList`, basePropList);
         if (basePropList.length > 0) {
           for (let idx in basePropList) {
-            console.log(`idx`, basePropList[idx]);
-            if (basePropList[idx]['valueRangeType'] === 1) {
-              var reg=/^[0-9]+.?[0-9]*$/;
-              let minStr = reg.test(basePropList[idx]['valueRange']['min']);
-              let maxStr = reg.test(basePropList[idx]['valueRange']['max']);
+            let curBaseProp = Object.assign({}, basePropList[idx]);
+            console.log(`idx`, curBaseProp);
+            if (curBaseProp['valueRangeType'] === 1) {
+              let reg = /^[0-9]*$/;
+              let minStr = reg.test(curBaseProp['valueRange']['min']);
+              let maxStr = reg.test(curBaseProp['valueRange']['max']);
               console.log(minStr, maxStr);
               if (minStr !== true || maxStr !== true) {
                 that.$message({
@@ -190,7 +192,7 @@ export default {
     // 保存当前
     saveCurrentTab () {
       var that = this;
-      if (!that.checkData()) return;
+      if (!that.checkData('cur')) return;
       var submitRes = {};
       // 添加基本信息
       var catInfo = that.$store.getters['categorymodify/catInfo'];
@@ -260,7 +262,7 @@ export default {
     // 保存所有
     saveAllTab () {
       var that = this;
-      if (!that.checkData()) return;
+      if (!that.checkData('all')) return;
       var submitRes = {};
       // 添加基本信息
       var catInfo = that.$store.getters['categorymodify/catInfo'];
