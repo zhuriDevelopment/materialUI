@@ -57,23 +57,9 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-// router.afterEach((transition) => {
-// })
 
 window.$config = {};
 
-// if (window.location.hostname === 'localhost' && window.location.port === "8080") {
-//   window.$config.HOST = 'http://localhost:8080';
-// } else if (window.location.hostname === 'localhost' && window.location.port === "8081") {
-//   window.$config.HOST = 'http://localhost:8001';
-//   // window.$config.HOST = 'http://202.120.1.66:8001'
-// } else if (window.location.hostname === '202.120.1.66' && window.location.port === '8001') {
-//   window.$config.HOST = 'http://202.120.1.66:8001'
-// } else {
-//   window.$config.HOST = 'http://localhost:3000';
-// }
-
-// window.$config.HOST = 'http://202.120.1.66:8080';
 window.$config.HOST = 'http://127.0.0.1:8080';
 
 /* eslint-disable no-new */
