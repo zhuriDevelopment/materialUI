@@ -4,7 +4,7 @@
   <!-- 取消选择按钮 -->
     <div style="margin-bottom: 20px">
       <el-button type="primary" @click="toggleSelection()">取消选择</el-button>
-      <el-button type="danger" icon="el-icon-delete">删除所选</el-button>
+      <el-button type="danger" icon="el-icon-delete" @click="deleteSelection()">删除所选</el-button>
     </div>
 
     <!-- 信息展示的表格 -->
@@ -85,7 +85,7 @@
         <template slot-scope="scope">
           <!-- <el-button type="text" size="small">查看</el-button> -->
           <el-button type="text" size="small" @click="handleEdit(scope.row)">编辑</el-button>
-          <el-button type="text" size="small">删除</el-button>
+          <el-button type="text" size="small" @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -101,6 +101,7 @@
 </style>
 
 <script>
+  import CommonApi from '@/api/commonApis';
   export default {
     name:"MaterialInfoSearchDisplayCard",
     data(){
@@ -126,9 +127,82 @@
       handleEdit(row) {
         var param = {
           spuCode: row.spuCode,
+          isNew: false,
         };
         this.$store.commit('infolist/list-cur-info', param);
         this.$router.push({ path:'/material/infomodify'})
+      },
+      handleDelete(row) {
+        var that = this;
+        console.log(`row = `, row);
+        that.$axios
+          .delete(`${window.$config.HOST}/materialmanagement/deleteInfoBySpuCode`, {
+            params: {
+              spuCode: row.spuCode,
+            },
+          })
+          .then(response => {
+            console.log(`response`, response);
+            let fail = false;
+            let msg = '更新成功！';
+            if (response.data !== 1) {
+              fail = true;
+              msg = '删除物料信息时出错！';
+            }
+            if (response.data === 1) {
+              that.$store.dispatch('infolist/getAllBaseInfoData', {
+                axios: that.$axios,
+                main: that,
+              });
+            }
+            that.$message({
+              showClose: true,
+              message: msg,
+              type: fail === false ? 'success' : 'error',
+            });
+          })
+          .catch(error => {
+            CommonApi.handleError(error, that, "在删除物料信息的时候发生错误，错误为：");
+          });
+      },
+      deleteSelection(rows) {
+        var that = this;
+        var rowList = that.$refs.multipleTable.store.states.selection;
+        var spuCodeList = [];
+        for (let ele in rowList) {
+          spuCodeList.push(rowList[ele]['spuCode']);
+        }
+        console.log(`spuCodeList`, spuCodeList);
+        that.$axios
+          .delete(`${window.$config.HOST}/materialmanagement/deleteInfoBySpuCodes`, {
+            params: {
+              spuCodes: spuCodeList,
+            },
+            paramsSerializer: CommonApi.paramsSerializer
+          })
+          .then(response => {
+            console.log(`response`, response);
+            let fail = false;
+            let msg = '更新成功！';
+            if (response.data !== 1) {
+              fail = true;
+              msg = '删除物料信息时出错！';
+            }
+            if (response.data === 1) {
+              that.$store.dispatch('infolist/getAllBaseInfoData', {
+                axios: that.$axios,
+                main: that,
+              });
+            }
+            that.$message({
+              showClose: true,
+              message: msg,
+              type: fail === false ? 'success' : 'error',
+            });
+          })
+          .catch(error => {
+            CommonApi.handleError(error, that, "在删除物料信息的时候发生错误，错误为：");
+          });
       }
     },
   }

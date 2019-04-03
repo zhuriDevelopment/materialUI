@@ -6,6 +6,7 @@ const state = {
   baseInfoDataAll: [],
   curBaseInfo: {
     spuCode: '',
+    isNew: false,
   },
   pageSize: 10,
   pageNum: 1,

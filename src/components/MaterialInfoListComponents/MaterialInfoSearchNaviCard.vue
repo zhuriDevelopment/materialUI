@@ -148,7 +148,7 @@ export default {
   methods:{
     deleteEmptyChildren(data) {
       var that = this;
-      console.log(`data = `, data);
+      // console.log(`data = `, data);
       delete data.value;
       data["value"] = data["id"];
       delete data.id;
@@ -208,6 +208,7 @@ export default {
     createNewMaterial() {
       var param = {
         spuCode: '',
+        isNew: true,
       };
       this.$store.commit('infolist/list-cur-info', param);
       this.$router.push({ path:'/material/infomodify'})

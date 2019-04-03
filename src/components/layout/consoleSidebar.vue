@@ -79,46 +79,25 @@
         <i class="el-icon-message"></i>
         快速入门
       </el-menu-item>
-      <!-- <el-submenu index="base">
-        <template slot="title">
-          <i class="el-icon-message"></i>
-          基础服务
-        </template>
-        <el-menu-item index="/thrmenu/article"><i class="el-icon-document"></i>三级菜单</el-menu-item>
-      </el-submenu> -->
-      <!-- <el-submenu index="user">
-        <template slot="title">
-          <i class="el-icon-message"></i>
-          用户中心
-        </template>
-        <el-menu-item index="/user"><i class="el-icon-document"></i>用户管理</el-menu-item>
-      </el-submenu> -->
       <el-submenu index="material">
         <template slot="title">
           <i class="el-icon-message"></i>
           基本信息
         </template>
         <el-menu-item index="/material/infolist"><i class="el-icon-document"></i>物料信息列表</el-menu-item>
-        <el-menu-item index="/material/infomodify"><i class="el-icon-document"></i>物料信息修改</el-menu-item>
+        <!-- <el-menu-item index="/material/infomodify"><i class="el-icon-document"></i>物料信息修改</el-menu-item> -->
         <el-menu-item index="/material/categorymodify"><i class="el-icon-document"></i>物料分类信息修改</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
 </template>
 <script>
-  // import { Menu, Submenu, MenuItem, MenuItemGroup, Icon } from "element-ui";
   export default {
     components: {
     },
     computed: {
       defaultActive: function() {
         const that = this;
-        // console.log("that.$route", that.$route);
-        // console.log("that.$route.meta", that.$route.meta);
-        // console.log(
-        //   `defaultActive`,
-        //   (that.$route.meta && that.$route.meta.activePath) || this.$route.path
-        // );
         return (
           (that.$route.meta && that.$route.meta.activePath) || this.$route.path
         );

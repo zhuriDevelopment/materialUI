@@ -9,7 +9,7 @@ const state = {
     // 物料类型
     type: '',
     // 物料分类
-    materialCatId: '',
+    materialCatId: 1,
     // 来源
     // source: '',
     // 用途
@@ -42,7 +42,7 @@ const actions = {
       spuCode: '',
       spuName: '',
       type: '',
-      materialCatId: '',
+      materialCatId: 1,
       // source: '',
       usage: '',
       designCode: '',

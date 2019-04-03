@@ -4,8 +4,8 @@
       <!-- 功能按钮 -->
       <el-row :gutter="10" style="display: flex; flex-direction: row-reverse">
         <el-button-group>
-          <el-button type="primary" @click="collectCurMaterialInfo">提交当前</el-button>
-          <el-button type="primary" @click="collectAllMaterialInfo">提交所有</el-button>
+          <el-button type="primary" @click="collectCurMaterialInfoAndSubmit">提交当前</el-button>
+          <el-button type="primary" @click="collectAllMaterialInfoAndSubmit">提交所有</el-button>
         </el-button-group>
       </el-row>
     </el-card>
@@ -136,7 +136,7 @@ export default {
   },
   mounted() {
     var that = this;
-    console.log(`store`, that.$store);
+    // console.log(`store`, that.$store);
     that.$store.dispatch('clearAllInfoInModify');
     that.loadAllOptions();
     var curSpuCode = that.$store.getters['infolist/curBaseInfo'].spuCode;
@@ -281,8 +281,16 @@ export default {
         default:
           break;
       }
-      result['spuCode'] = that.$store.getters['infolist/curBaseInfo'].spuCode;
-      result['spuCode'] = that.$store.getters['infolist/curBaseInfo'].spuCode;
+      if (that.$store.getters['infolist/curBaseInfo'].isNew === false) {
+        result['spuCode'] = that.$store.getters['infolist/curBaseInfo'].spuCode;
+      } else {
+        result['spuCode'] = result['baseDatas'].spuCode;
+      }
+      return result;
+    },
+    collectCurMaterialInfoAndSubmit () {
+      var that = this;
+      var result = that.collectCurMaterialInfo();
       console.log(`result`, result);
       that.$axios
         .put(`${window.$config.HOST}/materialmanagement/updateMaterialInfo`, result)
@@ -305,7 +313,6 @@ export default {
           CommonApi.handleError(error, that, '在修改当前物料信息时出现错误，错误为：');
         });
     },
-    // 收集所有物料信息的函数
     collectAllMaterialInfo () {
       var that = this;
       var result = {};
@@ -352,7 +359,17 @@ export default {
         defaultUnitId: that.$store.getters['unit/defaultUnitId'],
         unitList: that.$store.getters['unit/unitLists'],
       };
-      result['spuCode'] = that.$store.getters['infolist/curBaseInfo'].spuCode;
+      if (that.$store.getters['infolist/curBaseInfo'].isNew === false) {
+        result['spuCode'] = that.$store.getters['infolist/curBaseInfo'].spuCode;
+      } else {
+        result['spuCode'] = result['baseDatas'].spuCode;
+      }
+      return result;
+    },
+    // 收集所有物料信息的函数
+    collectAllMaterialInfoAndSubmit () {
+      var that = this;
+      var result = that.collectAllMaterialInfo();
       console.log(`result`, result);
       that.$axios
         .put(`${window.$config.HOST}/materialmanagement/updateMaterialInfo`, result)

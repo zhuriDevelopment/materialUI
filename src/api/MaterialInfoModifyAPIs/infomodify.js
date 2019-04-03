@@ -109,11 +109,11 @@ class InfoModifyFuncs {
   handleUnitInfos = (units) => {
     var unitresult = {
       // 默认计量单位id
-      defaultUnitId: 0,
+      defaultUnitId: 1,
       // 单位信息数据
       unitLists: [],
     }
-    unitresult.defaultUnitId = units.defaultUnit.id;
+    if (units.defaultUnit != null) unitresult.defaultUnitId = units.defaultUnit.id;
     console.log(`units.unitList`, units.unitList);
     for (let index in units.unitList) {
       var param = {};

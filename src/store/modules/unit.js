@@ -3,7 +3,7 @@ import * as types from '../mutation-types'
 const state = {
   units: {
     // 默认计量单位id
-    defaultUnitId: 0,
+    defaultUnitId: 1,
     // 单位信息数据
     unitLists: [],
   }
@@ -15,9 +15,7 @@ const getters = {
   units: state => state.units,
 };
 
-const actions = {
-
-};
+const actions = {};
 
 const mutations = {
   [types.INFO_DEF_UNIT_ID] (state, defaultUnitId) {

@@ -7,7 +7,7 @@
         <!--SPU编号输入-->
         <el-col :span="8">
           <el-form-item label="SPU编号：" prop="spuCode">
-            <el-input v-model="baseInfos.spuCode" class="combine-selector" placeholder="请输入内容"></el-input>
+            <el-input v-model="baseInfos.spuCode" class="combine-selector" placeholder="请输入内容" :disabled="!isNew"></el-input>
           </el-form-item>
         </el-col>
 
@@ -37,7 +37,7 @@
       <el-row :gutter="10">
         <!-- 物料分类选择 -->
         <el-col :span="8">
-          <el-form-item label="物料分类：">
+          <el-form-item label="物料分类：" prop="materialCatId">
             <el-select class="combine-selector" v-model="baseInfos.materialCatId" placeholder="请选择">
               <el-option
                 v-for="item in catOptions"
@@ -115,12 +115,12 @@
     <!--分割线-->
     <hr>
 
-    <el-form :model="units" ref="units" label-width="110px" label-position="left" style="margin-top: 20px">
+    <el-form :model="units" ref="units" label-width="120px" label-position="left" :rules="rulesUnits" style="margin-top: 20px">
 
       <el-row :gutter="10">
         <!-- 默认计量单位选择 -->
         <el-col :span="8">
-          <el-form-item label="默认计量单位：">
+          <el-form-item label="默认计量单位：" prop="defaultUnitId">
             <el-select class="combine-selector" v-model="units.defaultUnitId" placeholder="请选择">
               <el-option
                 v-for="item in unitOptions"
@@ -164,7 +164,7 @@
                 </template>
               </el-table-column>
               <el-table-column property="sort" label="排序号" width="150">
-                <template slot-scope="scope" style="display:flex;">
+                <template style="display:flex;">
                   <el-button type="text" icon="el-icon-sort-up"></el-button>
                   <el-button type="text" icon="el-icon-sort-down"></el-button>
                 </template>
@@ -233,6 +233,15 @@ export default {
         spuName: [
           { required: true, message: '请输入spu名称', trigger: 'change' }
         ],
+        materialCatId: [
+          { required: true, message: '请选择物料分类', trigger: 'blur' }
+        ]
+      },
+      // 计量单位规则
+      rulesUnits: {
+        defaultUnitId: [
+          { required: true, message: '请选择默认计量单位', trigger: 'blur' }
+        ]
       },
       options: {
         // 物料类别选项
@@ -258,7 +267,7 @@ export default {
             value: 4,
           },
         ],
-      }
+      },
     };
   },
   computed: {
@@ -286,6 +295,10 @@ export default {
         this.$store.commit('unit/unit-info');
       }
     },
+    isNew() {
+      console.log(`get isNew!`);
+      return this.$store.getters['infolist/curBaseInfo'].isNew;
+    }
   },
   methods: {
     handleAdd() {
