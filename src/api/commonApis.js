@@ -62,6 +62,12 @@ class commonApis {
     }
     return result;
   };
+  // 字符串前置补0
+  addPreZero = (num, len) => {
+    var arr = new Array(len);
+    arr = arr.fill(0);
+    return (arr.join('') + num).slice(-len);
+  }
 }
 
 export default new commonApis();

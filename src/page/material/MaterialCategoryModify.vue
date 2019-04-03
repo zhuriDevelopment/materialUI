@@ -121,6 +121,7 @@ import CategoryModifyNaviTree from "@/components/MaterialCategoryModifyComponent
 import CategoryModifyBasicInfoCard from "@/components/MaterialCategoryModifyComponents/CategoryModifyBasicInfoCard";
 import CategoryModifyDetailInfoCard from "@/components/MaterialCategoryModifyComponents/CategoryModifyDetailInfoCard";
 import CommonApis from "@/api/commonApis";
+import CtrPropFunc from "@/api/ctrprop";
 
 export default {
   name: "MaterialCategoryModify",
@@ -243,6 +244,70 @@ export default {
           that.refreshCatTree();
         })
     },
+    submitResult (submitRes) {
+      var that = this;
+      console.log(`submitRes`, submitRes);
+      that.$axios
+        .put(`${window.$config.HOST}/materialmanagement/updateMaterialInfoWithCatCodeAndCatName`, submitRes)
+        .then(response => {
+          console.log(`response`, response);
+          let fail = false;
+          let msg = '更新成功！';
+          if (response.data.errCode === -1) {
+            fail = true;
+            msg = "不存在对应物料分类信息！";
+          } else {
+            if (response.data.errCodeInBaseProp === 0) {
+              fail = true;
+              msg = "更新基本属性出错！";
+            } else if (response.data.errCodeInCtrProp === 0) {
+              fail = true;
+              msg = "更新控制属性出错！";
+            }
+          }
+          that.refreshCatTree();
+          that.$message({
+            showClose: true,
+            message: msg,
+            type: fail === false ? 'success' : 'error',
+          });
+        })
+        .catch(error => {
+          console.log(`error`, error);
+        })
+    },
+    // 对于新加的分类，新增一套控制信息
+    addNewCtrPropWithNewType () {
+      var that = this;
+      var submitRes = {};
+      var catInfo = that.$store.getters['categorymodify/catInfo'];
+      submitRes["id"] = catInfo.id;
+      submitRes["catCode"] = that.newType.code;
+      submitRes["catName"] = that.newType.name;
+      submitRes["type"] = that.newType.type;
+      submitRes["ctrProps"] = [];
+      var purchaseAndStoreInfos = CtrPropFunc.collectCtrPropsWithType(
+        that.$store.getters['purandstoreprop/defaultPurchaseAndStoreInfos'],
+        5);
+      submitRes["ctrProps"].push(purchaseAndStoreInfos);
+      var planInfos = CtrPropFunc.collectCtrPropsWithType(
+        that.$store.getters['planprop/defaultPlanInfos'],
+        6);
+      submitRes["ctrProps"].push(planInfos);
+      var salesInfos = CtrPropFunc.collectCtrPropsWithType(
+        that.$store.getters['salesprop/defaultSalesInfos'],
+        7);
+      submitRes["ctrProps"].push(salesInfos);
+      var qualifyInfos = CtrPropFunc.collectCtrPropsWithType(
+        that.$store.getters['qualityprop/defaultQualifyInfos'],
+        8);
+      submitRes["ctrProps"].push(qualifyInfos);
+      var financeInfos = CtrPropFunc.collectCtrPropsWithType(
+        that.$store.getters['financeprop/defaultFinanceInfos'],
+        9);
+      submitRes["ctrProps"].push(financeInfos);
+      that.submitResult(submitRes);
+    },
     createNewCategory () {
       var that = this;
       that.$refs["newType"].validate((valid) => {
@@ -272,13 +337,17 @@ export default {
                 msg = '新增失败！';
                 failed = true;
               }
-              that.$message({
-                message: msg,
-                showClose: true,
-                type: failed === false ? 'success' : 'error',
-              });
+              // 只有当成功了之后才进行新增控制信息
+              if (failed === false) {
+                that.addNewCtrPropWithNewType();
+              } else {
+                that.$message({
+                  message: msg,
+                  showClose: true,
+                  type: failed === false ? 'success' : 'error',
+                });
+              }
               that.dialogVisible = false;
-              that.refreshCatTree();
             })
             .catch(error => {
               CommonApis.handleError(error, that, '在创建新物料分类的过程中发生错误，错误为：');

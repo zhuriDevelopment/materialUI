@@ -14,28 +14,28 @@
       <el-table-column label="序号" type="index" width="50"></el-table-column>
 
       <!--第一列-->
-      <el-table-column prop="materialCode" label="物料编码" min-width="120">
+      <el-table-column prop="materialCode" label="物料编码" min-width="250">
         <template slot-scope="scope">
-          <el-input placeholder="请输入内容" v-model="scope.row.materialCode" :disabled="false"></el-input>
+          <el-input placeholder="请输入内容" v-model="scope.row.materialCode" disabled></el-input>
         </template>
       </el-table-column>
 
       <!--第二列-->
-      <el-table-column prop="materialName" label="物料名称" min-width="120">
+      <el-table-column prop="materialName" label="物料名称" min-width="150">
         <template slot-scope="scope">
           <el-input placeholder="请输入内容" v-model="scope.row.materialName" :disabled="false"></el-input>
         </template>
       </el-table-column>
 
       <!--第三列-->
-      <el-table-column prop="oldMaterialName" label="旧物料名称" min-width="120">
+      <el-table-column prop="oldMaterialName" label="旧物料名称" min-width="150">
         <template slot-scope="scope">
           <el-input placeholder="请输入内容" v-model="scope.row.oldMaterialName" :disabled="false"></el-input>
         </template>
       </el-table-column>
 
       <!--第四列-->
-      <el-table-column prop="barCode" label="条形码" min-width="120">
+      <el-table-column prop="barCode" label="条形码" min-width="150">
         <template slot-scope="scope">
           <el-input placeholder="请输入内容" v-model="scope.row.barCode" :disabled="false"></el-input>
         </template>
@@ -43,7 +43,7 @@
 
       <!-- 规格信息 -->
       <el-table-column
-        min-width="120"
+        min-width="150"
         v-for="col in materialInfoColumns"
         :prop="col.prop" :label="col.label" :key="col.label">
         <template slot-scope="scope">
@@ -69,6 +69,7 @@
 </style>
 
 <script>
+import CommonApi from "@/api/commonApis";
 export default {
   name: "MaterialDefinationCard",
   data() {
@@ -77,20 +78,28 @@ export default {
   },
   methods: {
     handleAdd() {
+      var that = this;
       var param = {
         materialCode: '',
         materialName: '',
         oldMaterialName: '',
         barCode: '',
       };
-      var materialInfoColumns = this.$store.getters['materialinfo/materialInfoColumns'];
+      var materialInfoColumns = that.$store.getters['materialinfo/materialInfoColumns'];
       for (let idx in materialInfoColumns) {
         param[materialInfoColumns[idx]['prop']] = '';
       }
-      param["idx"] = this.$store.getters['materialinfo/materialInfos'].length;
-      var materialInfo = Object.assign([], this.$store.getters['materialinfo/materialInfos']);
+      param["idx"] = that.$store.getters['materialinfo/materialInfos'].length;
+      var materialInfo = Object.assign([], that.$store.getters['materialinfo/materialInfos']);
+      // 更新物料编码
+      param['materialCode'] = 'M' + 
+                              that.$store.getters['baseinfo/baseInfos'].spuCode + 
+                              '-' + 
+                              that.$store.getters['baseinfo/baseInfos'].materialCatId +
+                              '-' + 
+                              CommonApi.addPreZero(param['idx'] + 1, 6);
       materialInfo.push(param);
-      this.$store.commit('materialinfo/material-info', materialInfo);
+      that.$store.commit('materialinfo/material-info', materialInfo);
     },
     handleDelete(row) {
       var materialInfo = Object.assign([], this.$store.getters['materialinfo/materialInfos']);

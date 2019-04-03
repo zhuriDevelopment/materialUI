@@ -18,10 +18,20 @@ const state = {
     // 开票类型
     billingType: '0',
   },
+  defaultFinanceInfos: {
+    typeId: '0',
+    recordCurrency: '人民币',
+    accountName: '资产类',
+    vatCode: '0',
+    invCostMethod: '0',
+    costingMethod: '0',
+    billingType: '0',
+  },
 };
 
 const getters = {
   financeInfos: state => state.financeInfos,
+  defaultFinanceInfos: state => state.defaultFinanceInfos,
 };
 
 const actions = {

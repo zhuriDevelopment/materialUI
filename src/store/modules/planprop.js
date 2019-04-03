@@ -24,6 +24,18 @@ const state = {
     // 默认计划单位
     defaultPlanUnit: '天',
   },
+  defaultPlanInfos: {
+    isIndependenceNeed: false,
+    orderLeadTime: '0',
+    replenishPolicy: '0',
+    replenishCycle: '0',
+    maxInventory: '0',
+    safeInventory: '0',
+    orderQuantity: '0',
+    batchPolicy: '0',
+    batchCycle: '0',
+    defaultPlanUnit: '天',
+  },
 };
 
 const getters = {
@@ -31,6 +43,7 @@ const getters = {
   maxInventory: state => state.planInfos.maxInventory,
   safeInventory: state => state.planInfos.safeInventory,
   orderQuantity: state => state.planInfos.orderQuantity,
+  defaultPlanInfos: state => state.defaultPlanInfos,
 };
 
 const actions = {
@@ -43,27 +56,17 @@ const actions = {
   // 清空计划属性
   clearPlanInfos ({commit}) {
     var params = {
-      // 是否独立需求
       isIndependenceNeed: false,
-      // 订货提前期
       orderLeadTime: '0',
-      // 补货政策
       replenishPolicy: '0',
-      // 补货周期
       replenishCycle: '0',
-      // 最大库存量
       maxInventory: '0',
-      // 安全库存量
       safeInventory: '0',
-      // 订货批量 = 最大库存量 - 安全库存量
       orderQuantity: '0',
-      // 批量政策
       batchPolicy: '0',
-      // 批量周期
       batchCycle: '0',
-      // 默认计划单位
       defaultPlanUnit: '天',
-    }
+    };
     commit(types.PLANS, params);
   }
 };

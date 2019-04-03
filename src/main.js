@@ -60,7 +60,7 @@ router.beforeEach((to, from, next) => {
 
 window.$config = {};
 
-window.$config.HOST = 'http://127.0.0.1:8080';
+window.$config.HOST = 'http://localhost:8080';
 
 /* eslint-disable no-new */
 new Vue({

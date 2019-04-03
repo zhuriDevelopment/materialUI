@@ -20,10 +20,21 @@ const state = {
     // 检验标准文件
     testStandFile: 'FileA',
   },
+  defaultQualifyInfos: {
+    testMethod: '0',
+    testLevel: '0',
+    testDegree: '0',
+    defaultTestDep: '0',
+    testHour: '0',
+    storageLimit: '0',
+    defaultTester: '默认建研院',
+    testStandFile: '默认文件',
+  },
 };
 
 const getters = {
   qualifyInfos: state => state.qualifyInfos,
+  defaultQualifyInfos: state => state.defaultQualifyInfos,
 };
 
 const actions = {

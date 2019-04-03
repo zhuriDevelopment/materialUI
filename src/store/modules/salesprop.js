@@ -24,35 +24,38 @@ const state = {
     // 默认销售单位
     defaultUnit: '0',
   },
+  defaultSalesInfos: {
+    planPrice: '0',
+    currency: '0',
+    isPriceCtr: false,
+    priceStrategy: "保守策略",
+    priceLowerLimitRate: "0",
+    costSubject: "默认科目",
+    defaultClient: "默认客户",
+    location: "默认销售地",
+    defaultSalesman: "默认业务员",
+    defaultUnit: '0',
+  },
 };
 
 const getters = {
   salesInfos: state => state.salesInfos,
+  defaultSalesInfos: state => state.defaultSalesInfos,
 };
 
 const actions = {
   // 清空销售类属性
   clearSalesInfos ({commit}) {
     var params = {
-      // 销售计划价格
       planPrice: '0',
-      // 计价货币
       currency: '0',
-      // 是否售价控制
       isPriceCtr: false,
-      // 销售价格策略
       priceStrategy: "保守策略",
-      // 销价下限率
       priceLowerLimitRate: "0",
-      // 销售成本科目
       costSubject: "默认科目",
-      // 默认客户
       defaultClient: "默认客户",
-      // 销售地
       location: "默认销售地",
-      // 默认业务员
       defaultSalesman: "默认业务员",
-      // 默认销售单位
       defaultUnit: '0',
     }
     commit(types.SALES, params);

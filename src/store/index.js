@@ -39,5 +39,5 @@ export default new Vuex.Store({
     financeprop,
   },
   // strict: debug,
-  plugins: [createLogger()]
+  // plugins: [createLogger()]
 })
