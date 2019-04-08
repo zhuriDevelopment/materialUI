@@ -8,9 +8,10 @@ const Layout = r => require.ensure([], () => r(require('../page/layout')), 'layo
 const Quick = r => require.ensure([], () => r(require('../page/quick/quick')), 'quick');
 
 // -------------------------------------------- 为用户新增代码 --------------------------------------------
-const MaterialInfoList = r => require.ensure([], () => r(require('../page/material/MaterialInfoList')), 'MaterialInfoList');
-const MaterialInfoModify = r => require.ensure([], () => r(require('../page/material/MaterialInfoModify')), 'MaterialInfoModify');
-const MaterialCategoryModify = r => require.ensure([], () => r(require('../page/material/MaterialCategoryModify')), 'MaterialCategoryModify');
+const brandMana = r => require.ensure([], () => r(require('../page/dictionary/brandMana.vue')), 'brandMana');
+const customerMana = r => require.ensure([], () => r(require('../page/dictionary/customerMana.vue')), 'customerMana');
+const productMana = r => require.ensure([], () => r(require('../page/dictionary/productMana.vue')), 'productMana');
+const dictionaryCateMana = r => require.ensure([], () => r(require('../page/dictionary/dictionaryCateMana.vue')), 'dictionaryCateMana');
 
 // -------------------------------------------- 路由配置部分 --------------------------------------------
 export default [{
@@ -31,28 +32,36 @@ export default [{
           bcrumd: ['快速入门']
         }
       },
-      { // 物料 -- 物料信息列表
-        path: '/material/infolist',
-        name: 'MaterialInfoList',
-        component: MaterialInfoList,
+      { 
+        path: '/dictionary/brandMana',
+        name: 'brandMana',
+        component: brandMana,
         meta: {
-          bcrumd: ['物料', '物料信息列表'],
+          bcrumd: ['数据字典', '品牌信息管理'],
         }
       },
-      { // 物料 -- 物料信息编辑
-        path: '/material/infomodify',
-        name: 'MaterialInfoModify',
-        component: MaterialInfoModify,
+      { 
+        path: '/dictionary/customerMana',
+        name: 'customerMana',
+        component: customerMana,
         meta: {
-          bcrumd: ['物料', '物料信息编辑'],
+          bcrumd: ['数据字典', '客户信息管理'],
         }
       },
-      { // 物料 -- 物料分类管理
-        path: '/material/categorymodify',
-        name: 'MaterialCategoryModify',
-        component: MaterialCategoryModify,
+      {
+        path: '/dictionary/productMana',
+        name: 'productMana',
+        component: productMana,
         meta: {
-          bcrumd: ['物料', '物料分类管理'],
+          bcrumd: ['数据字典', '产品信息管理'],
+        }
+      },
+      { 
+        path: '/dictionary/dictionaryCateMana',
+        name: 'dictionaryCateMana',
+        component: dictionaryCateMana,
+        meta: {
+          bcrumd: ['数据字典', '数据字典管理'],
         }
       },
       { // 默认路由

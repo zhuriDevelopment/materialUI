@@ -84,9 +84,10 @@
           <i class="el-icon-message"></i>
           基本信息
         </template>
-        <el-menu-item index="/material/infolist"><i class="el-icon-document"></i>物料信息列表</el-menu-item>
-        <!-- <el-menu-item index="/material/infomodify"><i class="el-icon-document"></i>物料信息修改</el-menu-item> -->
-        <el-menu-item index="/material/categorymodify"><i class="el-icon-document"></i>物料分类信息修改</el-menu-item>
+        <el-menu-item index="/dictionary/productMana"><i class="el-icon-document"></i>产品管理</el-menu-item>
+        <el-menu-item index="/dictionary/customerMana"><i class="el-icon-document"></i>客户管理</el-menu-item>
+        <el-menu-item index="/dictionary/brandMana"><i class="el-icon-document"></i>品牌管理</el-menu-item>
+        <el-menu-item index="/dictionary/dictionaryCateMana"><i class="el-icon-document"></i>数据字典管理</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
