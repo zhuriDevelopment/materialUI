@@ -21,7 +21,7 @@
     "fresh": "^0.5.2",
     "growl": "^1.10.0",
     "hoek": "^4.2.1",
-    "https-proxy-agent": "^2.2.0",
+    "https-proxy-agent": "^2.2.3",
     "loading-vue": "^0.0.2",
     "lodash": "^4.17.5",
     "macaddress": "^0.2.9",
